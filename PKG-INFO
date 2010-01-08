@@ -1,0 +1,12 @@
+Metadata-Version: 1.0
+Name: uTidylib
+Version: 0.2
+Summary: Wrapper for HTML Tidy at http://tidy.sourceforge.net
+Home-page: http://utidylib.sf.net
+Author: Cory Dodt
+Author-email: corydodt@twistedmatrix.com
+License: UNKNOWN
+Description: A wrapper for the relocatable version of HTML Tidy (see
+        http://tidy.sourceforge.net for details).  This allows you to
+        tidy HTML files through a Pythonic interface.
+Platform: UNKNOWN

@@ -1,0 +1,123 @@
+If you're reading this, you are probably using a platform that
+doesn't have binaries available.  Check anyway:
+
+http://sourceforge.net/project/showfiles.php?group_id=84459
+
+You may also want to consult this document if you get the message:
+"Couldn't find libtidy, please make sure it is installed correctly."
+
+==================================================================
+On Linux (instructions for other flavors of Unix mostly the same):
+___________________
+1. Install libtidy:
+
+TidyLib can be obtained from http://tidy.sourceforge.net/src/tidy_src.tgz
+
+(1a) Compile
+
+$ tar xvfz tidy_src.tgz
+$ cd tidy
+$ sh build/gnuauto/setup.sh
+$ ./configure    # may want to specify --prefix=/usr here, see below
+$ make
+
+
+(1b) Install
+(become root)
+# make install
+
+This will place libtidy in /usr/local/lib.  If you use --prefix=/usr in
+the configure line flagged above, your library will go to /usr/lib
+instead.  The directory you install the library into MUST be
+configured with ldconfig, so if you installed into /usr/local/lib and
+it's mysteriously not working:
+
+# man ldconfig
+# man ld.so.conf
+
+Other Unices may have some variant of ldconfig, or they may use an
+environment variable such as LIBPATH, LD_LIBRARY_PATH, etc.
+
+__________________
+2. Install ctypes:
+
+Ctypes is available from:
+http://sourceforge.net/project/showfiles.php?group_id=71702
+
+_________________________________
+3. Install uLibtidy python files:
+
+(as root)
+# cd uTidylib
+# python setup.py install
+
+
+
+==================================================================
+On Windows:
+__________________
+1. Install libtidy
+
+TidyLib can be obtained from http://tidy.sourceforge.net/src/tidy_src.tgz
+
+libtidy provides 2 ways to compile on Windows.  The first way is to
+use the project and makefiles in uTidylib/libtidy/build/msvc.  This
+way is not recommended as it requires you to purchase MS Visual C++.
+
+1a) Install Cygwin
+The second, recommended way is to install Cygwin, with at least the
+following packages:
+make, automake, libtool, gcc, and gcc-mingw
+It is recommended that you do _not_ install Cygwin Python; instead use
+the Windows installer at http://python.org/download/ .
+
+1b) Compile
+We will compile with the mingw compiler, which produces binaries that
+do not depend on the Cygwin DLLs.
+$ tar xvfz tidy_src.tgz
+$ cd tidy
+$ sh build/gnuauto/setup.sh
+$ CFLAGS=-mno-cygwin ./configure
+$ make
+
+1c) Copy DLL to a directory in the PATH:
+
+$ cp src/.libs/cygtidy-0-99-0.dll $SYSTEMROOT
+
+__________________
+2. Install ctypes:
+
+Ctypes is available from:
+http://sourceforge.net/project/showfiles.php?group_id=71702
+
+_________________________________
+3. Install uLibtidy python files:
+
+$ cd uTidylib
+$ python setup.py install
+
+
+==================================================================
+Running tests (after installing):
+_________________________________
+
+Running tests requires that you have installed Twisted
+(http://twistedmatrix.com), as uTidyLib uses the trial framework for
+testing.
+
+$ python -c "from twisted.scripts import trial; trial.run()" -p tidylib
+
+This should work on either Windows or Unix.
+
+
+==================================================================
+The Doc:
+________
+
+To build the doc, just run:
+
+$ python gendoc.py
+
+(This requires that you have epydoc installed.)
+
+The API documentation will be built in the ``apidoc'' directory.
