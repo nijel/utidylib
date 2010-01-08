@@ -1,3 +1,6 @@
+NOTE: This repository contains a patched version of uTidyLib which
+works with Mac OS X.
+
 This is uTidylib, the Python wrapper for the HTML cleaning
 library named TidyLib: http://tidy.sf.net .  Python 2.3 or later
 is required to use uTidylib.  Repeat, Python 2.3 or later is
