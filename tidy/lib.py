@@ -18,7 +18,7 @@ from cStringIO import StringIO
 import weakref
 from tidy.error import *
 
-# search the path for libtidy using the known names; try the package 
+# search the path for libtidy using the known names; try the package
 # directory too
 thelib=None
 os.environ['PATH'] = "%s%s%s" % (packagedir, os.pathsep, os.environ['PATH'])
@@ -33,7 +33,7 @@ if not thelib:
     raise OSError("Couldn't find libtidy, please make sure it is installed.")
 
 class Loader:
-    """I am a trivial wrapper that eliminates the need for tidy.tidyFoo, 
+    """I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
     so you can just access tidy.Foo
     """
     def __init__(self):
@@ -46,6 +46,7 @@ class Loader:
             return getattr(self.lib, name)
 
 _tidy=Loader()
+_tidy.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
 # define a callback to pass to Tidylib
 def _putByte(handle, c):
@@ -53,7 +54,7 @@ def _putByte(handle, c):
     sinkfactory[handle].putByte(c)
     return 0
 
-PUTBYTEFUNC=ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)    
+PUTBYTEFUNC=ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
 putByte=PUTBYTEFUNC(_putByte)
 
 class _OutputSink(ctypes.Structure):
@@ -94,7 +95,7 @@ class ReportItem:
                 return "line %d col %d - %s: %s" % (self.line, self.col,
                                                     severities[self.severity],
                                                     self.message)
-            
+
             else:
                 return "%s: %s" % (severities[self.severity], self.message)
         except KeyError:
@@ -103,7 +104,7 @@ class ReportItem:
     def __repr__(self):
         return "%s('%s')" % (self.__class__.__name__,
                              str(self).replace("'", "\\'"))
-        
+
 class FactoryDict(dict):
     """I am a dict with a create method and no __setitem__.  This allows
     me to control my own keys.
@@ -114,7 +115,7 @@ class FactoryDict(dict):
         dict.__setitem__(self, name, value)
     def __setitem__(self, name, value):
         raise TypeError, "Use create() to get a new object"
-        
+
 
 class SinkFactory(FactoryDict):
     """Mapping for lookup of sinks by handle"""
@@ -161,12 +162,12 @@ errors = {'missing or malformed argument for option: ': OptionArgError,
 class DocumentFactory(FactoryDict):
     def _setOptions(self, doc, **options):
         for k in options.keys():
-            
+
             # this will flush out most argument type errors...
             if options[k] is None: options[k] = ''
-            
-            _tidy.OptParseValue(doc.cdoc, 
-                                k.replace('_', '-'), 
+
+            _tidy.OptParseValue(doc.cdoc,
+                                k.replace('_', '-'),
                                 str(options[k]))
             if doc.errors:
                 match=filter(doc.errors[-1].message.startswith, errors.keys())
@@ -216,7 +217,7 @@ class DocumentFactory(FactoryDict):
         return doc
     def releaseDoc(self, ref):
         _tidy.Release(self[ref])
-    
+
 docfactory = DocumentFactory()
 parse = docfactory.parse
 parseString = docfactory.parseString
