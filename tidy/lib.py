@@ -204,6 +204,13 @@ class DocumentFactory(FactoryDict):
         @param st: the string to parse
         @return: a document object
         """
+        if type(st) == unicode:
+            try:
+                enc = kwargs['char_encoding']
+            except KeyError:
+                enc = 'utf8'
+                kwargs['char_encoding'] = enc
+            st = st.encode(enc)
         doc = self._create(**kwargs)
         self.loadString(doc, st)
         return doc
