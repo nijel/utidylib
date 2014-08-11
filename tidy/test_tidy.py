@@ -62,8 +62,7 @@ class TidyTestCase(unittest.TestCase):
         self.failUnless(found)
         doc2 = tidy.parseString("<Html>", **options)
         self.failUnless(str(doc2).startswith('<?xml'))
-#        self.failIf(len(doc2.errors)>1) # FIXME - tidylib doesn't
-#                                        # support this?
+        self.failIf(len(doc2.errors) == 0)
         self.failUnless(str(doc2).find('\n') < 0)
         doc3 = tidy.parse('foo.htm', char_encoding='utf8',
                           alt_text='foo')
