@@ -29,7 +29,12 @@ Date:    23 Feb 2003
 
 from __future__ import generators
 
-import sys, os, fnmatch, glob, shutil, codecs
+import sys
+import os
+import fnmatch
+import glob
+import shutil
+import codecs
 
 __version__ = '1.2'
 __all__ = ['path']
@@ -93,16 +98,28 @@ class path(_base):
         return path(os.getcwd())
     getcwd = staticmethod(getcwd)
 
-
     # --- Operations on path strings.
+    def abspath(self):
+        return path(os.path.abspath(self))
 
-    def abspath(self):       return path(os.path.abspath(self))
-    def normcase(self):      return path(os.path.normcase(self))
-    def normpath(self):      return path(os.path.normpath(self))
-    def realpath(self):      return path(os.path.realpath(self))
-    def expanduser(self):    return path(os.path.expanduser(self))
-    def expandvars(self):    return path(os.path.expandvars(self))
-    def dirname(self):       return path(os.path.dirname(self))
+    def normcase(self):
+        return path(os.path.normcase(self))
+
+    def normpath(self):
+        return path(os.path.normpath(self))
+
+    def realpath(self):
+        return path(os.path.realpath(self))
+
+    def expanduser(self):
+        return path(os.path.expanduser(self))
+
+    def expandvars(self):
+        return path(os.path.expandvars(self))
+
+    def dirname(self):
+        return path(os.path.dirname(self))
+
     basename = os.path.basename
 
     def expand(self):
@@ -113,7 +130,6 @@ class path(_base):
         read from a configuration file, for example.
         """
         return self.expandvars().expanduser().normpath()
-
 
     def _get_ext(self):
         f, ext = os.path.splitext(_base(self))
@@ -237,9 +253,7 @@ class path(_base):
         else:
             return path(os.path.join(*segments))
 
-
     # --- Listing, searching, walking, and matching
-
     def listdir(self, pattern=None):
         """ D.listdir() -> List of items in this directory.
 
@@ -279,7 +293,7 @@ class path(_base):
         whose names match the given pattern.  For example,
         d.files('*.pyc').
         """
-        
+
         return [p for p in self.listdir(pattern) if p.isfile()]
 
     def walk(self, pattern=None):
@@ -348,9 +362,7 @@ class path(_base):
         """
         return map(path, glob.glob(_base(self / pattern)))
 
-
     # --- Reading an entire file at once.
-
     def bytes(self):
         """ Open this file, read all bytes, return them as a string. """
         f = file(self, 'rb')
@@ -418,9 +430,7 @@ class path(_base):
         else:
             return self.text(encoding, errors).splitlines(retain)
 
-
     # --- Methods for querying the filesystem.
-
     exists = os.path.exists
     isabs = os.path.isabs
     isdir = os.path.isdir
@@ -477,9 +487,7 @@ class path(_base):
         def pathconf(self, name):
             return os.pathconf(self, name)
 
-
     # --- Modifying operations on files and directories
-
     def utime(self, times):
         """ Set the access and modified times of this file. """
         os.utime(self, times)
@@ -497,9 +505,7 @@ class path(_base):
     def renames(self, new):
         os.renames(self, new)
 
-
     # --- Create/delete operations on directories
-
     def mkdir(self, mode=0777):
         os.mkdir(self, mode)
 
@@ -512,9 +518,7 @@ class path(_base):
     def removedirs(self):
         os.removedirs(self)
 
-
     # --- Modifying operations on files
-
     def touch(self):
         """ Set the access/modified times of this file to the current time.
         Create the file if it does not exist.
@@ -529,9 +533,7 @@ class path(_base):
     def unlink(self):
         os.unlink(self)
 
-
     # --- Links
-
     if hasattr(os, 'link'):
         def link(self, newpath):
             """ Create a hard link at 'newpath', pointing to this file. """
@@ -561,9 +563,7 @@ class path(_base):
             else:
                 return (self.parent / p).abspath()
 
-
     # --- High-level functions from shutil
-
     copyfile = shutil.copyfile
     copymode = shutil.copymode
     copystat = shutil.copystat
@@ -574,9 +574,7 @@ class path(_base):
         move = shutil.move
     rmtree = shutil.rmtree
 
-
     # --- Special stuff from os
-
     if hasattr(os, 'chroot'):
         def chroot(self):
             os.chroot(self)
@@ -584,4 +582,3 @@ class path(_base):
     if hasattr(os, 'startfile'):
         def startfile(self):
             os.startfile(self)
-

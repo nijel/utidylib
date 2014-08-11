@@ -7,8 +7,9 @@ from distutils import sysconfig
 
 
 # pack the doc in as data files
-apidoc=path('apidoc')
-data_files = [] ; dfa = data_files.append
+apidoc = path('apidoc')
+data_files = []
+dfa = data_files.append
 pkgdir = path('tidy')
 if apidoc.isdir():
     dfa((str(pkgdir/apidoc), map(str, apidoc.files())))
@@ -31,13 +32,15 @@ class bdist_wininst_utidylib(bdist_wininst):
         # TODO - make it impossible to install on python2.2
         bdist_wininst.finalize_options(self)
 
-# make sure data files are installed in tidylib package during binary 
+
+# make sure data files are installed in tidylib package during binary
 # build phase - this is evil.
 class install_data_utidylib(install_data):
-    def finalize_options (self):
+    def finalize_options(self):
         self.set_undefined_options('install',
                                    ('install_lib', 'install_dir'))
         install_data.finalize_options(self)
+
 
 class install_utidylib(install):
     def run(self):
@@ -51,7 +54,6 @@ class install_utidylib(install):
         print "***         and http://tidy.sourceforge.net           ***"
         print "*** (or consult your vendor documentation for binary  ***"
         print "***                    packages.)                     ***"
-
 
 
 setup_data = dict(packages=['tidy', ],
