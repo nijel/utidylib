@@ -8,7 +8,7 @@ python:
   - "pypy"
 # commands to install dependencies
 install: 
-  - pip install -r requirements.txt
+  - pip install --allow-external ctypes  --allow-unverified ctypes -r requirements.txt
   - pip install -r requirements-test.txt
 # commands to run tests
 script: 
