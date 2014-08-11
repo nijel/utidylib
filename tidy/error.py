@@ -13,6 +13,10 @@ class TidyLibError(Exception):
     """
     def __init__(self, arg):
         self.arg = arg
+        super(TidyLibError, self).__init__(arg)
+
+    def __str__(self):
+        return self.arg
 
 
 class InvalidOptionError(TidyLibError):
@@ -28,8 +32,4 @@ class OptionArgError(TidyLibError):
     """
     Exception for invalid parameter.
     """
-    def __init__(self, arg):
-        self.arg = arg
-
-    def __str__(self):
-        return self.arg
+    pass
