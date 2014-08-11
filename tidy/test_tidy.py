@@ -5,6 +5,7 @@ import tidy
 
 class TidyTestCase(unittest.TestCase):
     def __init__(self, *args, **kwargs):
+        super(TidyTestCase, self).__init__(*args, **kwargs)
         foo = u'''<html>
     <h1>woot</h1>
     <hr>
