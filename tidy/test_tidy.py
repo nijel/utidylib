@@ -48,7 +48,7 @@ class TidyTestCase(unittest.TestCase):
         self.failUnless(str(doc2u).find('\xc3\xa9') >= 0)
 
     def test_errors(self):
-        doc1, doc2, doc3, doc4 = self.defaultDocs()
+        doc1, doc2, doc3, dummy = self.defaultDocs()
         for doc in [doc1, doc2, doc3]:
             str(getattr(doc, 'errors'))
             self.assertEquals(doc1.errors[0].line, 1)
@@ -71,7 +71,7 @@ class TidyTestCase(unittest.TestCase):
         self.failUnless(str(doc3).find('\xc3\xa9') >= 0)
 
     def test_parse(self):
-        doc1, doc2, doc3, doc4 = self.defaultDocs()
+        doc1, doc2, doc3, dummy = self.defaultDocs()
         self.failUnless(str(doc1).find('</html>') >= 0)
         self.failUnless(str(doc2).find('</html>') >= 0)
         self.failUnless(str(doc3).find('</html>') >= 0)
