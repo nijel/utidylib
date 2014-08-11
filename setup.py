@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Setup file for easy installation"""
 
-from distutils.core import setup
+from setuptools import setup
 from setuptools.command.install import install
 
 
