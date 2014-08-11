@@ -3,7 +3,6 @@ from distutils.core import setup
 from setuptools.command.install import install
 from distutils.command.install_data import install_data
 from distutils.command.bdist_wininst import bdist_wininst
-from distutils import sysconfig
 
 
 # pack the doc in as data files

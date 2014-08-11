@@ -2,7 +2,6 @@ from __future__ import generators
 
 import sys
 import os.path
-from itertools import count
 packagedir = os.path.dirname(__file__)
 
 # look for ctypes in the system path, then try looking for a private ctypes
@@ -16,7 +15,7 @@ except ImportError:
     import ctypes
 from cStringIO import StringIO
 import weakref
-from tidy.error import *
+from tidy.error import InvalidOptionError, OptionArgError
 
 # search the path for libtidy using the known names; try the package
 # directory too

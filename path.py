@@ -29,7 +29,6 @@ Date:    23 Feb 2003
 
 from __future__ import generators
 
-import sys
 import os
 import fnmatch
 import glob
