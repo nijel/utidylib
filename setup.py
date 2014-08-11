@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Setup file for easy installation"""
+
 from distutils.core import setup
 from setuptools.command.install import install
 
@@ -16,23 +20,20 @@ class install_utidylib(install):
         print "***                    packages.)                     ***"
 
 
-setup_data = dict(packages=['tidy', ],
-                  data_files=[],
-                  cmdclass=dict(
-                                install=install_utidylib,
-                                ),
-                  name='uTidylib',
-                  version='0.2',
-                  author='Cory Dodt',
-                  author_email='corydodt@twistedmatrix.com',
-                  url='http://utidylib.sf.net',
-                  description='Wrapper for HTML Tidy at '
-                              'http://tidy.sourceforge.net',
-                  long_description='''\
+setup(
+    packages=['tidy', ],
+    data_files=[],
+    cmdclass={
+        'install': install_utidylib,
+    },
+    name='uTidylib',
+    version='0.2',
+    author='Cory Dodt',
+    author_email='corydodt@twistedmatrix.com',
+    url='http://utidylib.sf.net',
+    description='Wrapper for HTML Tidy at http://tidy.sourceforge.net',
+    long_description='''\
 A wrapper for the relocatable version of HTML Tidy (see
 http://tidy.sourceforge.net for details).  This allows you to
 tidy HTML files through a Pythonic interface.'''
-                  )
-
-if __name__ == '__main__':
-    setup(**setup_data)
+)
