@@ -9,9 +9,7 @@ NOTE: This repository contains a patched version of uTidyLib which
 includes all Debian patches and works with Mac OS X.
 
 This is uTidylib, the Python wrapper for the HTML cleaning
-library named TidyLib: http://tidy.sf.net .  Python 2.3 or later
-is required to use uTidylib.  Repeat, Python 2.3 or later is
-*required* to use uTidylib.
+library named TidyLib: http://tidy.sf.net .
 
 Once installed, there are two ways to get help.  The simplest is:
 

@@ -33,13 +33,6 @@ traversal, since Python has several quality DOM implementations. (The author
 uses Twisted's implementation, twisted.web.microdom).
 """
 
-try:
-    dict(x=1)
-except TypeError:
-    raise ImportError(
-        "Python 2.3 or later is required to import this library."
-    )
-
 __all__ = [
     'error', 'lib', 'parse', 'parseString',
     'TidyLibError', 'InvalidOptionError', 'OptionArgError',

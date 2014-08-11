@@ -28,7 +28,6 @@ class bdist_wininst_utidylib(bdist_wininst):
                                    str(private_ctypes/'README.ctypes')]
              ))
 
-        # TODO - make it impossible to install on python2.2
         bdist_wininst.finalize_options(self)
 
 
