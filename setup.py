@@ -26,17 +26,6 @@ class bdist_wininst_utidylib(bdist_wininst):
                 ]
             )
         )
-        private_ctypes = pkgdir/'pvt_ctypes'
-        self.distribution.data_files.append(
-            (
-                str(private_ctypes),
-                [
-                    str(private_ctypes/'ctypes.zip'),
-                    str(private_ctypes/'_ctypes.pyd'),
-                    str(private_ctypes/'README.ctypes')
-                ]
-            )
-        )
 
         bdist_wininst.finalize_options(self)
 
