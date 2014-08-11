@@ -15,21 +15,6 @@ if apidoc.isdir():
         data_files.append((str(pkgdir/p), map(str, p.files())))
 
 
-class bdist_wininst_utidylib(bdist_wininst):
-    def finalize_options(self):
-        self.distribution.data_files.append(
-            (
-                str(pkgdir),
-                [
-                    str(pkgdir/'cygtidy-0-99-0.dll'),
-                    str(pkgdir/'README.tidydll')
-                ]
-            )
-        )
-
-        bdist_wininst.finalize_options(self)
-
-
 # make sure data files are installed in tidylib package during binary
 # build phase - this is evil.
 class install_data_utidylib(install_data):
@@ -56,7 +41,6 @@ class install_utidylib(install):
 setup_data = dict(packages=['tidy', ],
                   data_files=data_files,
                   cmdclass=dict(install_data=install_data_utidylib,
-                                bdist_wininst=bdist_wininst_utidylib,
                                 install=install_utidylib,
                                 ),
                   name='uTidylib',

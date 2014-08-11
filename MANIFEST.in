@@ -3,4 +3,3 @@ include LICENSE
 include *.py
 include README.*
 include MANIFEST.in
-include tidy/README.*
