@@ -1,7 +1,5 @@
 from distutils.core import setup
 from setuptools.command.install import install
-from distutils.command.install_data import install_data
-from distutils.command.bdist_wininst import bdist_wininst
 
 
 class install_utidylib(install):
