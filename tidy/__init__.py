@@ -40,7 +40,10 @@ except TypeError:
         "Python 2.3 or later is required to import this library."
     )
 
-__all__ = ['error', 'lib']
+__all__ = [
+    'error', 'lib', 'parse', 'parseString',
+    'TidyLibError', 'InvalidOptionError', 'OptionArgError',
+]
 
 from tidy.lib import parse, parseString
-from tidy.error import *
+from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
