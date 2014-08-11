@@ -15,15 +15,6 @@ if apidoc.isdir():
         data_files.append((str(pkgdir/p), map(str, p.files())))
 
 
-# make sure data files are installed in tidylib package during binary
-# build phase - this is evil.
-class install_data_utidylib(install_data):
-    def finalize_options(self):
-        self.set_undefined_options('install',
-                                   ('install_lib', 'install_dir'))
-        install_data.finalize_options(self)
-
-
 class install_utidylib(install):
     def run(self):
         install.run(self)
@@ -40,7 +31,7 @@ class install_utidylib(install):
 
 setup_data = dict(packages=['tidy', ],
                   data_files=data_files,
-                  cmdclass=dict(install_data=install_data_utidylib,
+                  cmdclass=dict(
                                 install=install_utidylib,
                                 ),
                   name='uTidylib',
