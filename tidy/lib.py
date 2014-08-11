@@ -84,6 +84,7 @@ class _Sink(object):
 
 class ReportItem(object):
     def __init__(self, err):
+        # TODO - parse emacs mode
         self.err = err
         if err.startswith('line'):
             tokens = err.split(' ', 6)
@@ -97,7 +98,6 @@ class ReportItem(object):
             self.message = tokens[1]
             self.line = None
             self.col = None
-        # TODO - parse emacs mode
 
     def __str__(self):
         severities = dict(W='Warning', E='Error', C='Config')
@@ -176,9 +176,10 @@ class _Document(object):
             _tidy.SaveString(self.cdoc, st, ctypes.byref(stlen))
         return st.value
 
-errors = {'missing or malformed argument for option: ': OptionArgError,
-          'unknown option: ': InvalidOptionError,
-          }
+errors = {
+    'missing or malformed argument for option: ': OptionArgError,
+    'unknown option: ': InvalidOptionError,
+}
 
 
 class DocumentFactory(FactoryDict):
