@@ -17,14 +17,26 @@ if apidoc.isdir():
 
 class bdist_wininst_utidylib(bdist_wininst):
     def finalize_options(self):
-        self.distribution.data_files.append((str(pkgdir), [str(pkgdir/'cygtidy-0-99-0.dll'),
-                           str(pkgdir/'README.tidydll')]
-             ))
+        self.distribution.data_files.append(
+            (
+                str(pkgdir),
+                [
+                    str(pkgdir/'cygtidy-0-99-0.dll'),
+                    str(pkgdir/'README.tidydll')
+                ]
+            )
+        )
         private_ctypes = pkgdir/'pvt_ctypes'
-        self.distribution.data_files.append((str(private_ctypes), [str(private_ctypes/'ctypes.zip'),
-                                   str(private_ctypes/'_ctypes.pyd'),
-                                   str(private_ctypes/'README.ctypes')]
-             ))
+        self.distribution.data_files.append(
+            (
+                str(private_ctypes),
+                [
+                    str(private_ctypes/'ctypes.zip'),
+                    str(private_ctypes/'_ctypes.pyd'),
+                    str(private_ctypes/'README.ctypes')
+                ]
+            )
+        )
 
         bdist_wininst.finalize_options(self)
 
