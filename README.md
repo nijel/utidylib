@@ -1,6 +1,10 @@
 utidylib
 ========
 
+[![Build Status](https://travis-ci.org/nijel/utidylib.svg?branch=master)](https://travis-ci.org/nijel/utidylib)
+[![Coverage Status](https://coveralls.io/repos/nijel/utidylib/badge.png?branch=master)](https://coveralls.io/r/nijel/utidylib?branch=master)
+[![Code Health](https://landscape.io/github/nijel/utidylib/master/landscape.png)](https://landscape.io/github/nijel/utidylib/master)
+
 NOTE: This repository contains a patched version of uTidyLib which
 includes all Debian patches and works with Mac OS X.
 
