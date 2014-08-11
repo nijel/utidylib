@@ -31,7 +31,18 @@ setup(
     author='Cory Dodt',
     author_email='corydodt@twistedmatrix.com',
     url='http://utidylib.sf.net',
+    license='MIT',
     description='Wrapper for HTML Tidy at http://tidy.sourceforge.net',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Topic :: Internet',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Environment :: Web Environment',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+    ],
     long_description='''\
 A wrapper for the relocatable version of HTML Tidy (see
 http://tidy.sourceforge.net for details).  This allows you to
