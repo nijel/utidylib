@@ -6,6 +6,9 @@ python:
   - "3.3"
   - "3.4"
   - "pypy"
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install git libtidy-0.99-0
 # commands to install dependencies
 install: 
   - pip install --allow-external ctypes  --allow-unverified ctypes -r requirements.txt
