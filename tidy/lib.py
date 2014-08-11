@@ -52,9 +52,9 @@ _tidy.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
 
 # define a callback to pass to Tidylib
-def _putByte(handle, c):
+def _putByte(handle, char):
     """Lookup sink by handle and call its putByte method"""
-    sinkfactory[handle].putByte(c)
+    sinkfactory[handle].putByte(char)
     return 0
 
 
