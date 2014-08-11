@@ -5,16 +5,6 @@ from distutils.command.install_data import install_data
 from distutils.command.bdist_wininst import bdist_wininst
 
 
-# pack the doc in as data files
-apidoc = path('apidoc')
-data_files = []
-pkgdir = path('tidy')
-if apidoc.isdir():
-    data_files.append((str(pkgdir/apidoc), map(str, apidoc.files())))
-    for p in path('apidoc').walkdirs():
-        data_files.append((str(pkgdir/p), map(str, p.files())))
-
-
 class install_utidylib(install):
     def run(self):
         install.run(self)
@@ -30,7 +20,7 @@ class install_utidylib(install):
 
 
 setup_data = dict(packages=['tidy', ],
-                  data_files=data_files,
+                  data_files=[],
                   cmdclass=dict(
                                 install=install_utidylib,
                                 ),
