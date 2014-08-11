@@ -8,22 +8,20 @@ from distutils.command.bdist_wininst import bdist_wininst
 # pack the doc in as data files
 apidoc = path('apidoc')
 data_files = []
-dfa = data_files.append
 pkgdir = path('tidy')
 if apidoc.isdir():
-    dfa((str(pkgdir/apidoc), map(str, apidoc.files())))
+    data_files.append((str(pkgdir/apidoc), map(str, apidoc.files())))
     for p in path('apidoc').walkdirs():
-        dfa((str(pkgdir/p), map(str, p.files())))
+        data_files.append((str(pkgdir/p), map(str, p.files())))
 
 
 class bdist_wininst_utidylib(bdist_wininst):
     def finalize_options(self):
-        dfa = self.distribution.data_files.append
-        dfa((str(pkgdir), [str(pkgdir/'cygtidy-0-99-0.dll'),
+        self.distribution.data_files.append((str(pkgdir), [str(pkgdir/'cygtidy-0-99-0.dll'),
                            str(pkgdir/'README.tidydll')]
              ))
         private_ctypes = pkgdir/'pvt_ctypes'
-        dfa((str(private_ctypes), [str(private_ctypes/'ctypes.zip'),
+        self.distribution.data_files.append((str(private_ctypes), [str(private_ctypes/'ctypes.zip'),
                                    str(private_ctypes/'_ctypes.pyd'),
                                    str(private_ctypes/'README.ctypes')]
              ))
