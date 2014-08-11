@@ -1,7 +1,7 @@
 import sys
 from epydoc.cli import cli
 
-def run(argv=sys.argv):
+def run(argv):
     argv_old=sys.argv
     sys.argv=argv
     cli()
