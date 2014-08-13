@@ -56,11 +56,7 @@ class Loader(object):
             self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
     def __getattr__(self, name):
-        try:
-            return getattr(self.lib, "tidy%s" % name)
-        # current ctypes uses ValueError, future will use AttributeError
-        except (ValueError, AttributeError):
-            return getattr(self.lib, name)
+        return getattr(self.lib, "tidy%s" % name)
 
 
 _tidy = Loader()
