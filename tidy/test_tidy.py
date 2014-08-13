@@ -28,14 +28,13 @@ class TidyTestCase(unittest.TestCase):
 
     def test_badOptions(self):
         badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
-        for dct in badopts:
-            try:
-                tidy.parseString(self.input2, **dct)
-            except tidy.TidyLibError:
-                pass
-            else:
-                self.fail("Invalid option %s should have raised an error" %
-                          repr(dct))
+        for opts in badopts:
+            self.assertRaises(
+                tidy.TidyLibError,
+                tidy.parseString,
+                self.input2,
+                **opts
+            )
 
     def test_encodings(self):
         foo = file('foo.htm').read().decode('utf8').encode('ascii',
