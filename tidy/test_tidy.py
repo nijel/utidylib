@@ -1,28 +1,23 @@
 ﻿import re
 import unittest
 import tidy
+import os.path
+
+DATA_STORAGE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'test_data'
+)
 
 
 class TidyTestCase(unittest.TestCase):
-    def __init__(self, *args, **kwargs):
-        super(TidyTestCase, self).__init__(*args, **kwargs)
-        foo = u'''<html>
-    <h1>woot</h1>
-    <hr>
-    <img src=\'asdfasdf\'>
-    <p>\N{LATIN SMALL LETTER E WITH ACUTE}
-<!-- hhmts end -->
-  </body>
-</html>
-'''.encode('utf8')
-        file('foo.htm', 'w').write(foo)
-        self.input1 = "<html><script>1>2</script>"
-        self.input2 = "<html>\n" + "<p>asdkfjhasldkfjhsldjas\n" * 100
+    input1 = "<html><script>1>2</script>"
+    input2 = "<html>\n" + "<p>asdkfjhasldkfjhsldjas\n" * 100
+    test_file = os.path.join(DATA_STORAGE, 'test.html')
 
     def defaultDocs(self):
         doc1 = tidy.parseString(self.input1)
         doc2 = tidy.parseString(self.input2)
-        doc3 = tidy.parse("foo.htm")
+        doc3 = tidy.parse(self.test_file)
         return (doc1, doc2, doc3)
 
     def test_badOptions(self):
@@ -36,7 +31,7 @@ class TidyTestCase(unittest.TestCase):
             )
 
     def test_encodings(self):
-        foo = file('foo.htm').read().decode('utf8').encode('ascii',
+        foo = file(self.test_file).read().decode('utf8').encode('ascii',
                                                            'xmlcharrefreplace')
         doc1u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='latin1')
@@ -61,7 +56,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc2).startswith('<?xml'))
         self.assertFalse(len(doc2.errors) == 0)
         self.assertTrue(str(doc2).find('\n') < 0)
-        doc3 = tidy.parse('foo.htm', char_encoding='utf8',
+        doc3 = tidy.parse(self.test_file, char_encoding='utf8',
                           alt_text='foo')
         self.assertTrue(str(doc3).find('alt="foo"') >= 0)
         self.assertTrue(str(doc3).find('\xc3\xa9') >= 0)

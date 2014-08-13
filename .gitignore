@@ -1,5 +1,4 @@
 *.swp
 *.pyc
-foo.htm
 /build/
 /uTidylib.egg-info/

@@ -1,5 +1,6 @@
 include INSTALL.txt
 include LICENSE
 include *.py
+include *.html
 include README.*
 include MANIFEST.in

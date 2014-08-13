@@ -22,6 +22,7 @@ class install_utidylib(install):
 
 setup(
     packages=['tidy', ],
+    package_data={'tidy': ['test_data/*.html']},
     data_files=[],
     cmdclass={
         'install': install_utidylib,
