@@ -95,3 +95,4 @@ class TidyTestCase(unittest.TestCase):
         doc = tidy.parseString(self.input1)
         for error in doc.errors:
             self.assertTrue(str(error).startswith('line'))
+            self.assertTrue(repr(error).startswith('ReportItem'))
