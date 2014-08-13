@@ -44,7 +44,6 @@ class TidyTestCase(unittest.TestCase):
 
     def test_errors(self):
         for doc in self.default_docs():
-            str(getattr(doc, 'errors'))
             self.assertEquals(doc.errors[0].line, 1)
 
     def test_nonexisting(self):
