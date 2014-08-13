@@ -124,7 +124,7 @@ class ReportItem(object):
     def __str__(self):
         try:
             if self.line:
-                return "line {0!d} col {1!d} - {2!s}: {3!s}".format(
+                return "line {0} col {1} - {2}: {3}".format(
                     self.line,
                     self.col,
                     self.severities[self.severity],
@@ -132,7 +132,7 @@ class ReportItem(object):
                 )
 
             else:
-                return "{0!s}: {1!s}".format(
+                return "{0}: {1}".format(
                     self.severities[self.severity],
                     self.message
                 )

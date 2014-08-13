@@ -52,6 +52,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertEquals(str(doc), '')
         self.assertTrue('missing.html' in doc.errors[0].message)
         self.assertEquals(doc.errors[0].severity, 'E')
+        self.assertTrue(str(doc.errors[0]).startswith('Error'))
 
     def test_options(self):
         doc1 = tidy.parseString(
@@ -89,3 +90,8 @@ class TidyTestCase(unittest.TestCase):
         handle = six.BytesIO()
         doc.write(handle)
         self.assertEquals(str(doc), handle.getvalue())
+
+    def test_errors(self):
+        doc = tidy.parseString(self.input1)
+        for error in doc.errors:
+            self.assertTrue(str(error).startswith('line'))
