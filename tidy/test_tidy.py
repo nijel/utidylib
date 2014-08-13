@@ -2,6 +2,7 @@
 import re
 import unittest
 import tidy
+import six
 import os.path
 
 DATA_STORAGE = os.path.join(
@@ -82,3 +83,9 @@ class TidyTestCase(unittest.TestCase):
         text = 'x' * 16384
         doc = tidy.parseString('<html><body>{0}</body></html>'.format(text))
         self.assertTrue(text in str(doc))
+
+    def test_write(self):
+        doc = tidy.parseString(self.input1)
+        handle = six.BytesIO()
+        doc.write(handle)
+        self.assertEquals(str(doc), handle.getvalue())
