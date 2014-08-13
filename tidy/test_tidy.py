@@ -50,6 +50,7 @@ class TidyTestCase(unittest.TestCase):
         doc = tidy.parse(os.path.join(DATA_STORAGE, 'missing.html'))
         self.assertEquals(str(doc), '')
         self.assertTrue('missing.html' in doc.errors[0].message)
+        self.assertEquals(doc.errors[0].severity, 'E')
 
     def test_options(self):
         doc1 = tidy.parseString(
