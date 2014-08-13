@@ -230,7 +230,7 @@ class DocumentFactory(FactoryDict):
         FactoryDict._setitem(self, ref, doc.cdoc)
         return doc
 
-    def parse(self, filename, *args, **kwargs):
+    def parse(self, filename, **kwargs):
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
@@ -244,7 +244,7 @@ class DocumentFactory(FactoryDict):
         self.loadFile(doc, filename)
         return doc
 
-    def parseString(self, text, *args, **kwargs):
+    def parseString(self, text, **kwargs):
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
