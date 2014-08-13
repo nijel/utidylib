@@ -94,6 +94,15 @@ class _Sink(object):
 
 
 class ReportItem(object):
+    """
+    Error report item as returned by tidy.
+
+    :attribute severity: W, E or C indicating severity
+    :attribute line: Line where error was fired (can be None)
+    :attribute col: Column where error was fired (can be None)
+    :attribute message: Error message itsef
+    :attribute err: Whole error message as returned by tidy
+    """
     severities = {'W': 'Warning', 'E': 'Error', 'C': 'Config'}
 
     def __init__(self, err):
@@ -101,7 +110,7 @@ class ReportItem(object):
         self.err = err
         if err.startswith('line'):
             tokens = err.split(' ', 6)
-            self.severity = tokens[5][0]  # W or E
+            self.severity = tokens[5][0]  # W, E or C
             self.line = int(tokens[1])
             self.col = int(tokens[3])
             self.message = tokens[6]
@@ -168,16 +177,27 @@ class SinkFactory(FactoryDict):
 sinkfactory = SinkFactory()
 
 
-class _Document(object):
+class Document(object):
+    """
+    Document object as returned by :func:`parseString` or :func:`parse`.
+    """
     def __init__(self):
         self.cdoc = _tidy.Create()
         self.errsink = sinkfactory.create()
         _tidy.SetErrorSink(self.cdoc, ctypes.byref(self.errsink.struct))
 
     def write(self, stream):
+        '''
+        :param stream: Writable file like object.
+
+        Writes document to the stream.
+        '''
         stream.write(str(self))
 
     def get_errors(self):
+        '''
+        Returns list of errors as a list of :class:`ReportItem`.
+        '''
         ret = []
         for line in str(self.errsink).split('\n'):
             line = line.strip(' \n\r')
@@ -231,7 +251,7 @@ class DocumentFactory(FactoryDict):
         self.load(doc, text, _tidy.ParseString)
 
     def _create(self, **kwargs):
-        doc = _Document()
+        doc = Document()
         self._setOptions(doc, **kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
         FactoryDict._setitem(self, ref, doc.cdoc)

@@ -7,6 +7,12 @@ Welcome to uTidyLib's documentation!
 
 .. autofunction:: parseString
 
+.. autoclass:: Document
+   :members:
+
+.. autoclass:: ReportItem
+   :members:
+
 .. autoexception:: TidyLibError
 
 .. autoexception:: InvalidOptionError

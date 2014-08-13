@@ -37,9 +37,9 @@ uses Twisted's implementation, twisted.web.microdom).
 """
 
 __all__ = [
-    'error', 'lib', 'parse', 'parseString',
+    'error', 'lib', 'parse', 'parseString', 'Document', 'ReportItem',
     'TidyLibError', 'InvalidOptionError', 'OptionArgError',
 ]
 
-from tidy.lib import parse, parseString
+from tidy.lib import parse, parseString, Document, ReportItem
 from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
