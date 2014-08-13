@@ -98,6 +98,8 @@ class _Sink(object):
 
 
 class ReportItem(object):
+    severities = {'W': 'Warning', 'E': 'Error', 'C': 'Config'}
+
     def __init__(self, err):
         # TODO - parse emacs mode
         self.err = err
@@ -115,7 +117,6 @@ class ReportItem(object):
             self.col = None
 
     def __str__(self):
-        severities = {'W': 'Warning', 'E': 'Error', 'C': 'Config'}
         try:
             if self.line:
                 return "line %d col %d - %s: %s" % (self.line, self.col,
@@ -123,7 +124,7 @@ class ReportItem(object):
                                                     self.message)
 
             else:
-                return "%s: %s" % (severities[self.severity], self.message)
+                return "%s: %s" % (self.severities[self.severity], self.message)
         except KeyError:
             return self.err
 
