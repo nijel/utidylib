@@ -77,3 +77,8 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc1).find('</html>') >= 0)
         self.assertTrue(str(doc2).find('</html>') >= 0)
         self.assertTrue(str(doc3).find('</html>') >= 0)
+
+    def test_big(self):
+        text = 'x' * 16384
+        doc = tidy.parseString('<html><body>{0}</body></html>'.format(text))
+        self.assertTrue(text in str(doc))
