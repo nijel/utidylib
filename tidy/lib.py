@@ -4,7 +4,7 @@ import os.path
 packagedir = os.path.dirname(__file__)
 
 import ctypes
-from cStringIO import StringIO
+from six import BytesIO
 import weakref
 from tidy.error import InvalidOptionError, OptionArgError
 
@@ -62,7 +62,7 @@ class _OutputSink(ctypes.Structure):
 
 class _Sink(object):
     def __init__(self):
-        self._data = StringIO()
+        self._data = BytesIO()
         self.struct = _OutputSink()
         self.struct.putByte = putByte
 

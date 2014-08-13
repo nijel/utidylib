@@ -11,6 +11,7 @@ before_install:
   - sudo apt-get install git libtidy-0.99-0
 # commands to install dependencies
 install: 
+  - pip install -r requirements.txt
   - pip install -r requirements-test.txt
 # commands to run tests
 script: 
