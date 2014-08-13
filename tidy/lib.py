@@ -193,12 +193,14 @@ class _Document(object):
 
     def __str__(self):
         stlen = ctypes.c_int(8192)
-        st = ctypes.c_buffer(stlen.value)
-        rc = _tidy.SaveString(self.cdoc, st, ctypes.byref(stlen))
-        if rc == -12:  # buffer too small
-            st = ctypes.c_buffer(stlen.value)
-            _tidy.SaveString(self.cdoc, st, ctypes.byref(stlen))
-        return st.value
+        string_buffer = ctypes.c_buffer(stlen.value)
+        result = _tidy.SaveString(
+            self.cdoc, string_buffer, ctypes.byref(stlen)
+        )
+        if result == -12:  # buffer too small
+            string_buffer = ctypes.c_buffer(stlen.value)
+            _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
+        return string_buffer.value
 
 ERROR_MAP = {
     'missing or malformed argument for option: ': OptionArgError,
