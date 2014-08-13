@@ -6,12 +6,21 @@ import six
 import weakref
 from tidy.error import InvalidOptionError, OptionArgError
 
+LIBNAMES = (
+    'tidy',
+    'cygtidy-0-99-0',
+    'libtidy',
+    'libtidy.so',
+    'libtidy-0.99.so.0',
+    'tidylib',
+    'libtidy.dylib'
+)
+
 # search the path for libtidy using the known names; try the package
 # directory too
 thelib = None
 os.environ['PATH'] = "%s%s%s" % (packagedir, os.pathsep, os.environ['PATH'])
-for libname in ('tidy', 'cygtidy-0-99-0', 'libtidy', 'libtidy.so',
-                'libtidy-0.99.so.0', 'tidylib', 'libtidy.dylib'):
+for libname in LIBNAMES:
     try:
         thelib = ctypes.CDLL(libname)
         break
