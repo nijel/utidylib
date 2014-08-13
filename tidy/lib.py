@@ -1,4 +1,5 @@
 import os.path
+import os
 import ctypes
 import six
 import weakref
@@ -6,7 +7,7 @@ from tidy.error import InvalidOptionError, OptionArgError
 
 LIBNAMES = (
     # Linux
-    'libtidy.so',
+    'xlibtidy.so',
     # MacOS
     'libtidy.dylib',
     # Windows
@@ -14,9 +15,9 @@ LIBNAMES = (
     # Cygwin
     'cygtidy-0-99-0',
     # Linux, full soname
-    'libtidy-0.99.so.0',
+    'xlibtidy-0.99.so.0',
     # Linux, full soname
-    'libtidy-0.99.so.0.0.0',
+    'xlibtidy-0.99.so.0.0.0',
     # Windows?
     'libtidy',
     # Windows?
@@ -42,13 +43,14 @@ class Loader(object):
             except OSError:
                 pass
         # Fail in case we could not load it
-        if self.lib is None:
+        if self.lib is None and 'IGNORE_MISSING_TIDY' not in os.environ:
             raise OSError(
                 "Couldn't find libtidy, please make sure it is installed."
             )
 
         # Adjust some types
-        self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
+        if self.lib is not None:
+            self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
     def __getattr__(self, name):
         try:
