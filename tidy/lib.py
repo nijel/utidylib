@@ -1,6 +1,4 @@
 import os.path
-packagedir = os.path.dirname(__file__)
-
 import ctypes
 import six
 import weakref
@@ -16,26 +14,30 @@ LIBNAMES = (
     'libtidy.dylib'
 )
 
-# search the path for libtidy using the known names; try the package
-# directory too
-thelib = None
-os.environ['PATH'] = "%s%s%s" % (packagedir, os.pathsep, os.environ['PATH'])
-for libname in LIBNAMES:
-    try:
-        thelib = ctypes.CDLL(libname)
-        break
-    except OSError:
-        pass
-if not thelib:
-    raise OSError("Couldn't find libtidy, please make sure it is installed.")
-
 
 class Loader(object):
     """I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
     so you can just access tidy.Foo
     """
     def __init__(self):
-        self.lib = thelib
+        self.lib = None
+        # Add package directory to search path
+        os.environ['PATH'] = ''.join(
+            (os.path.dirname(__file__), os.pathsep, os.environ['PATH'])
+        )
+        # Try loading library
+        for libname in LIBNAMES:
+            try:
+                self.lib = ctypes.CDLL(libname)
+                break
+            except OSError:
+                pass
+        # Fail in case we could not load it
+        if self.lib is None:
+            raise OSError("Couldn't find libtidy, please make sure it is installed.")
+
+        # Adjust some types
+        self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
     def __getattr__(self, name):
         try:
@@ -46,7 +48,6 @@ class Loader(object):
 
 
 _tidy = Loader()
-_tidy.Create.restype = ctypes.POINTER(ctypes.c_void_p)
 
 
 # define a callback to pass to Tidylib
