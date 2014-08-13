@@ -2,6 +2,7 @@
 import re
 import unittest
 import tidy
+import tidy.lib
 import six
 import os.path
 
@@ -96,3 +97,11 @@ class TidyTestCase(unittest.TestCase):
         for error in doc.errors:
             self.assertTrue(str(error).startswith('line'))
             self.assertTrue(repr(error).startswith('ReportItem'))
+
+    def test_missing_load(self):
+        backup = tidy.lib.LIBNAMES
+        try:
+            tidy.lib.LIBNAMES = ('not-existing-library',)
+            self.assertRaises(OSError, tidy.lib.Loader)
+        finally:
+            tidy.lib.LIBNAMES = backup
