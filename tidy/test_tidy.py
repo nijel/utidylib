@@ -32,7 +32,7 @@ class TidyTestCase(unittest.TestCase):
             )
 
     def test_encodings(self):
-        foo = open(self.test_file).read().decode('utf8').encode(
+        foo = open(self.test_file, 'rb').read().decode('utf8').encode(
             'ascii', 'xmlcharrefreplace'
         )
         doc1u = tidy.parseString(foo, input_encoding='ascii',

@@ -206,10 +206,10 @@ class DocumentFactory(FactoryDict):
                                 k.replace('_', '-'),
                                 str(options[k]))
             if doc.errors:
-                match = filter(
+                match = list(filter(
                     doc.errors[-1].message.startswith,
                     errors.keys()
-                )
+                ))
                 if match:
                     raise errors[match[0]](doc.errors[-1].message)
 
@@ -254,7 +254,7 @@ class DocumentFactory(FactoryDict):
         Use st as an HTML file, and process it, returning a
         document object.
         """
-        if type(st) == unicode:
+        if type(st) == six.text_type:
             try:
                 enc = kwargs['char_encoding']
             except KeyError:
