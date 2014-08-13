@@ -15,7 +15,7 @@ install:
   - pip install -r requirements-test.txt
 # commands to run tests
 script: 
-  - py.test --cov=tidy
+  - py.test --cov=tidy tidy
   - pep8 tidy
   - pylint --reports=n tidy || true
   - pyflakes tidy

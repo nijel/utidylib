@@ -22,6 +22,7 @@ For example:
     Hello Tidy!
   </body>
 </html>
+<BLANKLINE>
 
 For options like newline and output_encoding, which must be set to one of a
 fixed number of choices, you can provide either the numeric or string version
