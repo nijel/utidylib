@@ -115,7 +115,7 @@ class ReportItem(object):
             self.col = None
 
     def __str__(self):
-        severities = dict(W='Warning', E='Error', C='Config')
+        severities = {'W': 'Warning', 'E': 'Error', 'C': 'Config'}
         try:
             if self.line:
                 return "line %d col %d - %s: %s" % (self.line, self.col,
