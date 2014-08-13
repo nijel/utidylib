@@ -7,7 +7,7 @@ from tidy.error import InvalidOptionError, OptionArgError
 
 LIBNAMES = (
     # Linux
-    'xlibtidy.so',
+    'libtidy.so',
     # MacOS
     'libtidy.dylib',
     # Windows
@@ -15,9 +15,9 @@ LIBNAMES = (
     # Cygwin
     'cygtidy-0-99-0',
     # Linux, full soname
-    'xlibtidy-0.99.so.0',
+    'libtidy-0.99.so.0',
     # Linux, full soname
-    'xlibtidy-0.99.so.0.0.0',
+    'libtidy-0.99.so.0.0.0',
     # Windows?
     'libtidy',
     # Windows?
