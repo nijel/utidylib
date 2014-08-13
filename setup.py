@@ -3,30 +3,12 @@
 """Setup file for easy installation"""
 
 from setuptools import setup
-from setuptools.command.install import install
-
-
-class install_utidylib(install):
-    def run(self):
-        install.run(self)
-        print "*** This library requires that you have two libraries ***"
-        print "***           installed: ctypes and libtidy.          ***"
-        print "***   Please make sure they are installed correctly   ***"
-        print "***              before reporting a bug.              ***"
-        print "*** See:                                              ***"
-        print "***  http://starship.python.net/crew/theller/ctypes/  ***"
-        print "***         and http://tidy.sourceforge.net           ***"
-        print "*** (or consult your vendor documentation for binary  ***"
-        print "***                    packages.)                     ***"
 
 
 setup(
     packages=['tidy', ],
     package_data={'tidy': ['test_data/*.html']},
     data_files=[],
-    cmdclass={
-        'install': install_utidylib,
-    },
     name='uTidylib',
     version='0.2',
     author='Cory Dodt',
