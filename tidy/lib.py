@@ -229,24 +229,28 @@ class DocumentFactory(FactoryDict):
         return doc
 
     def parse(self, filename, *args, **kwargs):
-        """Open and process filename as an HTML file, returning a
+        """
+        :param kwargs: named options to pass to TidyLib for processing the
+                       input file.
+        :param filename: the name of a file to process
+        :return: a document object
+
+        Open and process filename as an HTML file, returning a
         processed document object.
-        @param kwargs: named options to pass to TidyLib for processing
-        the input file.
-        @param filename: the name of a file to process
-        @return: a document object
         """
         doc = self._create(**kwargs)
         self.loadFile(doc, filename)
         return doc
 
     def parseString(self, st, *args, **kwargs):
-        """Use st as an HTML file, and process it, returning a
+        """
+        :param kwargs: named options to pass to TidyLib for processing the
+                       input file.
+        :param st: the string to parse
+        :return: a document object
+
+        Use st as an HTML file, and process it, returning a
         document object.
-        @param kwargs: named options to pass to TidyLib for processing
-        the input file.
-        @param st: the string to parse
-        @return: a document object
         """
         if type(st) == unicode:
             try:
