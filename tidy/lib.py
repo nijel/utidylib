@@ -91,7 +91,7 @@ class _Sink(object):
         self.struct.putByte = putByte
 
     def putByte(self, byte):
-        self._data.write(bute)
+        self._data.write(byte)
 
     def __str__(self):
         return self._data.getvalue()
