@@ -153,7 +153,7 @@ class SinkFactory(FactoryDict):
         sink = _Sink()
         sink.struct.sinkData = self.lastsink
         FactoryDict._setitem(self, self.lastsink, sink)
-        self.lastsink = self.lastsink+1
+        self.lastsink = self.lastsink + 1
         return sink
 
 
