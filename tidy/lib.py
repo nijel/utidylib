@@ -13,7 +13,7 @@ os.environ['PATH'] = "%s%s%s" % (packagedir, os.pathsep, os.environ['PATH'])
 for libname in ('tidy', 'cygtidy-0-99-0', 'libtidy', 'libtidy.so',
                 'libtidy-0.99.so.0', 'tidylib', 'libtidy.dylib'):
     try:
-        thelib = getattr(ctypes.cdll, libname)
+        thelib = ctypes.CDLL(libname)
         break
     except OSError:
         pass
