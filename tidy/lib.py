@@ -120,7 +120,7 @@ class ReportItem(object):
         try:
             if self.line:
                 return "line %d col %d - %s: %s" % (self.line, self.col,
-                                                    severities[self.severity],
+                                                    self.severities[self.severity],
                                                     self.message)
 
             else:
