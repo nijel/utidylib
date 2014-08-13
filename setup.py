@@ -10,7 +10,7 @@ setup(
     package_data={'tidy': ['test_data/*.html']},
     data_files=[],
     name='uTidylib',
-    version='0.2',
+    version='0.3',
     author='Cory Dodt',
     author_email='corydodt@twistedmatrix.com',
     url='http://utidylib.sf.net',
