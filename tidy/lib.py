@@ -90,8 +90,8 @@ class _Sink(object):
         self.struct = _OutputSink()
         self.struct.putByte = putByte
 
-    def putByte(self, c):
-        self._data.write(c)
+    def putByte(self, byte):
+        self._data.write(bute)
 
     def __str__(self):
         return self._data.getvalue()
