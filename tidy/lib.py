@@ -5,13 +5,22 @@ import weakref
 from tidy.error import InvalidOptionError, OptionArgError
 
 LIBNAMES = (
-    'tidy',
-    'cygtidy-0-99-0',
-    'libtidy',
+    # Linux
     'libtidy.so',
+    # MacOS
+    'libtidy.dylib',
+    # Windows
+    'tidy',
+    # Cygwin
+    'cygtidy-0-99-0',
+    # Linux, full soname
     'libtidy-0.99.so.0',
+    # Linux, full soname
+    'libtidy-0.99.so.0.0.0',
+    # Windows?
+    'libtidy',
+    # Windows?
     'tidylib',
-    'libtidy.dylib'
 )
 
 
