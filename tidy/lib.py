@@ -119,18 +119,26 @@ class ReportItem(object):
     def __str__(self):
         try:
             if self.line:
-                return "line %d col %d - %s: %s" % (self.line, self.col,
-                                                    self.severities[self.severity],
-                                                    self.message)
+                return "line {0!d} col {1!d} - {2!s}: {3!s}".format(
+                    self.line,
+                    self.col,
+                    self.severities[self.severity],
+                    self.message
+                )
 
             else:
-                return "%s: %s" % (self.severities[self.severity], self.message)
+                return "{0!s}: {1!s}".format(
+                    self.severities[self.severity],
+                    self.message
+                )
         except KeyError:
             return self.err
 
     def __repr__(self):
-        return "%s('%s')" % (self.__class__.__name__,
-                             str(self).replace("'", "\\'"))
+        return "{0}('{1}')".format(
+            self.__class__.__name__,
+            str(self).replace("'", "\\'")
+        )
 
 
 class FactoryDict(dict):
