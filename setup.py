@@ -11,9 +11,9 @@ setup(
     data_files=[],
     name='uTidylib',
     version='0.3',
-    author='Cory Dodt',
-    author_email='corydodt@twistedmatrix.com',
-    url='http://utidylib.sf.net',
+    author='Michal Čihař',
+    author_email='michal@cihar.com',
+    url='https://nijel.github.io/utidylib/',
     license='MIT',
     description='Wrapper for HTML Tidy at http://tidy.sourceforge.net',
     classifiers=[
