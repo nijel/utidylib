@@ -19,7 +19,7 @@ script:
   - pep8 tidy
   - pylint --reports=n tidy || true
   - pyflakes tidy
-after_success:
+after_script:
   - coveralls
 matrix:
   allow_failures:
