@@ -220,8 +220,8 @@ class DocumentFactory(FactoryDict):
     def loadFile(self, doc, filename):
         self.load(doc, filename, _tidy.ParseFile)
 
-    def loadString(self, doc, st):
-        self.load(doc, st, _tidy.ParseString)
+    def loadString(self, doc, text):
+        self.load(doc, text, _tidy.ParseString)
 
     def _create(self, *args, **kwargs):
         doc = _Document()
@@ -244,25 +244,25 @@ class DocumentFactory(FactoryDict):
         self.loadFile(doc, filename)
         return doc
 
-    def parseString(self, st, *args, **kwargs):
+    def parseString(self, text, *args, **kwargs):
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
-        :param st: the string to parse
+        :param text: the string to parse
         :return: a document object
 
-        Use st as an HTML file, and process it, returning a
+        Use text as an HTML file, and process it, returning a
         document object.
         """
-        if type(st) == six.text_type:
+        if type(text) == six.text_type:
             try:
                 enc = kwargs['char_encoding']
             except KeyError:
                 enc = 'utf8'
                 kwargs['char_encoding'] = enc
-            st = st.encode(enc)
+            text = text.encode(enc)
         doc = self._create(**kwargs)
-        self.loadString(doc, st)
+        self.loadString(doc, text)
         return doc
 
     def releaseDoc(self, ref):
