@@ -42,10 +42,10 @@ class TidyTestCase(unittest.TestCase):
                                                            'xmlcharrefreplace')
         doc1u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='latin1')
-        self.failUnless(str(doc1u).find('\xe9') >= 0)
+        self.assertTrue(str(doc1u).find('\xe9') >= 0)
         doc2u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='utf8')
-        self.failUnless(str(doc2u).find('\xc3\xa9') >= 0)
+        self.assertTrue(str(doc2u).find('\xc3\xa9') >= 0)
 
     def test_errors(self):
         doc1, doc2, doc3, dummy = self.defaultDocs()
@@ -59,18 +59,18 @@ class TidyTestCase(unittest.TestCase):
         doc1 = tidy.parseString(self.input1, **options)
         found = re.search(r'//<![[]CDATA[[]\W+1>2\W+//]]>', str(doc1),
                           re.MULTILINE)
-        self.failUnless(found)
+        self.assertTrue(found)
         doc2 = tidy.parseString("<Html>", **options)
-        self.failUnless(str(doc2).startswith('<?xml'))
-        self.failIf(len(doc2.errors) == 0)
-        self.failUnless(str(doc2).find('\n') < 0)
+        self.assertTrue(str(doc2).startswith('<?xml'))
+        self.assertFalse(len(doc2.errors) == 0)
+        self.assertTrue(str(doc2).find('\n') < 0)
         doc3 = tidy.parse('foo.htm', char_encoding='utf8',
                           alt_text='foo')
-        self.failUnless(str(doc3).find('alt="foo"') >= 0)
-        self.failUnless(str(doc3).find('\xc3\xa9') >= 0)
+        self.assertTrue(str(doc3).find('alt="foo"') >= 0)
+        self.assertTrue(str(doc3).find('\xc3\xa9') >= 0)
 
     def test_parse(self):
         doc1, doc2, doc3, dummy = self.defaultDocs()
-        self.failUnless(str(doc1).find('</html>') >= 0)
-        self.failUnless(str(doc2).find('</html>') >= 0)
-        self.failUnless(str(doc3).find('</html>') >= 0)
+        self.assertTrue(str(doc1).find('</html>') >= 0)
+        self.assertTrue(str(doc2).find('</html>') >= 0)
+        self.assertTrue(str(doc3).find('</html>') >= 0)
