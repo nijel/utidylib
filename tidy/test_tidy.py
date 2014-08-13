@@ -32,13 +32,13 @@ class TidyTestCase(unittest.TestCase):
             )
 
     def test_encodings(self):
-        foo = open(self.test_file, 'rb').read().decode('utf8').encode(
+        text = open(self.test_file, 'rb').read().decode('utf8').encode(
             'ascii', 'xmlcharrefreplace'
         )
-        doc1u = tidy.parseString(foo, input_encoding='ascii',
+        doc1u = tidy.parseString(text, input_encoding='ascii',
                                  output_encoding='latin1')
         self.assertTrue(str(doc1u).find(b'\xe9') >= 0)
-        doc2u = tidy.parseString(foo, input_encoding='ascii',
+        doc2u = tidy.parseString(text, input_encoding='ascii',
                                  output_encoding='utf8')
         self.assertTrue(str(doc2u).find(b'\xc3\xa9') >= 0)
 
