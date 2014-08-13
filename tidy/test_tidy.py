@@ -1,4 +1,5 @@
-﻿import re
+﻿from __future__ import unicode_literals
+import re
 import unittest
 import tidy
 import os.path
@@ -35,10 +36,10 @@ class TidyTestCase(unittest.TestCase):
                                                            'xmlcharrefreplace')
         doc1u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='latin1')
-        self.assertTrue(str(doc1u).find('\xe9') >= 0)
+        self.assertTrue(str(doc1u).find(b'\xe9') >= 0)
         doc2u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='utf8')
-        self.assertTrue(str(doc2u).find('\xc3\xa9') >= 0)
+        self.assertTrue(str(doc2u).find(b'\xc3\xa9') >= 0)
 
     def test_errors(self):
         for doc in self.defaultDocs():
@@ -58,8 +59,8 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc2).find('\n') < 0)
         doc3 = tidy.parse(self.test_file, char_encoding='utf8',
                           alt_text='foo')
-        self.assertTrue(str(doc3).find('alt="foo"') >= 0)
-        self.assertTrue(str(doc3).find('\xc3\xa9') >= 0)
+        self.assertTrue(str(doc3).find(b'alt="foo"') >= 0)
+        self.assertTrue(str(doc3).find(b'\xc3\xa9') >= 0)
 
     def test_parse(self):
         doc1, doc2, doc3 = self.defaultDocs()

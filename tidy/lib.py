@@ -2,6 +2,7 @@ import os.path
 packagedir = os.path.dirname(__file__)
 
 import ctypes
+import six
 from six import BytesIO
 import weakref
 from tidy.error import InvalidOptionError, OptionArgError
@@ -191,7 +192,7 @@ class DocumentFactory(FactoryDict):
                     raise errors[match[0]](doc.errors[-1].message)
 
     def load(self, doc, arg, loader):
-        loader(doc.cdoc, arg)
+        loader(doc.cdoc, six.binary_type(arg))
         _tidy.CleanAndRepair(doc.cdoc)
 
     def loadFile(self, doc, filename):
