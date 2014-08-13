@@ -31,17 +31,20 @@ class Loader(object):
     """
     def __init__(self):
         self.lib = None
+
         # Add package directory to search path
         os.environ['PATH'] = ''.join(
             (os.path.dirname(__file__), os.pathsep, os.environ['PATH'])
         )
+
         # Try loading library
         for libname in LIBNAMES:
             try:
                 self.lib = ctypes.CDLL(libname)
                 break
             except OSError:
-                pass
+                continue
+
         # Fail in case we could not load it
         if self.lib is None and 'IGNORE_MISSING_TIDY' not in os.environ:
             raise OSError(
