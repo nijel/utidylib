@@ -23,8 +23,7 @@ class TidyTestCase(unittest.TestCase):
         doc1 = tidy.parseString(self.input1)
         doc2 = tidy.parseString(self.input2)
         doc3 = tidy.parse("foo.htm")
-        doc4 = tidy.parse("bar.htm")  # doesn't exist
-        return (doc1, doc2, doc3, doc4)
+        return (doc1, doc2, doc3)
 
     def test_badOptions(self):
         badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
@@ -47,7 +46,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc2u).find('\xc3\xa9') >= 0)
 
     def test_errors(self):
-        doc1, doc2, doc3, dummy = self.defaultDocs()
+        doc1, doc2, doc3 = self.defaultDocs()
         for doc in [doc1, doc2, doc3]:
             str(getattr(doc, 'errors'))
             self.assertEquals(doc1.errors[0].line, 1)
@@ -69,7 +68,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc3).find('\xc3\xa9') >= 0)
 
     def test_parse(self):
-        doc1, doc2, doc3, dummy = self.defaultDocs()
+        doc1, doc2, doc3 = self.defaultDocs()
         self.assertTrue(str(doc1).find('</html>') >= 0)
         self.assertTrue(str(doc2).find('</html>') >= 0)
         self.assertTrue(str(doc3).find('</html>') >= 0)
