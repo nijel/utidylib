@@ -44,7 +44,7 @@ class TidyTestCase(unittest.TestCase):
                                  output_encoding='utf8')
         self.assertTrue(str(doc2u).find(b'\xc3\xa9') >= 0)
 
-    def test_errors(self):
+    def test_error_lines(self):
         for doc in self.default_docs():
             self.assertEquals(doc.errors[0].line, 1)
 
