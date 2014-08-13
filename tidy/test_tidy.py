@@ -15,13 +15,13 @@ class TidyTestCase(unittest.TestCase):
     input2 = "<html>\n" + "<p>asdkfjhasldkfjhsldjas\n" * 100
     test_file = os.path.join(DATA_STORAGE, 'test.html')
 
-    def defaultDocs(self):
+    def default_docs(self):
         doc1 = tidy.parseString(self.input1)
         doc2 = tidy.parseString(self.input2)
         doc3 = tidy.parse(self.test_file)
         return (doc1, doc2, doc3)
 
-    def test_badOptions(self):
+    def test_bad_options(self):
         badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
         for opts in badopts:
             self.assertRaises(
@@ -43,7 +43,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc2u).find(b'\xc3\xa9') >= 0)
 
     def test_errors(self):
-        for doc in self.defaultDocs():
+        for doc in self.default_docs():
             str(getattr(doc, 'errors'))
             self.assertEquals(doc.errors[0].line, 1)
 
@@ -64,7 +64,7 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc3).find(b'\xc3\xa9') >= 0)
 
     def test_parse(self):
-        doc1, doc2, doc3 = self.defaultDocs()
+        doc1, doc2, doc3 = self.default_docs()
         self.assertTrue(str(doc1).find('</html>') >= 0)
         self.assertTrue(str(doc2).find('</html>') >= 0)
         self.assertTrue(str(doc3).find('</html>') >= 0)
