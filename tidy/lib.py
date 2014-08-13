@@ -200,7 +200,7 @@ class _Document(object):
             _tidy.SaveString(self.cdoc, st, ctypes.byref(stlen))
         return st.value
 
-errors = {
+ERROR_MAP = {
     'missing or malformed argument for option: ': OptionArgError,
     'unknown option: ': InvalidOptionError,
 }
@@ -218,12 +218,9 @@ class DocumentFactory(FactoryDict):
                                 k.replace('_', '-'),
                                 str(options[k]))
             if doc.errors:
-                match = list(filter(
-                    doc.errors[-1].message.startswith,
-                    errors.keys()
-                ))
-                if match:
-                    raise errors[match[0]](doc.errors[-1].message)
+                for error in ERROR_MAP:
+                    if doc.errors[-1].message.startswith(error):
+                        raise ERROR_MAP[error](doc.errors[-1].message)
 
     def load(self, doc, arg, loader):
         loader(doc.cdoc, six.binary_type(arg))
