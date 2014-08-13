@@ -43,7 +43,9 @@ class Loader(object):
                 pass
         # Fail in case we could not load it
         if self.lib is None:
-            raise OSError("Couldn't find libtidy, please make sure it is installed.")
+            raise OSError(
+                "Couldn't find libtidy, please make sure it is installed."
+            )
 
         # Adjust some types
         self.Create.restype = ctypes.POINTER(ctypes.c_void_p)

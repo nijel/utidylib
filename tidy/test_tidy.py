@@ -32,8 +32,9 @@ class TidyTestCase(unittest.TestCase):
             )
 
     def test_encodings(self):
-        foo = file(self.test_file).read().decode('utf8').encode('ascii',
-                                                           'xmlcharrefreplace')
+        foo = file(self.test_file).read().decode('utf8').encode(
+            'ascii', 'xmlcharrefreplace'
+        )
         doc1u = tidy.parseString(foo, input_encoding='ascii',
                                  output_encoding='latin1')
         self.assertTrue(str(doc1u).find(b'\xe9') >= 0)
