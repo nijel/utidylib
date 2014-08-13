@@ -11,12 +11,7 @@ class TidyLibError(Exception):
     """
     Generic Tidy exception.
     """
-    def __init__(self, arg):
-        self.arg = arg
-        super(TidyLibError, self).__init__(arg)
-
-    def __str__(self):
-        return self.arg
+    pass
 
 
 class InvalidOptionError(TidyLibError):
@@ -24,8 +19,7 @@ class InvalidOptionError(TidyLibError):
     Exception for invalid option.
     """
     def __str__(self):
-        return "%s was not a valid Tidy option." % (self.arg)
-    __repr__ = __str__
+        return "%s was not a valid Tidy option." % (self.args[0])
 
 
 class OptionArgError(TidyLibError):
