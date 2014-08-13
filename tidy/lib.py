@@ -223,7 +223,7 @@ class DocumentFactory(FactoryDict):
     def loadString(self, doc, text):
         self.load(doc, text, _tidy.ParseString)
 
-    def _create(self, *args, **kwargs):
+    def _create(self, **kwargs):
         doc = _Document()
         self._setOptions(doc, **kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
