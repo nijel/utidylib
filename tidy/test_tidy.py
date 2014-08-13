@@ -46,10 +46,9 @@ class TidyTestCase(unittest.TestCase):
         self.assertTrue(str(doc2u).find('\xc3\xa9') >= 0)
 
     def test_errors(self):
-        doc1, doc2, doc3 = self.defaultDocs()
-        for doc in [doc1, doc2, doc3]:
+        for doc in self.defaultDocs():
             str(getattr(doc, 'errors'))
-            self.assertEquals(doc1.errors[0].line, 1)
+            self.assertEquals(doc.errors[0].line, 1)
 
     def test_options(self):
         options = dict(add_xml_decl=1, show_errors=1, newline='CR',
