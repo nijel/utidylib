@@ -48,17 +48,17 @@ class TidyTestCase(unittest.TestCase):
             self.assertEquals(doc.errors[0].line, 1)
 
     def test_options(self):
-        options = {
-            'add_xml_decl': 1,
-            'show_errors': 1,
-            'newline': 'CR',
-            'output_xhtml': 1,
-        }
-        doc1 = tidy.parseString(self.input1, **options)
+        doc1 = tidy.parseString(
+            self.input1,
+            add_xml_decl=1, show_errors=1, newline='CR', output_xhtml=1
+        )
         found = re.search(r'//<![[]CDATA[[]\W+1>2\W+//]]>', str(doc1),
                           re.MULTILINE)
         self.assertTrue(found)
-        doc2 = tidy.parseString("<Html>", **options)
+        doc2 = tidy.parseString(
+            "<Html>",
+            add_xml_decl=1, show_errors=1, newline='CR', output_xhtml=1
+        )
         self.assertTrue(str(doc2).startswith('<?xml'))
         self.assertFalse(len(doc2.errors) == 0)
         self.assertTrue(str(doc2).find('\n') < 0)
