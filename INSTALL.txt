@@ -104,8 +104,8 @@ ________
 
 To build the doc, just run:
 
-$ python gendoc.py
+$ make -C docs html
 
-(This requires that you have epydoc installed.)
+(This requires that you have Sphinx installed.)
 
-The API documentation will be built in the ``apidoc'' directory.
+The API documentation will be built in the ``docs/_build/html/'' directory.
