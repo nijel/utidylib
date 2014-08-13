@@ -48,8 +48,12 @@ class TidyTestCase(unittest.TestCase):
             self.assertEquals(doc.errors[0].line, 1)
 
     def test_options(self):
-        options = dict(add_xml_decl=1, show_errors=1, newline='CR',
-                       output_xhtml=1)
+        options = {
+            'add_xml_decl': 1,
+            'show_errors': 1,
+            'newline': 'CR',
+            'output_xhtml': 1,
+        }
         doc1 = tidy.parseString(self.input1, **options)
         found = re.search(r'//<![[]CDATA[[]\W+1>2\W+//]]>', str(doc1),
                           re.MULTILINE)
