@@ -262,7 +262,7 @@ class DocumentFactory(FactoryDict):
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
         :param filename: the name of a file to process
-        :return: a document object
+        :return: a :class:`Document` object
 
         Open and process filename as an HTML file, returning a
         processed document object.
@@ -276,7 +276,7 @@ class DocumentFactory(FactoryDict):
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
         :param text: the string to parse
-        :return: a document object
+        :return: a :class:`Document` object
 
         Use text as an HTML file, and process it, returning a
         document object.
