@@ -37,10 +37,10 @@ traversal, since Python has several quality DOM implementations. (The author
 uses Twisted's implementation, twisted.web.microdom).
 """
 
+from tidy.lib import parse, parseString, Document, ReportItem
+from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
+
 __all__ = [
     'error', 'lib', 'parse', 'parseString', 'Document', 'ReportItem',
     'TidyLibError', 'InvalidOptionError', 'OptionArgError',
 ]
-
-from tidy.lib import parse, parseString, Document, ReportItem
-from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
