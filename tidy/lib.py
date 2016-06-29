@@ -18,6 +18,8 @@ LIBNAMES = (
     'libtidy-0.99.so.0',
     # Linux, full soname
     'libtidy-0.99.so.0.0.0',
+    # HTML tidy
+    'libtidy.so.5',
     # Windows?
     'libtidy',
     # Windows?
