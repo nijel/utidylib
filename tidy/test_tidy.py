@@ -66,17 +66,17 @@ class TidyTestCase(unittest.TestCase):
         )
         self.assertTrue(str(doc2).startswith('<?xml'))
         self.assertFalse(len(doc2.errors) == 0)
-        self.assertTrue(str(doc2).find('\n') < 0)
+        self.assertNotIn('\n', str(doc2))
         doc3 = tidy.parse(self.test_file, char_encoding='utf8',
                           alt_text='foo')
-        self.assertTrue(str(doc3).find(b'alt="foo"') >= 0)
-        self.assertTrue(str(doc3).find(b'\xc3\xa9') >= 0)
+        self.assertIn(b'alt="foo"', str(doc3))
+        self.assertIn(b'\xc3\xa9', str(doc3))
 
     def test_parse(self):
         doc1, doc2, doc3 = self.default_docs()
-        self.assertTrue(str(doc1).find('</html>') >= 0)
-        self.assertTrue(str(doc2).find('</html>') >= 0)
-        self.assertTrue(str(doc3).find('</html>') >= 0)
+        self.assertIn('</html>', str(doc1))
+        self.assertIn('</html>', str(doc2))
+        self.assertIn('</html>', str(doc3))
 
     def test_big(self):
         text = 'x' * 16384
