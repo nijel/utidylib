@@ -1,5 +1,4 @@
 ﻿from __future__ import unicode_literals
-import re
 import unittest
 import tidy
 import tidy.lib
