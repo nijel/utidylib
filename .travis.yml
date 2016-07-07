@@ -18,6 +18,8 @@ script:
   - pyflakes tidy
 after_script:
   - coveralls
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 matrix:
   allow_failures:
     - python: "3.3"
