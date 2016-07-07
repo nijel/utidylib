@@ -243,8 +243,9 @@ class DocumentFactory(FactoryDict):
                         raise ERROR_MAP[error](doc.errors[-1].message)
 
     def load(self, doc, arg, loader):
-        loader(doc.cdoc, six.binary_type(arg))
-        _tidy.CleanAndRepair(doc.cdoc)
+        status = loader(doc.cdoc, six.binary_type(arg))
+        if status > 0:
+            _tidy.CleanAndRepair(doc.cdoc)
 
     def loadFile(self, doc, filename):
         self.load(doc, filename, _tidy.ParseFile)
