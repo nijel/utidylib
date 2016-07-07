@@ -13,7 +13,7 @@ setup(
     version='0.3',
     author='Michal Čihař',
     author_email='michal@cihar.com',
-    url='https://nijel.github.io/utidylib/',
+    url='https://cihar.com/software/utidylib/',
     test_suite="tidy.test_tidy",
     license='MIT',
     description='Wrapper for HTML Tidy at http://tidy.sourceforge.net',
