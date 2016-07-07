@@ -82,10 +82,11 @@ class _OutputSink(ctypes.Structure):
 
 
 class _Sink(object):
-    def __init__(self):
+    def __init__(self, handle):
         self._data = six.BytesIO()
         self.struct = _OutputSink()
         self.struct.putByte = putByte
+        self.handle = handle
 
     def putByte(self, byte):
         self._data.write(byte)
@@ -168,7 +169,7 @@ class SinkFactory(FactoryDict):
         self.lastsink = 0
 
     def create(self):
-        sink = _Sink()
+        sink = _Sink(self.lastsink)
         sink.struct.sinkData = self.lastsink
         FactoryDict._setitem(self, self.lastsink, sink)
         self.lastsink = self.lastsink + 1
@@ -186,6 +187,9 @@ class Document(object):
         self.cdoc = _tidy.Create()
         self.errsink = sinkfactory.create()
         _tidy.SetErrorSink(self.cdoc, ctypes.byref(self.errsink.struct))
+
+    def __del__(self):
+        del sinkfactory[self.errsink.handle]
 
     def write(self, stream):
         '''
