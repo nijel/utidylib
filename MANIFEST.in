@@ -1,6 +1,11 @@
-include INSTALL.txt
 include LICENSE
 include *.py
-include *.html
 include README.*
 include MANIFEST.in
+include docs/conf.py
+include docs/Makefile
+include docs/make.bat
+include pytest.ini
+include requirements.txt
+include requirements-test.txt
+recursive-include docs *.rst
