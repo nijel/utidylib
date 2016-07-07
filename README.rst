@@ -27,6 +27,8 @@ HTML5 enabled Tidy <http://www.html-tidy.org/>.
 
 Once installed, there are two ways to get help.  The simplest is:
 
+.. code-block:: sh
+
     $ python
     >>> import tidy
     >>> help(tidy)
@@ -37,6 +39,8 @@ is available at site-packages/tidy/apidoc/index.html .
 
 10 Second Tutorial
 ------------------
+
+.. code-block:: python
 
     >>> import tidy
     >>> print tidy.parseString(
