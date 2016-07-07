@@ -45,3 +45,4 @@ __all__ = [
     'error', 'lib', 'parse', 'parseString', 'Document', 'ReportItem',
     'TidyLibError', 'InvalidOptionError', 'OptionArgError',
 ]
+__version__ = '0.3'
