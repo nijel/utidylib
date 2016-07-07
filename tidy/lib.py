@@ -64,21 +64,20 @@ class Loader(object):
 _tidy = Loader()
 
 
+_putByteFunction = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
+
 # define a callback to pass to Tidylib
-def _putByte(handle, char):
+@_putByteFunction
+def putByte(handle, char):
     """Lookup sink by handle and call its putByte method"""
     sinkfactory[handle].putByte(char)
     return 0
 
 
-PUTBYTEFUNC = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
-putByte = PUTBYTEFUNC(_putByte)
-
-
 class _OutputSink(ctypes.Structure):
     _fields_ = [
         ("sinkData", ctypes.c_int),
-        ("putByte", PUTBYTEFUNC),
+        ("putByte", _putByteFunction),
     ]
 
 
