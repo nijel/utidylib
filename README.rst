@@ -34,8 +34,8 @@ Once installed, there are two ways to get help.  The simplest is:
     >>> help(tidy)
     . . .
 
-Then, of course, there's the epydoc-generated API documentation, which
-is available at site-packages/tidy/apidoc/index.html .
+Then, of course, there's the API documentation, which
+is available at <http://utidylib.readthedocs.io/en/latest/>.
 
 10 Second Tutorial
 ------------------
