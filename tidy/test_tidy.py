@@ -1,9 +1,12 @@
 ﻿from __future__ import unicode_literals
 import unittest
+import os.path
+
+import six
+
 import tidy
 import tidy.lib
-import six
-import os.path
+
 
 DATA_STORAGE = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),

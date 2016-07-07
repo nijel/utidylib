@@ -1,8 +1,10 @@
 import os.path
 import os
 import ctypes
-import six
 import weakref
+
+import six
+
 from tidy.error import InvalidOptionError, OptionArgError
 
 LIBNAMES = (
