@@ -54,6 +54,12 @@ This requires that you have Sphinx installed.
 
 The API documentation will be built in the :file:`docs/_build/html/` directory.
 
+License
+=======
+
+.. include:: ../LICENSE
+
+
 Indices and tables
 ==================
 
