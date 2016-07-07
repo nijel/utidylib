@@ -66,6 +66,7 @@ _tidy = Loader()
 
 _putByteFunction = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
 
+
 # define a callback to pass to Tidylib
 @_putByteFunction
 def putByte(handle, char):
