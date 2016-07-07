@@ -25,6 +25,12 @@ Installing
 To use uTidylib, you need to have HTML tidy library installed.
 Check <http://www.html-tidy.org/> for instructions how to obtain it.
 
+Contributing
+============
+
+You are welcome to contribute on GitHub, we use it for source code management,
+issue tracking and patches submission, see <https://github.com/nijel/utidylib>.
+
 Running testsuite
 =================
 
