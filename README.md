@@ -1,4 +1,4 @@
-uTidyLib
+uTidylib
 ========
 
 [![Build Status](https://travis-ci.org/nijel/utidylib.svg?branch=master)](https://travis-ci.org/nijel/utidylib)
@@ -6,7 +6,7 @@ uTidyLib
 [![Code Health](https://landscape.io/github/nijel/utidylib/master/landscape.png)](https://landscape.io/github/nijel/utidylib/master)
 [![Documentation](https://readthedocs.org/projects/utidylib/badge/?version=latest)](http://utidylib.readthedocs.org/en/latest/)
 
-NOTE: This repository contains a patched version of uTidyLib which
+NOTE: This repository contains a patched version of uTidylib which
 includes all Debian patches and works with Mac OS X.
 
 This is uTidylib, the Python wrapper for the HTML cleaning

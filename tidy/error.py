@@ -1,5 +1,5 @@
 """
-Exceptions for uTidyLib
+Exceptions for uTidylib
 """
 
 __all__ = (

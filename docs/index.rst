@@ -1,4 +1,4 @@
-Welcome to uTidyLib's documentation!
+Welcome to uTidylib's documentation!
 ====================================
 
 .. automodule:: tidy

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# uTidyLib documentation build configuration file, created by
+# uTidylib documentation build configuration file, created by
 # sphinx-quickstart on Wed Aug 13 11:25:46 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -47,8 +47,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'uTidyLib'
-copyright = u'2014, Michal Čihař'
+project = u'uTidylib'
+copyright = u'2014-2016, Michal Čihař'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -180,7 +180,7 @@ html_theme = 'default'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'uTidyLibdoc'
+htmlhelp_basename = 'uTidylibdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -200,7 +200,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'uTidyLib.tex', u'uTidyLib Documentation',
+  ('index', 'uTidylib.tex', u'uTidylib Documentation',
    u'Michal Čihař', 'manual'),
 ]
 
@@ -230,7 +230,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'utidylib', u'uTidyLib Documentation',
+    ('index', 'utidylib', u'uTidylib Documentation',
      [u'Michal Čihař'], 1)
 ]
 
@@ -244,8 +244,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'uTidyLib', u'uTidyLib Documentation',
-   u'Michal Čihař', 'uTidyLib', 'One line description of project.',
+  ('index', 'uTidylib', u'uTidylib Documentation',
+   u'Michal Čihař', 'uTidylib', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -265,13 +265,13 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'uTidyLib'
+epub_title = u'uTidylib'
 epub_author = u'Michal Čihař'
 epub_publisher = u'Michal Čihař'
-epub_copyright = u'2014, Michal Čihař'
+epub_copyright = u'2014-2016, Michal Čihař'
 
 # The basename for the epub file. It defaults to the project name.
-#epub_basename = u'uTidyLib'
+#epub_basename = u'uTidylib'
 
 # The HTML theme for the epub output. Since the default themes are not optimized
 # for small screen space, using the same theme for HTML and epub output is

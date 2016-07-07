@@ -90,7 +90,7 @@ Running tests (after installing):
 _________________________________
 
 Running tests requires that you have installed Twisted
-(http://twistedmatrix.com), as uTidyLib uses the trial framework for
+(http://twistedmatrix.com), as uTidylib uses the trial framework for
 testing.
 
 $ python -c "from twisted.scripts import trial; trial.run()" -p tidylib
