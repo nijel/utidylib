@@ -50,7 +50,7 @@ class TidyTestCase(unittest.TestCase):
     def test_nonexisting(self):
         doc = tidy.parse(os.path.join(DATA_STORAGE, 'missing.html'))
         self.assertEquals(str(doc), '')
-        self.assertTrue('missing.html' in doc.errors[0].message)
+        self.assertIn('missing.html', doc.errors[0].message)
         self.assertEquals(doc.errors[0].severity, 'E')
         self.assertTrue(str(doc.errors[0]).startswith('Error'))
 
@@ -81,7 +81,7 @@ class TidyTestCase(unittest.TestCase):
     def test_big(self):
         text = 'x' * 16384
         doc = tidy.parseString('<html><body>{0}</body></html>'.format(text))
-        self.assertTrue(text in str(doc))
+        self.assertIn(text, str(doc))
 
     def test_unicode(self):
         doc = tidy.parseString('<html><body>zkouška</body></html>')
