@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+if [ "x$1" = "x--help" -o "x$1" = "x-h" ] ; then
+    echo "Usage: ./scripts/create-release [--tag]"
+    exit 1
+fi
+
+if ! git diff --exit-code --quiet ; then
+    echo "There are not committed changes!"
+    exit 1
+fi
+
+# Grab version
+version=`python -c 'import tidy; print tidy.__version__'`
+
+# What are we going to build?
+if [ "x$1" = "x--tag" ] ; then
+    git tag -s v$version -m "Version $version"
+fi
+
+# Create tarball
+./setup.py sdist --formats bztar,gztar,zip
+
+# Optionally upload
+if [ "x$1" = "x--tag" ] ; then
+#    ./setup.py register
+#    ./setup.py sdist --formats bztar,gztar,zip upload
+    scp dist/uTidylib-$version.* web:/srv/http/dl.cihar.com/utidylib/
+fi
