@@ -288,7 +288,7 @@ class DocumentFactory(FactoryDict):
         Use text as an HTML file, and process it, returning a
         document object.
         """
-        if type(text) == six.text_type:
+        if isinstance(text, six.text_type):
             try:
                 enc = kwargs['char_encoding']
             except KeyError:

@@ -83,6 +83,10 @@ class TidyTestCase(unittest.TestCase):
         doc = tidy.parseString('<html><body>{0}</body></html>'.format(text))
         self.assertTrue(text in str(doc))
 
+    def test_unicode(self):
+        doc = tidy.parseString('<html><body>zkouška</body></html>')
+        self.assertIn('zkouška'.encode('utf-8'), str(doc))
+
     def test_write(self):
         doc = tidy.parseString(self.input1)
         handle = six.BytesIO()
