@@ -36,7 +36,7 @@ Once installed, there are two ways to get help.  The simplest is:
     . . .
 
 Then, of course, there's the API documentation, which
-is available at <http://utidylib.readthedocs.io/en/latest/>.
+is available at <https://utidylib.readthedocs.io/en/latest/>.
 
 10 Second Tutorial
 ------------------
