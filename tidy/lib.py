@@ -120,34 +120,39 @@ class ReportItem(object):
         self.err = err
         if err.startswith('line'):
             tokens = err.split(' ', 6)
+            self.full_severity = tokens[5]
             self.severity = tokens[5][0]  # W, E or C
             self.line = int(tokens[1])
             self.col = int(tokens[3])
             self.message = tokens[6]
         else:
             tokens = err.split(' ', 1)
+            self.full_severity = tokens[0]
             self.severity = tokens[0][0]
             self.message = tokens[1]
             self.line = None
             self.col = None
 
-    def __str__(self):
+    def get_severity(self):
         try:
-            if self.line:
-                return "line {0} col {1} - {2}: {3}".format(
-                    self.line,
-                    self.col,
-                    self.severities[self.severity],
-                    self.message
-                )
-
-            else:
-                return "{0}: {1}".format(
-                    self.severities[self.severity],
-                    self.message
-                )
+            return self.severities[self.severity]
         except KeyError:
-            return self.err
+            return self.full_severity.strip().rstrip(':')
+
+    def __str__(self):
+        if self.line:
+            return "line {0} col {1} - {2}: {3}".format(
+                self.line,
+                self.col,
+                self.get_severity(),
+                self.message
+            )
+
+        else:
+            return "{0}: {1}".format(
+                self.get_severity(),
+                self.message
+            )
 
     def __repr__(self):
         return "{0}('{1}')".format(

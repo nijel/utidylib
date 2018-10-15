@@ -103,6 +103,10 @@ class TidyTestCase(unittest.TestCase):
             self.assertTrue(str(error).startswith('line'))
             self.assertTrue(repr(error).startswith('ReportItem'))
 
+    def test_report_item(self):
+        item = tidy.ReportItem('Invalid: error')
+        self.assertEqual(item.get_severity(), 'Invalid')
+
     def test_missing_load(self):
         backup = tidy.lib.LIBNAMES
         try:
