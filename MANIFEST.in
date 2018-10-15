@@ -1,6 +1,7 @@
 include LICENSE
 include *.py
 include README.*
+include CHANGES.*
 include MANIFEST.in
 include docs/conf.py
 include docs/Makefile

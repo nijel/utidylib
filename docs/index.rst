@@ -59,6 +59,8 @@ License
 
 .. include:: ../LICENSE
 
+.. include:: ../CHANGES.rst
+
 
 Indices and tables
 ==================
