@@ -4,7 +4,9 @@ python:
   - "2.7"
   - "pypy"
 # commands to install dependencies
-install: 
+install:
+  - if [ -n "$TIDY" ] ; then ./install-tidy.sh $TIDY ; fi
+  - export LD_LIBRARY_PATH=`pwd`/tidy-source/build/cmake/
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
 # commands to run tests
@@ -26,8 +28,16 @@ matrix:
     - dist: xenial
       sudo: required
       python: "3.7"
+env:
+  matrix:
+    - TIDY=5.6.0
+    - TIDY=5.4.0
+    - TIDY=5.2.0
+    - TIDY=5.0.0
+    - TIDY=
 addons:
   apt:
     packages:
     - libtidy-0.99-0
+    - cmake
 cache: pip
