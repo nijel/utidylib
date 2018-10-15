@@ -5,13 +5,9 @@ uTidylib
     :target: https://travis-ci.org/nijel/utidylib
     :alt: Build Status
 
-.. image:: https://img.shields.io/coveralls/nijel/utidylib.svg
-    :target: https://coveralls.io/r/nijel/utidylib?branch=master
+.. image:: https://codecov.io/gh/nijel/utidylib/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/nijel/utidylib
     :alt: Coverage Status
-
-.. image:: https://landscape.io/github/nijel/utidylib/master/landscape.png
-    :target: https://landscape.io/github/nijel/utidylib/master
-    :alt: Code Health
 
 .. image:: https://readthedocs.org/projects/utidylib/badge/?version=latest
     :target: http://utidylib.readthedocs.org/en/latest/
