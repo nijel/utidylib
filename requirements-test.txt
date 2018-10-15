@@ -3,4 +3,3 @@ pytest-cov
 pycodestyle
 pylint
 pyflakes
-coveralls
