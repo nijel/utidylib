@@ -187,6 +187,24 @@ class Document(object):
         self.options = options
         self.errsink = sinkfactory.create()
         _tidy.SetErrorSink(self.cdoc, ctypes.byref(self.errsink.struct))
+        self._set_options()
+
+    def _set_options(self):
+        for key, value in self.options.items():
+
+            # this will flush out most argument type errors...
+            if value is None:
+                value = ""
+
+            _tidy.OptParseValue(
+                self.cdoc,
+                key.replace("_", "-").encode("utf-8"),
+                str(value).encode("utf-8"),
+            )
+            if self.errors:
+                for error in ERROR_MAP:
+                    if self.errors[-1].message.startswith(error):
+                        raise ERROR_MAP[error](self.errors[-1].message)
 
     def __del__(self):
         del sinkfactory[self.errsink.handle]
@@ -239,23 +257,6 @@ ERROR_MAP = {
 
 
 class DocumentFactory(FactoryDict):
-    def _setOptions(self, doc, **options):
-        for key, value in options.items():
-
-            # this will flush out most argument type errors...
-            if value is None:
-                value = ""
-
-            _tidy.OptParseValue(
-                doc.cdoc,
-                key.replace("_", "-").encode("utf-8"),
-                str(value).encode("utf-8"),
-            )
-            if doc.errors:
-                for error in ERROR_MAP:
-                    if doc.errors[-1].message.startswith(error):
-                        raise ERROR_MAP[error](doc.errors[-1].message)
-
     def load(self, doc, arg, loader):
         status = loader(doc.cdoc, arg)
         if status > 0:
@@ -274,7 +275,6 @@ class DocumentFactory(FactoryDict):
         if "input_encoding" not in kwargs:
             kwargs["input_encoding"] = enc
         doc = Document(kwargs)
-        self._setOptions(doc, **kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
         FactoryDict._setitem(self, ref, doc.cdoc)
         return doc
