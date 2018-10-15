@@ -102,13 +102,18 @@ class ReportItem(object):
     """
     Error report item as returned by tidy.
 
-    :attribute severity: W, E or C indicating severity
+    :attribute severity: D, W, E or C indicating severity
     :attribute line: Line where error was fired (can be None)
     :attribute col: Column where error was fired (can be None)
     :attribute message: Error message itsef
     :attribute err: Whole error message as returned by tidy
     """
-    severities = {'W': 'Warning', 'E': 'Error', 'C': 'Config'}
+    severities = {
+        'W': 'Warning',
+        'E': 'Error',
+        'C': 'Config',
+        'D': 'Document',
+    }
 
     def __init__(self, err):
         # TODO - parse emacs mode

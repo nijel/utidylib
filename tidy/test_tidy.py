@@ -52,10 +52,15 @@ class TidyTestCase(unittest.TestCase):
 
     def test_nonexisting(self):
         doc = tidy.parse(os.path.join(DATA_STORAGE, 'missing.html'))
-        self.assertEquals(str(doc), '')
+        self.assertEquals(str(doc).strip(), '')
         self.assertIn('missing.html', doc.errors[0].message)
-        self.assertEquals(doc.errors[0].severity, 'E')
-        self.assertTrue(str(doc.errors[0]).startswith('Error'))
+        if doc.errors[0].severity == 'E':
+            self.assertEquals(doc.errors[0].severity, 'E')
+            self.assertTrue(str(doc.errors[0]).startswith('Error'))
+        else:
+            # Tidy 5.5.19 and newer
+            self.assertEquals(doc.errors[0].severity, 'D')
+            self.assertTrue(str(doc.errors[0]).startswith('Document'))
 
     def test_options(self):
         doc1 = tidy.parseString(
