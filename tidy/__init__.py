@@ -13,9 +13,9 @@ For example:
 >>> print(tidy.parseString(
 ...     '<Html>Hello Tidy!',
 ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
-...     doctype='transitional',  char_encoding='ascii'
+...     doctype='transitional'
 ... ))
-<?xml version="1.0" encoding="us-ascii"?>
+<?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
