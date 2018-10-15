@@ -28,7 +28,9 @@ class TidyTestCase(unittest.TestCase):
     def test_bad_options(self):
         badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
         for opts in badopts:
-            with self.assertRaisesRegexp(tidy.InvalidOptionError, 'not a valid Tidy option'):
+            with self.assertRaisesRegexp(
+                tidy.InvalidOptionError, 'not a valid Tidy option'
+            ):
                 tidy.parseString(self.input2, **opts)
 
     def test_encodings(self):
