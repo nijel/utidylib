@@ -32,10 +32,11 @@ matrix:
       env: TIDY=5.2.0
     - python: "3.6"
       env: TIDY=5.0.0
+    - python: "3.6"
+      env: TIDY=
 env:
   matrix:
     - TIDY=5.6.0
-    - TIDY=
 addons:
   apt:
     packages:
