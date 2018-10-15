@@ -38,3 +38,4 @@ addons:
   apt:
     packages:
     - libtidy-0.99-0
+cache: pip
