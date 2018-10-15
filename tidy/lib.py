@@ -218,7 +218,7 @@ class Document(object):
         Returns list of errors as a list of :class:`ReportItem`.
         '''
         ret = []
-        for line in self.errsink.getvalue().splitlines():
+        for line in self.errsink.getvalue().decode('utf-8').splitlines():
             line = line.strip()
             if line:
                 ret.append(ReportItem(line))
