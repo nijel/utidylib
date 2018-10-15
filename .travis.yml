@@ -12,9 +12,9 @@ install:
 # commands to run tests
 script: 
   - py.test --cov=tidy tidy
-  - pep8 tidy
-  - pylint --reports=n tidy || true
-  - pyflakes tidy
+  - pycodestyle tidy setup.py
+  - pylint --reports=n tidy setup.py || true
+  - pyflakes tidy setup.py
 after_script:
   - coveralls
 after_success:
