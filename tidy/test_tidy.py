@@ -28,12 +28,8 @@ class TidyTestCase(unittest.TestCase):
     def test_bad_options(self):
         badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
         for opts in badopts:
-            self.assertRaises(
-                tidy.TidyLibError,
-                tidy.parseString,
-                self.input2,
-                **opts
-            )
+            with self.assertRaisesRegexp(tidy.InvalidOptionError, 'not a valid Tidy option'):
+                tidy.parseString(self.input2, **opts)
 
     def test_encodings(self):
         text = open(self.test_file, 'rb').read().decode('utf8').encode(
@@ -111,6 +107,7 @@ class TidyTestCase(unittest.TestCase):
         backup = tidy.lib.LIBNAMES
         try:
             tidy.lib.LIBNAMES = ('not-existing-library',)
-            self.assertRaises(OSError, tidy.lib.Loader)
+            with self.assertRaises(OSError):
+                tidy.lib.Loader()
         finally:
             tidy.lib.LIBNAMES = backup
