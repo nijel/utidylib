@@ -242,16 +242,16 @@ ERROR_MAP = {
 
 class DocumentFactory(FactoryDict):
     def _setOptions(self, doc, **options):
-        for k in options.keys():
+        for key, value in options.items():
 
             # this will flush out most argument type errors...
-            if options[k] is None:
-                options[k] = ""
+            if value is None:
+                value = ""
 
             _tidy.OptParseValue(
                 doc.cdoc,
-                k.replace("_", "-").encode("utf-8"),
-                str(options[k]).encode("utf-8"),
+                key.replace("_", "-").encode("utf-8"),
+                str(value).encode("utf-8"),
             )
             if doc.errors:
                 for error in ERROR_MAP:
