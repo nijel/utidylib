@@ -94,7 +94,7 @@ class _Sink(object):
     def putByte(self, byte):
         self._data.write(byte)
 
-    def __str__(self):
+    def getvalue(self):
         return self._data.getvalue()
 
 
@@ -196,8 +196,9 @@ class Document(object):
     """
     Document object as returned by :func:`parseString` or :func:`parse`.
     """
-    def __init__(self):
+    def __init__(self, options):
         self.cdoc = _tidy.Create()
+        self.options = options
         self.errsink = sinkfactory.create()
         _tidy.SetErrorSink(self.cdoc, ctypes.byref(self.errsink.struct))
 
@@ -210,14 +211,14 @@ class Document(object):
 
         Writes document to the stream.
         '''
-        stream.write(str(self))
+        stream.write(self.getvalue())
 
     def get_errors(self):
         '''
         Returns list of errors as a list of :class:`ReportItem`.
         '''
         ret = []
-        for line in str(self.errsink).splitlines():
+        for line in self.errsink.getvalue().splitlines():
             line = line.strip()
             if line:
                 ret.append(ReportItem(line))
@@ -225,7 +226,7 @@ class Document(object):
 
     errors = property(get_errors)
 
-    def __str__(self):
+    def getvalue(self):
         stlen = ctypes.c_int(8192)
         string_buffer = ctypes.c_buffer(stlen.value)
         result = _tidy.SaveString(
@@ -235,6 +236,13 @@ class Document(object):
             string_buffer = ctypes.c_buffer(stlen.value)
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         return string_buffer.value
+
+    def __unicode__(self):
+        return self.getvalue().decode(self.options['output_encoding'])
+
+    def __str__(self):
+        return self.__unicode__().encode('utf-8')
+
 
 ERROR_MAP = {
     'missing or malformed argument for option: ': OptionArgError,
@@ -270,7 +278,12 @@ class DocumentFactory(FactoryDict):
         self.load(doc, text, _tidy.ParseString)
 
     def _create(self, **kwargs):
-        doc = Document()
+        enc = kwargs.get('char-encoding', 'utf8')
+        if 'output_encoding' not in kwargs:
+            kwargs['output_encoding'] = enc
+        if 'input_encoding' not in kwargs:
+            kwargs['input_encoding'] = enc
+        doc = Document(kwargs)
         self._setOptions(doc, **kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
         FactoryDict._setitem(self, ref, doc.cdoc)
@@ -300,14 +313,9 @@ class DocumentFactory(FactoryDict):
         Use text as an HTML file, and process it, returning a
         document object.
         """
-        if isinstance(text, six.text_type):
-            try:
-                enc = kwargs['char_encoding']
-            except KeyError:
-                enc = 'utf8'
-                kwargs['char_encoding'] = enc
-            text = text.encode(enc)
         doc = self._create(**kwargs)
+        if isinstance(text, six.text_type):
+            text = text.encode(doc.options['input_encoding'])
         self.loadString(doc, text)
         return doc
 

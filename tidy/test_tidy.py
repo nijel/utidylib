@@ -37,10 +37,10 @@ class TidyTestCase(unittest.TestCase):
         )
         doc1u = tidy.parseString(text, input_encoding='ascii',
                                  output_encoding='latin1')
-        self.assertTrue(str(doc1u).find(b'\xe9') >= 0)
+        self.assertTrue(doc1u.getvalue().find(b'\xe9') >= 0)
         doc2u = tidy.parseString(text, input_encoding='ascii',
                                  output_encoding='utf8')
-        self.assertTrue(str(doc2u).find(b'\xc3\xa9') >= 0)
+        self.assertTrue(doc2u.getvalue().find(b'\xc3\xa9') >= 0)
 
     def test_error_lines(self):
         for doc in self.default_docs():
@@ -73,14 +73,14 @@ class TidyTestCase(unittest.TestCase):
         self.assertNotIn('\n', str(doc2))
         doc3 = tidy.parse(self.test_file, char_encoding='utf8',
                           alt_text='foo')
-        self.assertIn(b'alt="foo"', str(doc3))
-        self.assertIn(b'\xc3\xa9', str(doc3))
+        self.assertIn('alt="foo"', unicode(doc3))
+        self.assertIn('é', unicode(doc3))
 
     def test_parse(self):
         doc1, doc2, doc3 = self.default_docs()
         self.assertIn('</html>', str(doc1))
         self.assertIn('</html>', str(doc2))
-        self.assertIn('</html>', str(doc3))
+        self.assertIn('</html>', unicode(doc3))
 
     def test_big(self):
         text = 'x' * 16384
@@ -89,7 +89,7 @@ class TidyTestCase(unittest.TestCase):
 
     def test_unicode(self):
         doc = tidy.parseString('<html><body>zkouška</body></html>')
-        self.assertIn('zkouška'.encode('utf-8'), str(doc))
+        self.assertIn('zkouška', unicode(doc))
 
     def test_write(self):
         doc = tidy.parseString(self.input1)
