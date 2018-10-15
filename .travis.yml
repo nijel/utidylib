@@ -18,8 +18,6 @@ script:
   - pycodestyle tidy setup.py
   - pylint --reports=n tidy setup.py || true
   - pyflakes tidy setup.py
-after_script:
-  - coveralls
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 matrix:
@@ -27,12 +25,15 @@ matrix:
     - dist: xenial
       sudo: required
       python: "3.7"
+    - python: "3.6"
+      TIDY=5.4.0
+    - python: "3.6"
+      TIDY=5.2.0
+    - python: "3.6"
+      TIDY=5.0.0
 env:
   matrix:
     - TIDY=5.6.0
-    - TIDY=5.4.0
-    - TIDY=5.2.0
-    - TIDY=5.0.0
     - TIDY=
 addons:
   apt:
