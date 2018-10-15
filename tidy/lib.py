@@ -215,10 +215,10 @@ class Document(object):
     def getvalue(self):
         """Raw string as returned by tidy."""
         stlen = ctypes.c_int(8192)
-        string_buffer = ctypes.c_buffer(stlen.value)
+        string_buffer = ctypes.create_string_buffer(stlen.value)
         result = _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         if result == -12:  # buffer too small
-            string_buffer = ctypes.c_buffer(stlen.value)
+            string_buffer = ctypes.create_string_buffer(stlen.value)
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         return string_buffer.value
 
