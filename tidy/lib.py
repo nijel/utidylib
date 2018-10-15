@@ -257,7 +257,8 @@ ERROR_MAP = {
 
 
 class DocumentFactory(FactoryDict):
-    def load(self, doc, arg, loader):
+    @staticmethod
+    def load(doc, arg, loader):
         status = loader(doc.cdoc, arg)
         if status > 0:
             _tidy.CleanAndRepair(doc.cdoc)
