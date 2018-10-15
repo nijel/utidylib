@@ -262,9 +262,11 @@ class DocumentFactory(FactoryDict):
             if options[k] is None:
                 options[k] = ''
 
-            _tidy.OptParseValue(doc.cdoc,
-                                k.replace('_', '-'),
-                                str(options[k]))
+            _tidy.OptParseValue(
+                doc.cdoc,
+                k.replace('_', '-').encode('utf-8'),
+                str(options[k]).encode('utf-8')
+            )
             if doc.errors:
                 for error in ERROR_MAP:
                     if doc.errors[-1].message.startswith(error):
