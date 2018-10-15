@@ -26,10 +26,18 @@ class TidyTestCase(unittest.TestCase):
         return (doc1, doc2, doc3)
 
     def test_bad_options(self):
-        badopts = [{'foo': 1}, {'indent': '---'}, {'indent_spaces': None}]
+        badopts = [{'foo': 1}]
         for opts in badopts:
             with self.assertRaisesRegexp(
                 tidy.InvalidOptionError, 'not a valid Tidy option'
+            ):
+                tidy.parseString(self.input2, **opts)
+
+    def test_bad_option_values(self):
+        badopts = [{'indent': '---'}, {'indent_spaces': None}]
+        for opts in badopts:
+            with self.assertRaisesRegexp(
+                tidy.OptionArgError, 'missing or malformed argument'
             ):
                 tidy.parseString(self.input2, **opts)
 
