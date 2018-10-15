@@ -14,6 +14,12 @@ setup(
     author="Michal Čihař",
     author_email="michal@cihar.com",
     url="https://cihar.com/software/utidylib/",
+    download_url="https://github.com/nijel/utidylib",
+    project_urls={
+        "Bug Tracker": "https://github.com/nijel/utidylib/issues",
+        "Documentation": "https://utidylib.readthedocs.io/en/latest/",
+        "Source Code": "https://github.com/nijel/utidylib",
+    },
     test_suite="tidy.test_tidy",
     license="MIT",
     description="Wrapper for HTML Tidy at http://tidy.sourceforge.net",
