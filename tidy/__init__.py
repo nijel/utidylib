@@ -42,7 +42,14 @@ from tidy.lib import parse, parseString, Document, ReportItem
 from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
 
 __all__ = [
-    'error', 'lib', 'parse', 'parseString', 'Document', 'ReportItem',
-    'TidyLibError', 'InvalidOptionError', 'OptionArgError',
+    "error",
+    "lib",
+    "parse",
+    "parseString",
+    "Document",
+    "ReportItem",
+    "TidyLibError",
+    "InvalidOptionError",
+    "OptionArgError",
 ]
-__version__ = '0.4'
+__version__ = "0.4"

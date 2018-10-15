@@ -9,23 +9,23 @@ from tidy.error import InvalidOptionError, OptionArgError
 
 LIBNAMES = (
     # Linux
-    'libtidy.so',
+    "libtidy.so",
     # MacOS
-    'libtidy.dylib',
+    "libtidy.dylib",
     # Windows
-    'tidy',
+    "tidy",
     # Cygwin
-    'cygtidy-0-99-0',
+    "cygtidy-0-99-0",
     # Linux, full soname
-    'libtidy-0.99.so.0',
+    "libtidy-0.99.so.0",
     # Linux, full soname
-    'libtidy-0.99.so.0.0.0',
+    "libtidy-0.99.so.0.0.0",
     # HTML tidy
-    'libtidy.so.5',
+    "libtidy.so.5",
     # Windows?
-    'libtidy',
+    "libtidy",
     # Windows?
-    'tidylib',
+    "tidylib",
 )
 
 
@@ -33,12 +33,13 @@ class Loader(object):
     """I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
     so you can just access tidy.Foo
     """
+
     def __init__(self):
         self.lib = None
 
         # Add package directory to search path
-        os.environ['PATH'] = ''.join(
-            (os.path.dirname(__file__), os.pathsep, os.environ['PATH'])
+        os.environ["PATH"] = "".join(
+            (os.path.dirname(__file__), os.pathsep, os.environ["PATH"])
         )
 
         # Try loading library
@@ -50,10 +51,8 @@ class Loader(object):
                 continue
 
         # Fail in case we could not load it
-        if self.lib is None and 'IGNORE_MISSING_TIDY' not in os.environ:
-            raise OSError(
-                "Couldn't find libtidy, please make sure it is installed."
-            )
+        if self.lib is None and "IGNORE_MISSING_TIDY" not in os.environ:
+            raise OSError("Couldn't find libtidy, please make sure it is installed.")
 
         # Adjust some types
         if self.lib is not None:
@@ -78,10 +77,7 @@ def putByte(handle, char):
 
 
 class _OutputSink(ctypes.Structure):
-    _fields_ = [
-        ("sinkData", ctypes.c_int),
-        ("putByte", _putByteFunction),
-    ]
+    _fields_ = [("sinkData", ctypes.c_int), ("putByte", _putByteFunction)]
 
 
 class _Sink(object):
@@ -108,25 +104,21 @@ class ReportItem(object):
     :attribute message: Error message itsef
     :attribute err: Whole error message as returned by tidy
     """
-    severities = {
-        'W': 'Warning',
-        'E': 'Error',
-        'C': 'Config',
-        'D': 'Document',
-    }
+
+    severities = {"W": "Warning", "E": "Error", "C": "Config", "D": "Document"}
 
     def __init__(self, err):
         # TODO - parse emacs mode
         self.err = err
-        if err.startswith('line'):
-            tokens = err.split(' ', 6)
+        if err.startswith("line"):
+            tokens = err.split(" ", 6)
             self.full_severity = tokens[5]
             self.severity = tokens[5][0]  # W, E or C
             self.line = int(tokens[1])
             self.col = int(tokens[3])
             self.message = tokens[6]
         else:
-            tokens = err.split(' ', 1)
+            tokens = err.split(" ", 1)
             self.full_severity = tokens[0]
             self.severity = tokens[0][0]
             self.message = tokens[1]
@@ -137,27 +129,20 @@ class ReportItem(object):
         try:
             return self.severities[self.severity]
         except KeyError:
-            return self.full_severity.strip().rstrip(':')
+            return self.full_severity.strip().rstrip(":")
 
     def __str__(self):
         if self.line:
             return "line {0} col {1} - {2}: {3}".format(
-                self.line,
-                self.col,
-                self.get_severity(),
-                self.message
+                self.line, self.col, self.get_severity(), self.message
             )
 
         else:
-            return "{0}: {1}".format(
-                self.get_severity(),
-                self.message
-            )
+            return "{0}: {1}".format(self.get_severity(), self.message)
 
     def __repr__(self):
         return "{0}('{1}')".format(
-            self.__class__.__name__,
-            str(self).replace("'", "\\'")
+            self.__class__.__name__, str(self).replace("'", "\\'")
         )
 
 
@@ -165,6 +150,7 @@ class FactoryDict(dict):
     """I am a dict with a create method and no __setitem__.  This allows
     me to control my own keys.
     """
+
     def create(self):
         """Subclasses should implement me to generate a new item"""
 
@@ -177,6 +163,7 @@ class FactoryDict(dict):
 
 class SinkFactory(FactoryDict):
     """Mapping for lookup of sinks by handle"""
+
     def __init__(self):
         FactoryDict.__init__(self)
         self.lastsink = 0
@@ -196,6 +183,7 @@ class Document(object):
     """
     Document object as returned by :func:`parseString` or :func:`parse`.
     """
+
     def __init__(self, options):
         self.cdoc = _tidy.Create()
         self.options = options
@@ -206,19 +194,19 @@ class Document(object):
         del sinkfactory[self.errsink.handle]
 
     def write(self, stream):
-        '''
+        """
         :param stream: Writable file like object.
 
         Writes document to the stream.
-        '''
+        """
         stream.write(self.getvalue())
 
     def get_errors(self):
-        '''
+        """
         Returns list of errors as a list of :class:`ReportItem`.
-        '''
+        """
         ret = []
-        for line in self.errsink.getvalue().decode('utf-8').splitlines():
+        for line in self.errsink.getvalue().decode("utf-8").splitlines():
             line = line.strip()
             if line:
                 ret.append(ReportItem(line))
@@ -230,9 +218,7 @@ class Document(object):
         """Raw string as returned by tidy."""
         stlen = ctypes.c_int(8192)
         string_buffer = ctypes.c_buffer(stlen.value)
-        result = _tidy.SaveString(
-            self.cdoc, string_buffer, ctypes.byref(stlen)
-        )
+        result = _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         if result == -12:  # buffer too small
             string_buffer = ctypes.c_buffer(stlen.value)
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
@@ -240,7 +226,7 @@ class Document(object):
 
     def gettext(self):
         """Unicode text for output returned by tidy."""
-        return self.getvalue().decode(self.options['output_encoding'])
+        return self.getvalue().decode(self.options["output_encoding"])
 
     def __str__(self):
         if six.PY3:
@@ -249,8 +235,8 @@ class Document(object):
 
 
 ERROR_MAP = {
-    'missing or malformed argument for option: ': OptionArgError,
-    'unknown option: ': InvalidOptionError,
+    "missing or malformed argument for option: ": OptionArgError,
+    "unknown option: ": InvalidOptionError,
 }
 
 
@@ -260,12 +246,12 @@ class DocumentFactory(FactoryDict):
 
             # this will flush out most argument type errors...
             if options[k] is None:
-                options[k] = ''
+                options[k] = ""
 
             _tidy.OptParseValue(
                 doc.cdoc,
-                k.replace('_', '-').encode('utf-8'),
-                str(options[k]).encode('utf-8')
+                k.replace("_", "-").encode("utf-8"),
+                str(options[k]).encode("utf-8"),
             )
             if doc.errors:
                 for error in ERROR_MAP:
@@ -278,17 +264,17 @@ class DocumentFactory(FactoryDict):
             _tidy.CleanAndRepair(doc.cdoc)
 
     def loadFile(self, doc, filename):
-        self.load(doc, filename.encode('utf-8'), _tidy.ParseFile)
+        self.load(doc, filename.encode("utf-8"), _tidy.ParseFile)
 
     def loadString(self, doc, text):
         self.load(doc, text, _tidy.ParseString)
 
     def _create(self, **kwargs):
-        enc = kwargs.get('char-encoding', 'utf8')
-        if 'output_encoding' not in kwargs:
-            kwargs['output_encoding'] = enc
-        if 'input_encoding' not in kwargs:
-            kwargs['input_encoding'] = enc
+        enc = kwargs.get("char-encoding", "utf8")
+        if "output_encoding" not in kwargs:
+            kwargs["output_encoding"] = enc
+        if "input_encoding" not in kwargs:
+            kwargs["input_encoding"] = enc
         doc = Document(kwargs)
         self._setOptions(doc, **kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
@@ -321,7 +307,7 @@ class DocumentFactory(FactoryDict):
         """
         doc = self._create(**kwargs)
         if isinstance(text, six.text_type):
-            text = text.encode(doc.options['input_encoding'])
+            text = text.encode(doc.options["input_encoding"])
         self.loadString(doc, text)
         return doc
 
