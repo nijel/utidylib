@@ -12,3 +12,8 @@ Changes
 
 * Initial release under new maintainer.
 * Incorporated Debian patches.
+* Various compatiblity fixes (eg. with 64-bit machines).
+* Various code cleanups.
+* New test suite.
+* New documentation.
+* Support for new HTML 5 tidy library.
