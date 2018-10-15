@@ -48,7 +48,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'uTidylib'
-copyright = u'2014-2016, Michal Čihař'
+copyright = u'2014-2018, Michal Čihař'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -268,7 +268,7 @@ texinfo_documents = [
 epub_title = u'uTidylib'
 epub_author = u'Michal Čihař'
 epub_publisher = u'Michal Čihař'
-epub_copyright = u'2014-2016, Michal Čihař'
+epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'uTidylib'
