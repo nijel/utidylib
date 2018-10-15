@@ -105,7 +105,7 @@ class TidyTestCase(unittest.TestCase):
         doc = tidy.parseString(self.input1)
         handle = six.BytesIO()
         doc.write(handle)
-        self.assertEquals(str(doc), handle.getvalue())
+        self.assertEquals(doc.getvalue(), handle.getvalue())
 
     def test_errors(self):
         doc = tidy.parseString(self.input1)
