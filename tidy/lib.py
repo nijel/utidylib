@@ -136,9 +136,7 @@ class ReportItem(object):
             return "line {0} col {1} - {2}: {3}".format(
                 self.line, self.col, self.get_severity(), self.message
             )
-
-        else:
-            return "{0}: {1}".format(self.get_severity(), self.message)
+        return "{0}: {1}".format(self.get_severity(), self.message)
 
     def __repr__(self):
         return "{0}('{1}')".format(
