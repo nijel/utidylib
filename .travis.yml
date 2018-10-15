@@ -25,12 +25,13 @@ matrix:
     - dist: xenial
       sudo: required
       python: "3.7"
+      env: TIDY=5.6.0
     - python: "3.6"
-      TIDY=5.4.0
+      env: TIDY=5.4.0
     - python: "3.6"
-      TIDY=5.2.0
+      env: TIDY=5.2.0
     - python: "3.6"
-      TIDY=5.0.0
+      env: TIDY=5.0.0
 env:
   matrix:
     - TIDY=5.6.0
