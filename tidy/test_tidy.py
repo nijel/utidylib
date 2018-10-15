@@ -75,14 +75,14 @@ class TidyTestCase(unittest.TestCase):
         self.assertNotIn('\n', str(doc2))
         doc3 = tidy.parse(self.test_file, char_encoding='utf8',
                           alt_text='foo')
-        self.assertIn('alt="foo"', unicode(doc3))
-        self.assertIn('é', unicode(doc3))
+        self.assertIn('alt="foo"', doc3.gettext())
+        self.assertIn('é', doc3.gettext())
 
     def test_parse(self):
         doc1, doc2, doc3 = self.default_docs()
         self.assertIn('</html>', str(doc1))
         self.assertIn('</html>', str(doc2))
-        self.assertIn('</html>', unicode(doc3))
+        self.assertIn('</html>', doc3.gettext())
 
     def test_big(self):
         text = 'x' * 16384
@@ -91,7 +91,7 @@ class TidyTestCase(unittest.TestCase):
 
     def test_unicode(self):
         doc = tidy.parseString('<html><body>zkouška</body></html>')
-        self.assertIn('zkouška', unicode(doc))
+        self.assertIn('zkouška', doc.gettext())
 
     def test_write(self):
         doc = tidy.parseString(self.input1)

@@ -227,6 +227,7 @@ class Document(object):
     errors = property(get_errors)
 
     def getvalue(self):
+        """Raw string as returned by tidy."""
         stlen = ctypes.c_int(8192)
         string_buffer = ctypes.c_buffer(stlen.value)
         result = _tidy.SaveString(
@@ -237,11 +238,14 @@ class Document(object):
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         return string_buffer.value
 
-    def __unicode__(self):
+    def gettext(self):
+        """Unicode text for output returned by tidy."""
         return self.getvalue().decode(self.options['output_encoding'])
 
     def __str__(self):
-        return self.__unicode__().encode('utf-8')
+        if six.PY3:
+            return self.gettext()
+        return self.getvalue()
 
 
 ERROR_MAP = {
