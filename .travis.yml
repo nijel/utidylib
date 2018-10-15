@@ -2,6 +2,9 @@ sudo: false
 language: python
 python:
   - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
   - "pypy"
 # commands to install dependencies
 install:
@@ -20,10 +23,6 @@ after_script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 matrix:
-  allow_failures:
-    - dist: xenial
-      sudo: required
-      python: "3.7"
   include:
     - dist: xenial
       sudo: required
