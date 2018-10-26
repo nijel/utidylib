@@ -1,6 +1,11 @@
 Changes
 =======
 
+0.5
+---
+
+* Fixed compatibility with Debian patched libtidy5deb1.
+
 0.4
 ---
 
