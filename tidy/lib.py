@@ -22,6 +22,8 @@ LIBNAMES = (
     "libtidy-0.99.so.0.0.0",
     # HTML tidy
     "libtidy.so.5",
+    # Debian changed soname
+    "libtidy.so.5deb1",
     # Windows?
     "libtidy",
     # Windows?
