@@ -25,7 +25,6 @@ fi
 
 # Optionally upload
 if [ "x$1" = "x--tag" ] ; then
-#    ./setup.py register
-#    ./setup.py sdist --formats bztar,gztar,zip upload
+    # twine upload dist/uTidylib-$version.tar.gz
     scp dist/uTidylib-$version.* web:/srv/http/dl.cihar.com/utidylib/
 fi
