@@ -13,7 +13,7 @@ if ! git diff --exit-code --quiet ; then
 fi
 
 # Grab version
-version=`python -c 'import tidy; print tidy.__version__'`
+version=`python -c 'import tidy; print(tidy.__version__)'`
 
 # What are we going to build?
 if [ "x$1" = "x--tag" ] ; then
