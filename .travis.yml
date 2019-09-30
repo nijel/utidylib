@@ -5,7 +5,7 @@ python:
   - "2.7"
   - "3.6"
   - "3.7"
-  - "pypy"
+  - "pypy3"
 # commands to install dependencies
 install:
   - if [ -n "$TIDY" ] ; then ./scripts/install-tidy.sh $TIDY ; fi
