@@ -1,6 +1,11 @@
 Changes
 =======
 
+0.6
+---
+
+* First official release PyPI.
+
 0.5
 ---
 

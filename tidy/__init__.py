@@ -52,4 +52,4 @@ __all__ = [
     "InvalidOptionError",
     "OptionArgError",
 ]
-__version__ = "0.5"
+__version__ = "0.6"

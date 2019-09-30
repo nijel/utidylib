@@ -9,7 +9,7 @@ setup(
     package_data={"tidy": ["test_data/*.html"]},
     data_files=[],
     name="uTidylib",
-    version="0.5",
+    version="0.6",
     author="Michal Čihař",
     author_email="michal@cihar.com",
     url="https://cihar.com/software/utidylib/",
