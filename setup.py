@@ -4,6 +4,9 @@
 
 from setuptools import setup
 
+with open(os.path.join(os.path.dirname(__file__), "README.rst")) as readme:
+    LONG_DESCRIPTION = readme.read()
+
 setup(
     packages=["tidy"],
     package_data={"tidy": ["test_data/*.html"]},
@@ -33,8 +36,6 @@ setup(
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
     ],
-    long_description="""\
-A wrapper for the relocatable version of HTML Tidy (see
-http://tidy.sourceforge.net for details).  This allows you to
-tidy HTML files through a Pythonic interface.""",
+    long_description=LONG_DESCRIPTION,
+    install_requires=["six"],
 )
