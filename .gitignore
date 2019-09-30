@@ -2,6 +2,7 @@
 *.pyc
 /build/
 /dist/
+/.venv*
 /uTidylib.egg-info/
 .coverage
 /.cache/
