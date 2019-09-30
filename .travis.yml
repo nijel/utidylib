@@ -18,6 +18,7 @@ script:
   - pycodestyle tidy setup.py
   - pylint --reports=n tidy setup.py || true
   - pyflakes tidy setup.py
+  - flake8 tidy setup.py
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 matrix:
