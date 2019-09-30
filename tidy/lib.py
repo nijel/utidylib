@@ -1,6 +1,6 @@
-import os.path
-import os
 import ctypes
+import os
+import os.path
 import weakref
 
 import six

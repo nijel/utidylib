@@ -4,7 +4,6 @@
 
 from setuptools import setup
 
-
 setup(
     packages=["tidy"],
     package_data={"tidy": ["test_data/*.html"]},

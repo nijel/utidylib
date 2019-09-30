@@ -38,8 +38,8 @@ traversal, since Python has several quality DOM implementations. (The author
 uses Twisted's implementation, twisted.web.microdom).
 """
 
-from tidy.lib import parse, parseString, Document, ReportItem
-from tidy.error import TidyLibError, InvalidOptionError, OptionArgError
+from tidy.error import InvalidOptionError, OptionArgError, TidyLibError
+from tidy.lib import Document, ReportItem, parse, parseString
 
 __all__ = [
     "error",
