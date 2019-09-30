@@ -25,6 +25,6 @@ fi
 
 # Optionally upload
 if [ "x$1" = "x--tag" ] ; then
-    # twine upload dist/uTidylib-$version.tar.gz
+    twine upload --sign --identity 63CB1DF1EF12CF2AC0EE5A329C27B31342B7511D dist/uTidylib-$version.tar.gz
     scp dist/uTidylib-$version.* web:/srv/http/dl.cihar.com/utidylib/
 fi
