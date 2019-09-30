@@ -8,7 +8,7 @@ python:
   - "pypy"
 # commands to install dependencies
 install:
-  - if [ -n "$TIDY" ] ; then ./install-tidy.sh $TIDY ; fi
+  - if [ -n "$TIDY" ] ; then ./scripts/install-tidy.sh $TIDY ; fi
   - export LD_LIBRARY_PATH=`pwd`/tidy-source/build/cmake/
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
