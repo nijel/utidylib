@@ -1,10 +1,10 @@
 sudo: false
 language: python
+dist: bionic
 python:
   - "2.7"
-  - "3.4"
-  - "3.5"
   - "3.6"
+  - "3.7"
   - "pypy"
 # commands to install dependencies
 install:
@@ -22,17 +22,15 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 matrix:
   include:
-    - dist: xenial
-      sudo: required
-      python: "3.7"
-      env: TIDY=5.6.0
-    - python: "3.6"
+    - python: "3.7"
+      env: TIDY=5.7.28
+    - python: "3.7"
       env: TIDY=5.4.0
-    - python: "3.6"
+    - python: "3.7"
       env: TIDY=5.2.0
-    - python: "3.6"
+    - python: "3.7"
       env: TIDY=5.0.0
-    - python: "3.6"
+    - python: "3.7"
       env: TIDY=
 env:
   matrix:
@@ -40,6 +38,6 @@ env:
 addons:
   apt:
     packages:
-    - libtidy-0.99-0
+    - libtidy5
     - cmake
 cache: pip
