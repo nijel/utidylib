@@ -18,9 +18,7 @@ This is fork of uTidylib with permission with original author. Originally it
 incorporated patches from Debian and other distributions, now it also brings
 compatibility with recent html-tidy versions and works with Python 3.
 
-Unfortunatelly this version is not released to PyPI as there is currently no
-working process to take over maintainership there and original uploader (who is
-different from original library author) is not reachable.
+The package is available on PyPI <https://pypi.org/project/uTidylib/>.
 
 This is uTidylib, the Python wrapper for the HTML cleaning
 library named TidyLib. It supports both original Tidy <http://tidy.sf.net> and new
