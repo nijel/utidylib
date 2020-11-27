@@ -25,6 +25,12 @@ Installing
 To use uTidylib, you need to have HTML tidy library installed.
 Check <http://www.html-tidy.org/> for instructions how to obtain it.
 
+Once you have installed the library, install uTidylib:
+
+.. code-block:: sh
+
+    pip install uTidylib
+
 Contributing
 ============
 
