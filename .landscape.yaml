@@ -1,4 +1,0 @@
-test-warnings: yes
-strictness: veryhigh
-ignore-paths:
-    - docs
