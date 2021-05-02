@@ -4,7 +4,7 @@ Changes
 0.7
 ---
 
-* Not yet released.
+* Dropped support for Python 3.
 
 0.6
 ---
