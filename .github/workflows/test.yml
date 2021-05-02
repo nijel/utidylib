@@ -31,13 +31,15 @@ jobs:
         uses: actions/setup-python@v2.2.1
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install tidy
+        run: ./scripts/install-tidy.sh 5.6.0
       - name: Install pip dependencies
         run: |
           python -m pip install --upgrade pip wheel
           pip install -r requirements.txt -r requirements-test.txt
       - name: Test
         run: |
-          py.test --cov=utidylib utidylib
+          py.test --cov=tidy tidy
       - name: Coverage
         run: |
           coverage xml

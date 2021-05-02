@@ -1,6 +1,6 @@
 include LICENSE
 include *.py
-include install-tidy.sh
+include scripts/*
 include README.*
 include CHANGES.*
 include MANIFEST.in
