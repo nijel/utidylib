@@ -1,2 +1,4 @@
+-r requirements-lint.txt
+-r requirements.txt
 pytest
 pytest-cov
