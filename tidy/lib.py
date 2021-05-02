@@ -134,15 +134,13 @@ class ReportItem:
 
     def __str__(self):
         if self.line:
-            return "line {0} col {1} - {2}: {3}".format(
+            return "line {} col {} - {}: {}".format(
                 self.line, self.col, self.get_severity(), self.message
             )
-        return "{0}: {1}".format(self.get_severity(), self.message)
+        return f"{self.get_severity()}: {self.message}"
 
     def __repr__(self):
-        return "{0}('{1}')".format(
-            self.__class__.__name__, str(self).replace("'", "\\'")
-        )
+        return "{}('{}')".format(self.__class__.__name__, str(self).replace("'", "\\'"))
 
 
 class FactoryDict(dict):

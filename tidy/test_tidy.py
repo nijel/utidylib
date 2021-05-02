@@ -88,7 +88,7 @@ class TidyTestCase(unittest.TestCase):
 
     def test_big(self):
         text = "x" * 16384
-        doc = tidy.parseString("<html><body>{0}</body></html>".format(text))
+        doc = tidy.parseString(f"<html><body>{text}</body></html>")
         self.assertIn(text, str(doc))
 
     def test_unicode(self):
