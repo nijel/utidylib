@@ -24,7 +24,7 @@ class TidyTestCase(unittest.TestCase):
     def test_bad_options(self):
         badopts = [{"foo": 1}]
         for opts in badopts:
-            with self.assertRaisesRegexp(
+            with self.assertRaisesRegex(
                 tidy.InvalidOptionError, "not a valid Tidy option"
             ):
                 tidy.parseString(self.input2, **opts)
@@ -32,7 +32,7 @@ class TidyTestCase(unittest.TestCase):
     def test_bad_option_values(self):
         badopts = [{"indent": "---"}, {"indent_spaces": None}]
         for opts in badopts:
-            with self.assertRaisesRegexp(
+            with self.assertRaisesRegex(
                 tidy.OptionArgError, "missing or malformed argument"
             ):
                 tidy.parseString(self.input2, **opts)
@@ -51,18 +51,18 @@ class TidyTestCase(unittest.TestCase):
 
     def test_error_lines(self):
         for doc in self.default_docs():
-            self.assertEquals(doc.errors[0].line, 1)
+            self.assertEqual(doc.errors[0].line, 1)
 
     def test_nonexisting(self):
         doc = tidy.parse(os.path.join(DATA_STORAGE, "missing.html"))
-        self.assertEquals(str(doc).strip(), "")
+        self.assertEqual(str(doc).strip(), "")
         self.assertIn("missing.html", doc.errors[0].message)
         if doc.errors[0].severity == "E":
-            self.assertEquals(doc.errors[0].severity, "E")
+            self.assertEqual(doc.errors[0].severity, "E")
             self.assertTrue(str(doc.errors[0]).startswith("Error"))
         else:
             # Tidy 5.5.19 and newer
-            self.assertEquals(doc.errors[0].severity, "D")
+            self.assertEqual(doc.errors[0].severity, "D")
             self.assertTrue(str(doc.errors[0]).startswith("Document"))
 
     def test_options(self):
@@ -99,7 +99,7 @@ class TidyTestCase(unittest.TestCase):
         doc = tidy.parseString(self.input1)
         handle = io.BytesIO()
         doc.write(handle)
-        self.assertEquals(doc.getvalue(), handle.getvalue())
+        self.assertEqual(doc.getvalue(), handle.getvalue())
 
     def test_errors(self):
         doc = tidy.parseString(self.input1)
