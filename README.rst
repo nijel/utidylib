@@ -39,7 +39,7 @@ is available at <https://utidylib.readthedocs.io/en/latest/>.
 10 Second Tutorial
 ------------------
 
-.. code-block:: python
+.. code-block:: pyconsole
 
     >>> import tidy
     >>> print(tidy.parseString(
