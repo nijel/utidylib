@@ -39,14 +39,19 @@ is available at <https://utidylib.readthedocs.io/en/latest/>.
 10 Second Tutorial
 ------------------
 
-.. code-block:: pyconsole
+.. code-block:: pycon
 
     >>> import tidy
-    >>> print(tidy.parseString(
-    ...     '<Html>Hello Tidy!',
-    ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
-    ...     doctype='transitional'
-    ... ))
+    >>> print(
+    ...     tidy.parseString(
+    ...         "<Html>Hello Tidy!",
+    ...         output_xhtml=1,
+    ...         add_xml_decl=1,
+    ...         indent=1,
+    ...         tidy_mark=0,
+    ...         doctype="transitional",
+    ...     )
+    ... )
     <?xml version="1.0"?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
