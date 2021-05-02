@@ -1,6 +1,2 @@
 pytest
 pytest-cov
-pycodestyle
-pylint
-pyflakes
-flake8

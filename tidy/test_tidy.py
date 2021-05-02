@@ -1,8 +1,8 @@
 ﻿from __future__ import unicode_literals
+
+import io
 import os.path
 import unittest
-
-import six
 
 import tidy
 import tidy.lib
@@ -97,7 +97,7 @@ class TidyTestCase(unittest.TestCase):
 
     def test_write(self):
         doc = tidy.parseString(self.input1)
-        handle = six.BytesIO()
+        handle = io.BytesIO()
         doc.write(handle)
         self.assertEquals(doc.getvalue(), handle.getvalue())
 

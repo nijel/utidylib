@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # uTidylib documentation build configuration file, created by
 # sphinx-quickstart on Wed Aug 13 11:25:46 2014.

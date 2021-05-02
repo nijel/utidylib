@@ -1,9 +1,8 @@
 import ctypes
+import io
 import os
 import os.path
 import weakref
-
-import six
 
 from tidy.error import InvalidOptionError, OptionArgError
 
@@ -31,7 +30,7 @@ LIBNAMES = (
 )
 
 
-class Loader(object):
+class Loader:
     """I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
     so you can just access tidy.Foo
     """
@@ -82,9 +81,9 @@ class _OutputSink(ctypes.Structure):
     _fields_ = [("sinkData", ctypes.c_int), ("putByte", _putByteFunction)]
 
 
-class _Sink(object):
+class _Sink:
     def __init__(self, handle):
-        self._data = six.BytesIO()
+        self._data = io.BytesIO()
         self.struct = _OutputSink()
         self.struct.putByte = putByte
         self.handle = handle
@@ -96,7 +95,7 @@ class _Sink(object):
         return self._data.getvalue()
 
 
-class ReportItem(object):
+class ReportItem:
     """
     Error report item as returned by tidy.
 
@@ -179,7 +178,7 @@ class SinkFactory(FactoryDict):
 sinkfactory = SinkFactory()
 
 
-class Document(object):
+class Document:
     """
     Document object as returned by :func:`parseString` or :func:`parse`.
     """
@@ -247,8 +246,7 @@ class Document(object):
         return self.getvalue().decode(self.options["output_encoding"])
 
     def __str__(self):
-        if six.PY3:
-            return self.gettext()
+        return self.gettext()
         return self.getvalue()
 
 
@@ -307,7 +305,7 @@ class DocumentFactory(FactoryDict):
         document object.
         """
         doc = self._create(**kwargs)
-        if isinstance(text, six.text_type):
+        if isinstance(text, str):
             text = text.encode(doc.options["input_encoding"])
         self.loadString(doc, text)
         return doc
