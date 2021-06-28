@@ -1,7 +1,7 @@
 ﻿from __future__ import unicode_literals
 
 import io
-import os.path
+import os
 import unittest
 
 import tidy
@@ -54,6 +54,7 @@ class TidyTestCase(unittest.TestCase):
             self.assertEqual(doc.errors[0].line, 1)
 
     def test_nonexisting(self):
+        os.environ.pop("IGNORE_MISSING_TIDY", None)
         doc = tidy.parse(os.path.join(DATA_STORAGE, "missing.html"))
         self.assertEqual(str(doc).strip(), "")
         self.assertIn("missing.html", doc.errors[0].message)
