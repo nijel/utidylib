@@ -3,6 +3,7 @@ import io
 import os
 import os.path
 import weakref
+from typing import Optional, Tuple
 
 from tidy.error import InvalidOptionError, OptionArgError
 
@@ -35,8 +36,9 @@ class Loader:
     so you can just access tidy.Foo
     """
 
-    def __init__(self):
+    def __init__(self, libnames: Optional[Tuple[str, ...]] = None):
         self.lib = None
+        self.libnames = libnames or LIBNAMES
 
         # Add package directory to search path
         os.environ["PATH"] = "".join(
@@ -44,7 +46,7 @@ class Loader:
         )
 
         # Try loading library
-        for libname in LIBNAMES:
+        for libname in self.libnames:
             try:
                 self.lib = ctypes.CDLL(libname)
                 break

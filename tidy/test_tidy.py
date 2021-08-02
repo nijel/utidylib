@@ -113,10 +113,5 @@ class TidyTestCase(unittest.TestCase):
         self.assertEqual(item.get_severity(), "Invalid")
 
     def test_missing_load(self):
-        backup = tidy.lib.LIBNAMES
-        try:
-            tidy.lib.LIBNAMES = ("not-existing-library",)
-            with self.assertRaises(OSError):
-                tidy.lib.Loader()
-        finally:
-            tidy.lib.LIBNAMES = backup
+        with self.assertRaises(OSError):
+            tidy.lib.Loader(libnames=("not-existing-library",))
