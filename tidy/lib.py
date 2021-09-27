@@ -164,7 +164,7 @@ class SinkFactory(FactoryDict):
     """Mapping for lookup of sinks by handle"""
 
     def __init__(self):
-        FactoryDict.__init__(self)
+        super().__init__()
         self.lastsink = 0
 
     def create(self):
