@@ -1,6 +1,12 @@
 Changes
 =======
 
+0.8
+---
+
+* Code cleanups.
+* Fixed typo in 0.7 release notes.
+
 0.7
 ---
 
