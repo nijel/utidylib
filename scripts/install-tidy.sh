@@ -23,3 +23,4 @@ rm tidy.tar.gz
 cd tidy-source/build/cmake/
 cmake ../.. -DCMAKE_BUILD_TYPE=Release
 make
+sudo make install
