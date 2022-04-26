@@ -18,7 +18,7 @@ jobs:
         tidy-version:
           - "5.6.0"
         include:
-          - os: linux
+          - os: ubuntu-20.04
             python-version: "3.10"
             tidy-version: "5.8.0"
     name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
