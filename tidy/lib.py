@@ -62,6 +62,7 @@ class Loader:
         # Adjust some types
         if self.lib is not None:
             self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
+            self.LibraryVersion.restype = ctypes.c_char_p
 
     def __getattr__(self, name):
         return getattr(self.lib, "tidy%s" % name)
@@ -319,3 +320,7 @@ class DocumentFactory(FactoryDict):
 docfactory = DocumentFactory()
 parse = docfactory.parse
 parseString = docfactory.parseString
+
+
+def getTidyVersion():
+    return _tidy.lib.tidyLibraryVersion().decode()

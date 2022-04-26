@@ -53,7 +53,7 @@ jobs:
       - name: Install editable
         run: pip install -e .
       - name: Check used library
-        run: python -c 'import tidy.lib; print(tidy.lib._tidy.lib._name)'
+        run: python -c 'import tidy.lib; print(tidy.lib._tidy.lib._name, tidy.lib.getTidyVersion())'
       - uses: codecov/codecov-action@v3
         with:
           token: ${{secrets.CODECOV_TOKEN}}
