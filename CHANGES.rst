@@ -1,6 +1,12 @@
 Changes
 =======
 
+0.9
+---
+
+* Dropped support for Python 3.6.
+* Added support for Python 3.10.
+
 0.8
 ---
 
