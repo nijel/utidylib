@@ -21,6 +21,6 @@ mkdir tidy-source
 tar xvf tidy.tar.gz --strip-components=1 -C tidy-source
 rm tidy.tar.gz
 cd tidy-source/build/cmake/
-cmake ../.. -DCMAKE_BUILD_TYPE=Release
+cmake ../.. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
 make
 sudo make install
