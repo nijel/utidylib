@@ -6,6 +6,7 @@ Changes
 
 * Dropped support for Python 3.6.
 * Added support for Python 3.10.
+* Compatibility with html-tidy 5.8.0.
 
 0.8
 ---
