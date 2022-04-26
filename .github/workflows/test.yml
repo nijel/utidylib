@@ -21,6 +21,9 @@ jobs:
           - os: ubuntu-20.04
             python-version: "3.10"
             tidy-version: "5.8.0"
+          - os: ubuntu-20.04
+            python-version: "3.10"
+            tidy-version: "os"
     name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
 
     steps:
