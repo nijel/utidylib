@@ -38,6 +38,7 @@ class Loader:
 
     def __init__(self, libnames: Optional[Tuple[str, ...]] = None):
         self.lib = None
+        self.libname = None
         self.libnames = libnames or LIBNAMES
 
         # Add package directory to search path
@@ -49,6 +50,7 @@ class Loader:
         for libname in self.libnames:
             try:
                 self.lib = ctypes.CDLL(libname)
+                self.libname = libname
                 break
             except OSError:
                 continue

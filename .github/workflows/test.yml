@@ -46,6 +46,10 @@ jobs:
       - name: Coverage
         run: |
           coverage xml
+      - name: Install editable
+        run: pip install -e .
+      - name: Check used library
+        run: python -c 'import tidy.lib; print(tidy.lib._tidy.libname)'
       - uses: codecov/codecov-action@v3
         with:
           token: ${{secrets.CODECOV_TOKEN}}
