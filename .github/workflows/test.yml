@@ -15,7 +15,13 @@ jobs:
           - "3.8"
           - "3.9"
           - "3.10"
-    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}
+        tidy-version:
+          - "5.6.0"
+        include:
+          - os: linux
+            python-version: "3.10"
+            tidy-version: "5.8.0"
+    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
 
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +35,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install tidy
-        run: ./scripts/install-tidy.sh 5.6.0
+        run: ./scripts/install-tidy.sh ${ matrix.tidy-version }}
       - name: Install pip dependencies
         run: |
           python -m pip install --upgrade pip wheel
@@ -44,4 +50,4 @@ jobs:
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           flags: unittests
-          name: Python ${{ matrix.python-version }}, ${{ matrix.os }}
+          name: Python ${{ matrix.python-version }}, ${{ matrix.os }}, tidy ${{ matrix.tidy-version }}
