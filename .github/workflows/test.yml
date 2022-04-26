@@ -35,7 +35,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install tidy
-        run: ./scripts/install-tidy.sh ${ matrix.tidy-version }}
+        run: ./scripts/install-tidy.sh ${{ matrix.tidy-version }}
       - name: Install pip dependencies
         run: |
           python -m pip install --upgrade pip wheel
