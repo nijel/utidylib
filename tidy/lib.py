@@ -48,6 +48,10 @@ class Loader:
         )
 
         # Try loading library
+        lib_path = os.environ.get("TIDY_LIBRARY_FULL_PATH")
+        if lib_path:
+            self.libnames = (lib_path,) + self.libnames
+
         for libname in self.libnames:
             try:
                 self.lib = ctypes.CDLL(libname)
