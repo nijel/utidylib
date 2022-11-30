@@ -47,6 +47,11 @@ class Loader:
             (os.path.dirname(__file__), os.pathsep, os.environ["PATH"])
         )
 
+        # Add full path to a library
+        lib_path = os.environ.get("TIDY_LIBRARY_FULL_PATH")
+        if lib_path:
+            self.libnames = (lib_path,) + self.libnames
+
         # Try loading library
         for libname in self.libnames:
             try:

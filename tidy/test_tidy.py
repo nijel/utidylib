@@ -115,3 +115,22 @@ class TidyTestCase(unittest.TestCase):
     def test_missing_load(self):
         with self.assertRaises(OSError):
             tidy.lib.Loader(libnames=("not-existing-library",))
+
+    def test_lib_from_environ(self):
+        os.environ["TIDY_LIBRARY_FULL_PATH"] = "/foo/bar/tidy"
+        loader = tidy.lib.Loader()
+        expected_libnames = (
+            "/foo/bar/tidy",
+            "libtidy.so",
+            "libtidy.dylib",
+            "tidy",
+            "cygtidy-0-99-0",
+            "libtidy-0.99.so.0",
+            "libtidy-0.99.so.0.0.0",
+            "libtidy.so.5",
+            "libtidy.so.58",
+            "libtidy.so.5deb1",
+            "libtidy",
+            "tidylib",
+        )
+        self.assertEqual(loader.libnames, expected_libnames)
