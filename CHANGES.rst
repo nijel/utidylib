@@ -8,6 +8,7 @@ Changes
 * Added support for Python 3.10 and 3.11.
 * Compatibility with html-tidy 5.8.0.
 * Added support for specifying library full path using TIDY_LIBRARY_FULL_PATH.
+* Added getTidyVersion to get libtidy version.
 
 0.8
 ---
