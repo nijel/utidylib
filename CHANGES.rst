@@ -7,6 +7,7 @@ Changes
 * Dropped support for Python 3.6.
 * Added support for Python 3.10.
 * Compatibility with html-tidy 5.8.0.
+* Added support for specifying library full path using TIDY_LIBRARY_FULL_PATH.
 
 0.8
 ---
