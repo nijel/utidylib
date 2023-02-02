@@ -200,7 +200,6 @@ class Document:
 
     def _set_options(self):
         for key, value in self.options.items():
-
             # this will flush out most argument type errors...
             if value is None:
                 value = ""
