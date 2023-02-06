@@ -1,2 +1,2 @@
-pre-commit==3.0.3
+pre-commit==3.0.4
 twine
