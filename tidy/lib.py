@@ -4,7 +4,18 @@ import os
 import os.path
 import weakref
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Union, Optional, Tuple, Callable, BinaryIO, Mapping, TypeVar
+from typing import (
+    Any,
+    BinaryIO,
+    Callable,
+    Dict,
+    List,
+    Mapping,
+    Optional,
+    Tuple,
+    TypeVar,
+    Union,
+)
 
 from tidy.error import InvalidOptionError, OptionArgError
 
@@ -281,7 +292,9 @@ ERROR_MAP = {
 
 class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
     @staticmethod
-    def load(doc: Document, arg: bytes, loader: Callable[[Document, bytes], int]) -> None:
+    def load(
+        doc: Document, arg: bytes, loader: Callable[[Document, bytes], int]
+    ) -> None:
         status = loader(doc.cdoc, arg)
         if status > 0:
             _tidy.CleanAndRepair(doc.cdoc)
