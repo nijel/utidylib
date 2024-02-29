@@ -111,7 +111,7 @@ class ReportItem:
     :attribute severity: D, W, E or C indicating severity
     :attribute line: Line where error was fired (can be None)
     :attribute col: Column where error was fired (can be None)
-    :attribute message: Error message itsef
+    :attribute message: Error message itself
     :attribute err: Whole error message as returned by tidy
     """
 
@@ -214,6 +214,8 @@ class Document:
             # this will flush out most argument type errors...
             if value is None:
                 value = ""
+            if isinstance(value, bool):
+                value = int(value)
 
             _tidy.OptParseValue(
                 self.cdoc,
@@ -269,7 +271,6 @@ class Document:
 
     def __str__(self) -> str:
         return self.gettext()
-        return self.getvalue()
 
 
 ERROR_MAP = {
@@ -326,9 +327,11 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
         Use text as an HTML file, and process it, returning a
         document object.
         """
-        doc = self._create(**kwargs)
+        doc = self.create(**kwargs)
         if isinstance(text, str):
-            text = text.encode(doc.options["input_encoding"])
+            input_encoding = doc.options["input_encoding"]
+            assert isinstance(input_encoding, str)
+            text = text.encode(input_encoding)
         self.loadString(doc, text)
         return doc
 
