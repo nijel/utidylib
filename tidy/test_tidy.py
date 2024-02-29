@@ -67,11 +67,11 @@ class TidyTestCase(unittest.TestCase):
 
     def test_options(self):
         doc1 = tidy.parseString(
-            self.input1, add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=1
+            self.input1, add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=True
         )
         self.assertIn("CDATA", str(doc1))
         doc2 = tidy.parseString(
-            "<Html>", add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=1
+            "<Html>", add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=True
         )
         self.assertTrue(str(doc2).startswith("<?xml"))
         self.assertFalse(len(doc2.errors) == 0)
@@ -133,6 +133,9 @@ class TidyTestCase(unittest.TestCase):
             "tidylib",
         )
         self.assertEqual(loader.libnames, expected_libnames)
+
+    def test_lib_version(self):
+        self.assertEqual(len(tidy.lib.getTidyVersion().split(".")), 3)
 
 
 if __name__ == "__main__":
