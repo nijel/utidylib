@@ -267,7 +267,7 @@ class DocumentFactory(FactoryDict):
     @staticmethod
     def load(doc, arg, loader):
         status = loader(doc.cdoc, arg)
-        if status > 0:
+        if status >= 0:
             _tidy.CleanAndRepair(doc.cdoc)
 
     def loadFile(self, doc, filename):
@@ -277,7 +277,7 @@ class DocumentFactory(FactoryDict):
         self.load(doc, text, _tidy.ParseString)
 
     def _create(self, **kwargs):
-        enc = kwargs.get("char-encoding", "utf8")
+        enc = kwargs.get("char_encoding", "utf8")
         if "output_encoding" not in kwargs:
             kwargs["output_encoding"] = enc
         if "input_encoding" not in kwargs:
