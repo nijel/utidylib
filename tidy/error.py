@@ -18,7 +18,7 @@ class InvalidOptionError(TidyLibError):
     Exception for invalid option.
     """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "%s was not a valid Tidy option." % (self.args[0])
 
 
