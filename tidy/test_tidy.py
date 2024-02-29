@@ -132,3 +132,7 @@ class TidyTestCase(unittest.TestCase):
             "tidylib",
         )
         self.assertEqual(loader.libnames, expected_libnames)
+
+
+if __name__ == "__main__":
+    unittest.main()
