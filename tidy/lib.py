@@ -3,7 +3,8 @@ import io
 import os
 import os.path
 import weakref
-from typing import Optional, Tuple
+from abc import ABC, abstractmethod
+from typing import Any, Dict, List, Union, Optional, Tuple, Callable, BinaryIO, Mapping, TypeVar
 
 from tidy.error import InvalidOptionError, OptionArgError
 
@@ -38,9 +39,9 @@ class Loader:
     so you can just access tidy.Foo
     """
 
-    def __init__(self, libnames: Optional[Tuple[str, ...]] = None):
-        self.lib = None
-        self.libnames = libnames or LIBNAMES
+    def __init__(self, libnames: Optional[Tuple[str, ...]] = None) -> None:
+        self.lib: ctypes.CDLL
+        self.libnames: Tuple[str, ...] = libnames or LIBNAMES
 
         # Add package directory to search path
         os.environ["PATH"] = "".join(
@@ -59,17 +60,15 @@ class Loader:
                 break
             except OSError:
                 continue
-
-        # Fail in case we could not load it
-        if self.lib is None and "IGNORE_MISSING_TIDY" not in os.environ:
+        else:
+            # Fail in case we could not load it
             raise OSError("Couldn't find libtidy, please make sure it is installed.")
 
         # Adjust some types
-        if self.lib is not None:
-            self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
-            self.LibraryVersion.restype = ctypes.c_char_p
+        self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
+        self.LibraryVersion.restype = ctypes.c_char_p
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> Any:
         return getattr(self.lib, "tidy%s" % name)
 
 
@@ -81,7 +80,7 @@ _putByteFunction = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
 
 # define a callback to pass to Tidylib
 @_putByteFunction
-def putByte(handle, char):
+def putByte(handle: int, char: int) -> int:
     """Lookup sink by handle and call its putByte method"""
     sinkfactory[handle].putByte(char)
     return 0
@@ -92,16 +91,16 @@ class _OutputSink(ctypes.Structure):
 
 
 class _Sink:
-    def __init__(self, handle):
+    def __init__(self, handle: int) -> None:
         self._data = io.BytesIO()
         self.struct = _OutputSink()
         self.struct.putByte = putByte
         self.handle = handle
 
-    def putByte(self, byte):
+    def putByte(self, byte: bytes) -> None:
         self._data.write(byte)
 
-    def getvalue(self):
+    def getvalue(self) -> bytes:
         return self._data.getvalue()
 
 
@@ -118,9 +117,14 @@ class ReportItem:
 
     severities = {"W": "Warning", "E": "Error", "C": "Config", "D": "Document"}
 
-    def __init__(self, err):
+    def __init__(self, err: str) -> None:
         # TODO - parse emacs mode
-        self.err = err
+        self.err: str = err
+        self.full_severity: str
+        self.severity: str
+        self.message: str
+        self.line: Optional[int]
+        self.col: Optional[int]
         if err.startswith("line"):
             tokens = err.split(" ", 6)
             self.full_severity = tokens[5]
@@ -136,46 +140,51 @@ class ReportItem:
             self.line = None
             self.col = None
 
-    def get_severity(self):
+    def get_severity(self) -> str:
         try:
             return self.severities[self.severity]
         except KeyError:
             return self.full_severity.strip().rstrip(":")
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.line:
             return "line {} col {} - {}: {}".format(
                 self.line, self.col, self.get_severity(), self.message
             )
         return f"{self.get_severity()}: {self.message}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "{}('{}')".format(self.__class__.__name__, str(self).replace("'", "\\'"))
 
 
-class FactoryDict(dict):
+K = TypeVar("K")
+V = TypeVar("V")
+
+
+class FactoryDict(ABC, dict, Mapping[K, V]):
     """I am a dict with a create method and no __setitem__.  This allows
     me to control my own keys.
     """
 
-    def create(self):
+    @abstractmethod
+    def create(self) -> V:
         """Subclasses should implement me to generate a new item"""
 
-    def _setitem(self, name, value):
+    def _setitem(self, name: K, value: V) -> None:
         dict.__setitem__(self, name, value)
 
-    def __setitem__(self, name, value):
+    def __setitem__(self, _: K, __: V) -> None:
         raise TypeError("Use create() to get a new object")
 
 
-class SinkFactory(FactoryDict):
+class SinkFactory(FactoryDict[int, _Sink]):
     """Mapping for lookup of sinks by handle"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.lastsink = 0
+        self.lastsink: int = 0
 
-    def create(self):
+    def create(self) -> _Sink:
         sink = _Sink(self.lastsink)
         sink.struct.sinkData = self.lastsink
         FactoryDict._setitem(self, self.lastsink, sink)
@@ -185,20 +194,22 @@ class SinkFactory(FactoryDict):
 
 sinkfactory = SinkFactory()
 
+OPTION_TYPE = Optional[Union[str, int, bool]]
+
 
 class Document:
     """
     Document object as returned by :func:`parseString` or :func:`parse`.
     """
 
-    def __init__(self, options):
+    def __init__(self, options: Dict[str, OPTION_TYPE]) -> None:
         self.cdoc = _tidy.Create()
         self.options = options
         self.errsink = sinkfactory.create()
         _tidy.SetErrorSink(self.cdoc, ctypes.byref(self.errsink.struct))
         self._set_options()
 
-    def _set_options(self):
+    def _set_options(self) -> None:
         for key, value in self.options.items():
             # this will flush out most argument type errors...
             if value is None:
@@ -214,10 +225,10 @@ class Document:
                     if self.errors[-1].message.startswith(error):
                         raise ERROR_MAP[error](self.errors[-1].message)
 
-    def __del__(self):
+    def __del__(self) -> None:
         del sinkfactory[self.errsink.handle]
 
-    def write(self, stream):
+    def write(self, stream: BinaryIO) -> None:
         """
         :param stream: Writable file like object.
 
@@ -225,7 +236,7 @@ class Document:
         """
         stream.write(self.getvalue())
 
-    def get_errors(self):
+    def get_errors(self) -> List[ReportItem]:
         """
         Returns list of errors as a list of :class:`ReportItem`.
         """
@@ -236,9 +247,11 @@ class Document:
                 ret.append(ReportItem(line))
         return ret
 
-    errors = property(get_errors)
+    @property
+    def errors(self) -> List[ReportItem]:
+        return self.get_errors()
 
-    def getvalue(self):
+    def getvalue(self) -> bytes:
         """Raw string as returned by tidy."""
         stlen = ctypes.c_int(8192)
         string_buffer = ctypes.create_string_buffer(stlen.value)
@@ -248,11 +261,13 @@ class Document:
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         return string_buffer.value
 
-    def gettext(self):
+    def gettext(self) -> str:
         """Unicode text for output returned by tidy."""
-        return self.getvalue().decode(self.options["output_encoding"])
+        output_encoding = self.options["output_encoding"]
+        assert isinstance(output_encoding, str)
+        return self.getvalue().decode(output_encoding)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.gettext()
         return self.getvalue()
 
@@ -263,20 +278,20 @@ ERROR_MAP = {
 }
 
 
-class DocumentFactory(FactoryDict):
+class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
     @staticmethod
-    def load(doc, arg, loader):
+    def load(doc: Document, arg: bytes, loader: Callable[[Document, bytes], int]) -> None:
         status = loader(doc.cdoc, arg)
         if status > 0:
             _tidy.CleanAndRepair(doc.cdoc)
 
-    def loadFile(self, doc, filename):
+    def loadFile(self, doc: Document, filename: str) -> None:
         self.load(doc, filename.encode("utf-8"), _tidy.ParseFile)
 
-    def loadString(self, doc, text):
+    def loadString(self, doc: Document, text: bytes) -> None:
         self.load(doc, text, _tidy.ParseString)
 
-    def _create(self, **kwargs):
+    def create(self, **kwargs: OPTION_TYPE) -> Document:
         enc = kwargs.get("char-encoding", "utf8")
         if "output_encoding" not in kwargs:
             kwargs["output_encoding"] = enc
@@ -287,7 +302,7 @@ class DocumentFactory(FactoryDict):
         FactoryDict._setitem(self, ref, doc.cdoc)
         return doc
 
-    def parse(self, filename, **kwargs):
+    def parse(self, filename: str, **kwargs: OPTION_TYPE) -> Document:
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
@@ -297,11 +312,11 @@ class DocumentFactory(FactoryDict):
         Open and process filename as an HTML file, returning a
         processed document object.
         """
-        doc = self._create(**kwargs)
+        doc = self.create(**kwargs)
         self.loadFile(doc, filename)
         return doc
 
-    def parseString(self, text, **kwargs):
+    def parseString(self, text: Union[bytes, str], **kwargs: OPTION_TYPE) -> Document:
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
@@ -317,7 +332,7 @@ class DocumentFactory(FactoryDict):
         self.loadString(doc, text)
         return doc
 
-    def releaseDoc(self, ref):
+    def releaseDoc(self, ref: weakref.ReferenceType) -> None:
         _tidy.Release(self[ref])
 
 
@@ -326,5 +341,7 @@ parse = docfactory.parse
 parseString = docfactory.parseString
 
 
-def getTidyVersion():
-    return _tidy.lib.tidyLibraryVersion().decode()
+def getTidyVersion() -> str:
+    version = _tidy.lib.tidyLibraryVersion()
+    assert isinstance(version, bytes)
+    return version.decode()
