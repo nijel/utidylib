@@ -1,6 +1,7 @@
 import io
 import os
 import unittest
+import pathlib
 
 import tidy
 import tidy.lib
@@ -37,8 +38,7 @@ class TidyTestCase(unittest.TestCase):
 
     def test_encodings(self):
         text = (
-            open(self.test_file, "rb")
-            .read()
+            pathlib.Path(self.test_file).read_bytes()
             .decode("utf8")
             .encode("ascii", "xmlcharrefreplace")
         )
