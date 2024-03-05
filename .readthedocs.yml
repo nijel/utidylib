@@ -17,3 +17,8 @@ build:
     python: '3.11'
   apt_packages:
     - libtidy5deb1
+
+# Optionally set the version of Python and requirements required to build your docs
+python:
+  install:
+    - requirements: docs/requirements.txt
