@@ -11,6 +11,7 @@ from typing import (
     Any,
     BinaryIO,
     Callable,
+    ClassVar,
     Mapping,
     Optional,
     TypeVar,
@@ -99,7 +100,7 @@ def putByte(handle: int, char: int) -> int:
 
 
 class _OutputSink(ctypes.Structure):
-    _fields_ = [("sinkData", ctypes.c_int), ("putByte", _putByteFunction)]
+    _fields_ = (("sinkData", ctypes.c_int), ("putByte", _putByteFunction))
 
 
 class _Sink:
@@ -127,7 +128,12 @@ class ReportItem:
     :attribute err: Whole error message as returned by tidy
     """
 
-    severities = {"W": "Warning", "E": "Error", "C": "Config", "D": "Document"}
+    severities: ClassVar[dict[str, str]] = {
+        "W": "Warning",
+        "E": "Error",
+        "C": "Config",
+        "D": "Document",
+    }
 
     def __init__(self, err: str) -> None:
         # TODO - parse emacs mode
