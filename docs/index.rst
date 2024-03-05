@@ -40,12 +40,11 @@ issue tracking and patches submission, see <https://github.com/nijel/utidylib>.
 Running testsuite
 =================
 
-The testsuite can be exececuted using both py.test or setuptools, choose whatever approach you prefer:
+The testsuite can be exececuted using pytest:
 
 .. code-block:: sh
 
-    ./setup.py test
-    py.test tidy
+    pytest tidy
 
 Building documentation
 ======================
