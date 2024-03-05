@@ -39,14 +39,14 @@ master_doc = "index"
 
 # General information about the project.
 project = "uTidylib"
-copyright = "2014-2021, Michal Čihař"
+copyright = "uTidylib contributors"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = "0.4"
+version = "0.9"
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -73,7 +73,13 @@ htmlhelp_basename = "uTidylibdoc"
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    ("index", "uTidylib.tex", "uTidylib Documentation", "Michal Čihař", "manual"),
+    (
+        "index",
+        "uTidylib.tex",
+        "uTidylib Documentation",
+        "uTidylib contributors",
+        "manual",
+    ),
 ]
 
 
@@ -81,15 +87,17 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [("index", "utidylib", "uTidylib Documentation", ["Michal Čihař"], 1)]
+man_pages = [
+    ("index", "utidylib", "uTidylib Documentation", ["uTidylib contributors"], 1)
+]
 
 
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
 epub_title = "uTidylib"
-epub_author = "Michal Čihař"
-epub_publisher = "Michal Čihař"
+epub_author = "uTidylib contributors"
+epub_publisher = "uTidylib contributors"
 epub_copyright = copyright
 
 # A list of files that should not be packed into the epub file.
