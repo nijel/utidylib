@@ -66,6 +66,14 @@ License
 
 .. include:: ../CHANGES.rst
 
+History
+=======
+
+This is fork of the original uTidylib with permission with original author.
+Originally it incorporated patches from Debian and other distributions, now it
+also brings compatibility with recent html-tidy versions and works with Python 3.
+
+The original source code is still available at https://github.com/xdissent/utidylib/.
 
 Indices and tables
 ==================
