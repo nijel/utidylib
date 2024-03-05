@@ -3,15 +3,18 @@ target-version = "py38"
 
 [tool.ruff.lint]
 extend-safe-fixes = [
+  "ANN",
   "D",
   "TCH",
   "FLY",
-  "SIM"
+  "SIM",
+  "UP"
 ]
 ignore = [
   "PT",  # CONFIG: Not using pytest
   "D203",  # CONFIG: incompatible with D211
   "D212",  # CONFIG: incompatible with D213
+  "ANN101",
   "S101",
   "FA",
   "D100",
@@ -26,10 +29,7 @@ ignore = [
   "PTH100",
   "PTH118",
   "PTH120",
-  "ANN101",
-  "ANN201",
   "EM101",
-  "ANN401",
   "RUF012",
   "TRY003",
   "TD",

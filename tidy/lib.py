@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import ctypes
 import io
 import os
@@ -8,11 +10,8 @@ from typing import (
     Any,
     BinaryIO,
     Callable,
-    Dict,
-    List,
     Mapping,
     Optional,
-    Tuple,
     TypeVar,
     Union,
 )
@@ -51,9 +50,9 @@ class Loader:
     so you can just access tidy.Foo.
     """
 
-    def __init__(self, libnames: Optional[Tuple[str, ...]] = None) -> None:
+    def __init__(self, libnames: tuple[str, ...] | None = None) -> None:
         self.lib: ctypes.CDLL
-        self.libnames: Tuple[str, ...] = libnames or LIBNAMES
+        self.libnames: tuple[str, ...] = libnames or LIBNAMES
 
         # Add package directory to search path
         os.environ["PATH"] = "".join(
@@ -80,7 +79,7 @@ class Loader:
         self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
         self.LibraryVersion.restype = ctypes.c_char_p
 
-    def __getattr__(self, name: str) -> Any:
+    def __getattr__(self, name: str) -> Any:  # noqa: ANN401
         return getattr(self.lib, "tidy%s" % name)
 
 
@@ -135,8 +134,8 @@ class ReportItem:
         self.full_severity: str
         self.severity: str
         self.message: str
-        self.line: Optional[int]
-        self.col: Optional[int]
+        self.line: int | None
+        self.col: int | None
         if err.startswith("line"):
             tokens = err.split(" ", 6)
             self.full_severity = tokens[5]
@@ -216,7 +215,7 @@ OPTION_TYPE = Optional[Union[str, int, bool]]
 class Document:
     """Document object as returned by :func:`parseString` or :func:`parse`."""
 
-    def __init__(self, options: Dict[str, OPTION_TYPE]) -> None:
+    def __init__(self, options: dict[str, OPTION_TYPE]) -> None:
         self.cdoc = _tidy.Create()
         self.options = options
         self.errsink = sinkfactory.create()
@@ -252,7 +251,7 @@ class Document:
         """
         stream.write(self.getvalue())
 
-    def get_errors(self) -> List[ReportItem]:
+    def get_errors(self) -> list[ReportItem]:
         """Returns list of errors as a list of :class:`ReportItem`."""
         ret = []
         for line in self.errsink.getvalue().decode("utf-8").splitlines():
@@ -262,7 +261,7 @@ class Document:
         return ret
 
     @property
-    def errors(self) -> List[ReportItem]:
+    def errors(self) -> list[ReportItem]:
         return self.get_errors()
 
     def getvalue(self) -> bytes:
@@ -333,7 +332,7 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
         self.loadFile(doc, filename)
         return doc
 
-    def parseString(self, text: Union[bytes, str], **kwargs: OPTION_TYPE) -> Document:
+    def parseString(self, text: bytes | str, **kwargs: OPTION_TYPE) -> Document:
         """
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.

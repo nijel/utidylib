@@ -1,5 +1,7 @@
 """Exceptions for uTidylib."""
 
+from __future__ import annotations
+
 __all__ = ("TidyLibError", "InvalidOptionError", "OptionArgError")
 
 
