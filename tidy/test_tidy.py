@@ -24,7 +24,8 @@ class TidyTestCase(unittest.TestCase):
         badopts = [{"foo": 1}]
         for opts in badopts:
             with self.assertRaisesRegex(
-                tidy.InvalidOptionError, "not a valid Tidy option"
+                tidy.InvalidOptionError,
+                "not a valid Tidy option",
             ):
                 tidy.parseString(self.input2, **opts)
 
@@ -32,7 +33,8 @@ class TidyTestCase(unittest.TestCase):
         badopts = [{"indent": "---"}, {"indent_spaces": None}]
         for opts in badopts:
             with self.assertRaisesRegex(
-                tidy.OptionArgError, "missing or malformed argument"
+                tidy.OptionArgError,
+                "missing or malformed argument",
             ):
                 tidy.parseString(self.input2, **opts)
 
@@ -67,11 +69,19 @@ class TidyTestCase(unittest.TestCase):
 
     def test_options(self):
         doc1 = tidy.parseString(
-            self.input1, add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=True
+            self.input1,
+            add_xml_decl=1,
+            show_errors=1,
+            newline="CR",
+            output_xhtml=True,
         )
         self.assertIn("CDATA", str(doc1))
         doc2 = tidy.parseString(
-            "<Html>", add_xml_decl=1, show_errors=1, newline="CR", output_xhtml=True
+            "<Html>",
+            add_xml_decl=1,
+            show_errors=1,
+            newline="CR",
+            output_xhtml=True,
         )
         self.assertTrue(str(doc2).startswith("<?xml"))
         self.assertFalse(len(doc2.errors) == 0)

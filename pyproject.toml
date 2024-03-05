@@ -1,0 +1,45 @@
+[tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
+extend-safe-fixes = [
+  "D",
+  "TCH",
+  "FLY",
+  "SIM"
+]
+ignore = [
+  "PT",  # CONFIG: Not using pytest
+  "D203",  # CONFIG: incompatible with D211
+  "D212",  # CONFIG: incompatible with D213
+  "S101",
+  "FA",
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D105",
+  "D107",
+  "D205",
+  "D401",
+  "RUF005",
+  "PTH100",
+  "PTH118",
+  "PTH120",
+  "ANN101",
+  "ANN201",
+  "EM101",
+  "ANN401",
+  "RUF012",
+  "TRY003",
+  "TD",
+  "FIX002",
+  "SLF001",
+  "PLW2901",
+  "PLR2004"
+]
+select = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"docs/conf.py" = ["INP001", "A001"]
+"tidy/lib.py" = ["N802", "N816"]

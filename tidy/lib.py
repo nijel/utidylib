@@ -46,8 +46,9 @@ LIBNAMES = (
 
 
 class Loader:
-    """I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
-    so you can just access tidy.Foo
+    """
+    I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
+    so you can just access tidy.Foo.
     """
 
     def __init__(self, libnames: Optional[Tuple[str, ...]] = None) -> None:
@@ -56,7 +57,7 @@ class Loader:
 
         # Add package directory to search path
         os.environ["PATH"] = "".join(
-            (os.path.dirname(__file__), os.pathsep, os.environ["PATH"])
+            (os.path.dirname(__file__), os.pathsep, os.environ["PATH"]),
         )
 
         # Add full path to a library
@@ -92,7 +93,7 @@ _putByteFunction = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_char)
 # define a callback to pass to Tidylib
 @_putByteFunction
 def putByte(handle: int, char: int) -> int:
-    """Lookup sink by handle and call its putByte method"""
+    """Lookup sink by handle and call its putByte method."""
     sinkfactory[handle].putByte(char)
     return 0
 
@@ -160,7 +161,10 @@ class ReportItem:
     def __str__(self) -> str:
         if self.line:
             return "line {} col {} - {}: {}".format(
-                self.line, self.col, self.get_severity(), self.message
+                self.line,
+                self.col,
+                self.get_severity(),
+                self.message,
             )
         return f"{self.get_severity()}: {self.message}"
 
@@ -173,13 +177,14 @@ V = TypeVar("V")
 
 
 class FactoryDict(ABC, dict, Mapping[K, V]):
-    """I am a dict with a create method and no __setitem__.  This allows
+    """
+    I am a dict with a create method and no __setitem__.  This allows
     me to control my own keys.
     """
 
     @abstractmethod
     def create(self) -> V:
-        """Subclasses should implement me to generate a new item"""
+        """Subclasses should implement me to generate a new item."""
 
     def _setitem(self, name: K, value: V) -> None:
         dict.__setitem__(self, name, value)
@@ -189,7 +194,7 @@ class FactoryDict(ABC, dict, Mapping[K, V]):
 
 
 class SinkFactory(FactoryDict[int, _Sink]):
-    """Mapping for lookup of sinks by handle"""
+    """Mapping for lookup of sinks by handle."""
 
     def __init__(self) -> None:
         super().__init__()
@@ -209,9 +214,7 @@ OPTION_TYPE = Optional[Union[str, int, bool]]
 
 
 class Document:
-    """
-    Document object as returned by :func:`parseString` or :func:`parse`.
-    """
+    """Document object as returned by :func:`parseString` or :func:`parse`."""
 
     def __init__(self, options: Dict[str, OPTION_TYPE]) -> None:
         self.cdoc = _tidy.Create()
@@ -250,9 +253,7 @@ class Document:
         stream.write(self.getvalue())
 
     def get_errors(self) -> List[ReportItem]:
-        """
-        Returns list of errors as a list of :class:`ReportItem`.
-        """
+        """Returns list of errors as a list of :class:`ReportItem`."""
         ret = []
         for line in self.errsink.getvalue().decode("utf-8").splitlines():
             line = line.strip()
@@ -293,7 +294,9 @@ ERROR_MAP = {
 class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
     @staticmethod
     def load(
-        doc: Document, arg: bytes, loader: Callable[[Document, bytes], int]
+        doc: Document,
+        arg: bytes,
+        loader: Callable[[Document, bytes], int],
     ) -> None:
         status = loader(doc.cdoc, arg)
         if status > 0:
