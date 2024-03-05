@@ -1,5 +1,6 @@
 """
 The Tidy wrapper.
+
 I am the main interface to TidyLib. This package supports processing HTML with
 Tidy, with all the options that the tidy command line supports.
 

@@ -48,6 +48,8 @@ LIBNAMES = (
 
 class Loader:
     """
+    ctypes.CDLL wrapper.
+
     I am a trivial wrapper that eliminates the need for tidy.tidyFoo,
     so you can just access tidy.Foo.
     """
@@ -186,13 +188,16 @@ V = TypeVar("V")
 
 class FactoryDict(ABC, dict, Mapping[K, V]):
     """
+    Custom dict wrapper.
+
     I am a dict with a create method and no __setitem__.  This allows
     me to control my own keys.
     """
 
     @abstractmethod
     def create(self) -> V:
-        """Subclasses should implement me to generate a new item."""
+        """Generate a new item."""
+        raise NotImplementedError
 
     def _setitem(self, name: K, value: V) -> None:
         dict.__setitem__(self, name, value)
@@ -261,7 +266,7 @@ class Document:
         stream.write(self.getvalue())
 
     def get_errors(self) -> list[ReportItem]:
-        """Returns list of errors as a list of :class:`ReportItem`."""
+        """Return list of errors as a list of :class:`ReportItem`."""
         ret = []
         for line in self.errsink.getvalue().decode("utf-8").splitlines():
             line = line.strip()  # noqa: PLW2901
@@ -329,13 +334,15 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
 
     def parse(self, filename: str, **kwargs: OPTION_TYPE) -> Document:
         """
+        Open and process filename as an HTML file.
+
+        Returning a processed document object.
+
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
         :param filename: the name of a file to process
         :return: a :class:`Document` object
 
-        Open and process filename as an HTML file, returning a
-        processed document object.
         """
         doc = self.create(**kwargs)
         self.loadFile(doc, filename)
@@ -343,13 +350,15 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
 
     def parseString(self, text: bytes | str, **kwargs: OPTION_TYPE) -> Document:
         """
+        Use text as an HTML file.
+
+        Returning a processed document object.
+
         :param kwargs: named options to pass to TidyLib for processing the
                        input file.
         :param text: the string to parse
         :return: a :class:`Document` object
 
-        Use text as an HTML file, and process it, returning a
-        document object.
         """
         doc = self.create(**kwargs)
         if isinstance(text, str):
