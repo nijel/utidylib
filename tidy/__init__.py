@@ -54,4 +54,4 @@ __all__ = [
     "InvalidOptionError",
     "OptionArgError",
 ]
-__version__ = "0.10"
+__version__ = "1.0"
