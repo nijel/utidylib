@@ -209,7 +209,7 @@ class SinkFactory(FactoryDict[int, _Sink]):
     def create(self) -> _Sink:
         sink = _Sink(self.lastsink)
         sink.struct.sinkData = self.lastsink
-        FactoryDict._setitem(self, self.lastsink, sink)
+        FactoryDict._setitem(self, self.lastsink, sink)  # noqa: SLF001
         self.lastsink = self.lastsink + 1
         return sink
 
@@ -233,9 +233,9 @@ class Document:
         for key, value in self.options.items():
             # this will flush out most argument type errors...
             if value is None:
-                value = ""
+                value = ""  # noqa: PLW2901
             if isinstance(value, bool):
-                value = int(value)
+                value = int(value)  # noqa: PLW2901
 
             _tidy.OptParseValue(
                 self.cdoc,
@@ -262,7 +262,7 @@ class Document:
         """Returns list of errors as a list of :class:`ReportItem`."""
         ret = []
         for line in self.errsink.getvalue().decode("utf-8").splitlines():
-            line = line.strip()
+            line = line.strip()  # noqa: PLW2901
             if line:
                 ret.append(ReportItem(line))
         return ret
@@ -322,7 +322,7 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
             kwargs["input_encoding"] = enc
         doc = Document(kwargs)
         ref = weakref.ref(doc, self.releaseDoc)
-        FactoryDict._setitem(self, ref, doc.cdoc)
+        FactoryDict._setitem(self, ref, doc.cdoc)  # noqa: SLF001
         return doc
 
     def parse(self, filename: str, **kwargs: OPTION_TYPE) -> Document:
