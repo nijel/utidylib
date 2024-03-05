@@ -4,6 +4,11 @@ Changes
 0.10
 ----
 
+* Dropped support for Python 3.7.
+* Added support for Python 3.12.
+* Added type hints.
+* Improved documentation.
+
 0.9
 ---
 
