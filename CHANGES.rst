@@ -8,6 +8,8 @@ Changes
 * Added support for Python 3.12.
 * Added type hints.
 * Improved documentation.
+* Always call CleanAndRepair after parsing.
+* Fixed handling char_encoding argument.
 
 0.9
 ---
