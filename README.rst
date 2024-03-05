@@ -1,8 +1,8 @@
 uTidylib
 ========
 
-.. image:: https://travis-ci.org/nijel/utidylib.svg?branch=master
-    :target: https://travis-ci.org/nijel/utidylib
+.. image:: https://github.com/nijel/utidylib/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/nijel/utidylib/actions/workflows/test.yml
     :alt: Build Status
 
 .. image:: https://codecov.io/gh/nijel/utidylib/branch/master/graph/badge.svg
