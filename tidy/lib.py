@@ -13,9 +13,7 @@ from typing import (
     Callable,
     ClassVar,
     Mapping,
-    Optional,
     TypeVar,
-    Union,
 )
 
 from tidy.error import InvalidOptionError, OptionArgError
@@ -215,13 +213,14 @@ class SinkFactory(FactoryDict[int, _Sink]):
 
 sinkfactory = SinkFactory()
 
-OPTION_TYPE = Optional[Union[str, int, bool]]
+OPTION_TYPE = str | int | bool | None
+OPTION_DICT_TYPE = dict[str, OPTION_TYPE]
 
 
 class Document:
     """Document object as returned by :func:`parseString` or :func:`parse`."""
 
-    def __init__(self, options: dict[str, OPTION_TYPE]) -> None:
+    def __init__(self, options: OPTION_DICT_TYPE) -> None:
         self.cdoc = _tidy.Create()
         self.options = options
         self.errsink = sinkfactory.create()

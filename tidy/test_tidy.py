@@ -32,7 +32,10 @@ class TidyTestCase(unittest.TestCase):
                 tidy.parseString(self.input2, **opts)
 
     def test_bad_option_values(self) -> None:
-        badopts = [{"indent": "---"}, {"indent_spaces": None}]
+        badopts: list[tidy.lib.OPTION_DICT_TYPE] = [
+            {"indent": "---"},
+            {"indent_spaces": None},
+        ]
         for opts in badopts:
             with self.assertRaisesRegex(
                 tidy.OptionArgError,
