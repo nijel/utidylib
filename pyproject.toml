@@ -15,8 +15,10 @@ ignore = [
   "PT",  # CONFIG: Not using pytest
   "D203",  # CONFIG: incompatible with D211
   "D212",  # CONFIG: incompatible with D213
-  "ANN101",
-  "S101",
+  "COM812",  # CONFIG: incompatible with formatter
+  "ISC001",  # CONFIG: incompatible with formatter
+  "ANN101",  # TODO: Missing type annotation for `self` in method
+  "S101",  # TODO: Use of `assert` detected
   "D100",
   "D101",
   "D102",
@@ -25,11 +27,10 @@ ignore = [
   "D107",
   "D205",
   "D401",
-  "PTH100",
-  "PTH118",
-  "PTH120",
+  "PTH100",  # TODO: Use pathlib
+  "PTH118",  # TODO: Use pathlib
+  "PTH120",  # TODO: Use pathlib
   "EM101",
-  "RUF012",
   "TRY003",
   "TD",
   "FIX002",
