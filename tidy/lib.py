@@ -305,7 +305,7 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
         loader: Callable[[Document, bytes], int],
     ) -> None:
         status = loader(doc.cdoc, arg)
-        if status > 0:
+        if status >= 0:
             _tidy.CleanAndRepair(doc.cdoc)
 
     def loadFile(self, doc: Document, filename: str) -> None:
@@ -315,7 +315,7 @@ class DocumentFactory(FactoryDict[weakref.ReferenceType, Document]):
         self.load(doc, text, _tidy.ParseString)
 
     def create(self, **kwargs: OPTION_TYPE) -> Document:
-        enc = kwargs.get("char-encoding", "utf8")
+        enc = kwargs.get("char_encoding", "utf8")
         if "output_encoding" not in kwargs:
             kwargs["output_encoding"] = enc
         if "input_encoding" not in kwargs:
