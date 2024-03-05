@@ -7,6 +7,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-toml
       - id: requirements-txt-fixer
       - id: check-merge-conflict
       - id: check-json
@@ -32,9 +33,11 @@ repos:
     hooks:
       - id: pretty-format-toml
         args: [--autofix]
+      - id: pretty-format-yaml
+        args: [--autofix, --indent, '2', --offset, '2']
   - repo: meta
     hooks:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
-exclude: "^docs/make.bat$"
+exclude: ^docs/make.bat$
