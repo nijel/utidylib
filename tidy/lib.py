@@ -120,15 +120,7 @@ class _Sink:
 
 
 class ReportItem:
-    """
-    Error report item as returned by tidy.
-
-    :attribute severity: D, W, E or C indicating severity
-    :attribute line: Line where error was fired (can be None)
-    :attribute col: Column where error was fired (can be None)
-    :attribute message: Error message itself
-    :attribute err: Whole error message as returned by tidy
-    """
+    """Error report item as returned by tidy."""
 
     severities: ClassVar[dict[str, str]] = {
         "W": "Warning",
@@ -138,12 +130,12 @@ class ReportItem:
     }
 
     def __init__(self, err: str) -> None:
-        self.err: str = err
-        self.full_severity: str
-        self.severity: str
-        self.message: str
-        self.line: int | None
-        self.col: int | None
+        self.err: str = err  #: Whole error message as returned by tidy
+        self.full_severity: str  #: Full severity string
+        self.severity: str  #: D, W, E or C indicating severity
+        self.message: str  #: Error message itself
+        self.line: int | None  #: Line where error was fired (can be None)
+        self.col: int | None  #: Column where error was fired (can be None)
         # Parses:
         # line <line number> column <column number> - (Error|Warning): <message>
         # It might be also useful to  gnu-emacs reporting mode
