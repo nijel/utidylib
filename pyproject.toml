@@ -30,9 +30,8 @@ ignore = [
   "PTH100",  # TODO: Use pathlib
   "PTH118",  # TODO: Use pathlib
   "PTH120",  # TODO: Use pathlib
-  "TRY003",
-  "TD",
-  "FIX002"
+  "EM101",
+  "TRY003"
 ]
 select = ["ALL"]
 

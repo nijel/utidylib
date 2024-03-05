@@ -136,13 +136,15 @@ class ReportItem:
     }
 
     def __init__(self, err: str) -> None:
-        # TODO - parse emacs mode
         self.err: str = err
         self.full_severity: str
         self.severity: str
         self.message: str
         self.line: int | None
         self.col: int | None
+        # Parses:
+        # line <line number> column <column number> - (Error|Warning): <message>
+        # It might be also useful to  gnu-emacs reporting mode
         if err.startswith("line"):
             tokens = err.split(" ", 6)
             self.full_severity = tokens[5]
