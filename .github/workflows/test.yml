@@ -12,20 +12,20 @@ jobs:
           - ubuntu-22.04
           - macos-latest
         python-version:
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "3.12"
+          - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
+          - '3.12'
         tidy-version:
-          - "5.6.0"
+          - 5.6.0
         include:
           - os: ubuntu-22.04
-            python-version: "3.11"
-            tidy-version: "5.8.0"
+            python-version: '3.11'
+            tidy-version: 5.8.0
           - os: ubuntu-20.04
-            python-version: "3.11"
-            tidy-version: "os"
+            python-version: '3.11'
+            tidy-version: os
     name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
 
     steps:

@@ -7,6 +7,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-toml
       - id: requirements-txt-fixer
       - id: check-merge-conflict
       - id: check-json
@@ -17,45 +18,26 @@ repos:
     rev: v1.29.0
     hooks:
       - id: yamllint
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
     hooks:
-      - id: isort
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
-    hooks:
-      - id: pyupgrade
-        args: [--py38-plus]
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
-    hooks:
-      - id: black
-  - repo: https://github.com/PyCQA/flake8
-    rev: 5.0.4
-    hooks:
-      - id: flake8
-        additional_dependencies:
-          - flake8-bugbear
-          - flake8-builtins
-          - flake8-comprehensions
-          - flake8-django
-          - flake8-docstrings
-          - flake8-eradicate
-          - flake8-executable
-          - flake8-logging-format
-          - flake8-mutable
-          - flake8-polyfill
-          - flake8-print
-          - flake8-return
-          - flake8-self
-          - pep8-naming
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.13.0
     hooks:
       - id: blacken-docs
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.12.0
+    hooks:
+      - id: pretty-format-toml
+        args: [--autofix]
+      - id: pretty-format-yaml
+        args: [--autofix, --indent, '2', --offset, '2']
   - repo: meta
     hooks:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
-exclude: "^docs/make.bat$"
+exclude: ^docs/make.bat$

@@ -1,4 +1,6 @@
-"""The Tidy wrapper.
+"""
+The Tidy wrapper.
+
 I am the main interface to TidyLib. This package supports processing HTML with
 Tidy, with all the options that the tidy command line supports.
 
@@ -52,4 +54,4 @@ __all__ = [
     "InvalidOptionError",
     "OptionArgError",
 ]
-__version__ = "0.7"
+__version__ = "0.10"

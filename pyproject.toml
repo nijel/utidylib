@@ -1,0 +1,38 @@
+[tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
+extend-safe-fixes = [
+  "ANN",
+  "D",
+  "TCH",
+  "FLY",
+  "RUF005",
+  "SIM",
+  "UP"
+]
+ignore = [
+  "PT",  # CONFIG: Not using pytest
+  "D203",  # CONFIG: incompatible with D211
+  "D212",  # CONFIG: incompatible with D213
+  "COM812",  # CONFIG: incompatible with formatter
+  "ISC001",  # CONFIG: incompatible with formatter
+  "ANN101",  # TODO: Missing type annotation for `self` in method
+  "S101",  # TODO: Use of `assert` detected
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D105",
+  "D107",
+  "PTH100",  # TODO: Use pathlib
+  "PTH118",  # TODO: Use pathlib
+  "PTH120",  # TODO: Use pathlib
+  "EM101",
+  "TRY003"
+]
+select = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"docs/conf.py" = ["INP001", "A001"]
+"tidy/lib.py" = ["N802", "N816"]
