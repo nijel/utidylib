@@ -13,6 +13,11 @@ uTidylib
     :target: http://utidylib.readthedocs.org/en/latest/
     :alt: Documentation
 
+.. image:: https://img.shields.io/pypi/v/uTidylib
+   :target: https://pypi.org/project/uTidylib/
+   :alt: PyPI - Version
+
+
 
 This is fork of uTidylib with permission with original author. Originally it
 incorporated patches from Debian and other distributions, now it also brings
