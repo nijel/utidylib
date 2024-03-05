@@ -8,6 +8,7 @@ import weakref
 from abc import ABC, abstractmethod
 from errno import ENOMEM
 from typing import (
+    TYPE_CHECKING,
     Any,
     BinaryIO,
     Callable,
@@ -17,6 +18,10 @@ from typing import (
 )
 
 from tidy.error import InvalidOptionError, OptionArgError
+
+if TYPE_CHECKING:
+    OPTION_TYPE = str | int | bool | None
+    OPTION_DICT_TYPE = dict[str, OPTION_TYPE]
 
 LIBNAMES = (
     # Linux
@@ -212,9 +217,6 @@ class SinkFactory(FactoryDict[int, _Sink]):
 
 
 sinkfactory = SinkFactory()
-
-OPTION_TYPE = str | int | bool | None
-OPTION_DICT_TYPE = dict[str, OPTION_TYPE]
 
 
 class Document:
