@@ -39,6 +39,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: configure compiler
+        if: matrix.os == macos-latest
+        run: brew link --overwrite gcc
       - name: Install tidy
         run: ./scripts/install-tidy.sh ${{ matrix.tidy-version }}
       - name: Install pip dependencies
