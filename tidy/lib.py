@@ -6,6 +6,7 @@ import os
 import os.path
 import weakref
 from abc import ABC, abstractmethod
+from errno import ENOMEM
 from typing import (
     Any,
     BinaryIO,
@@ -269,7 +270,7 @@ class Document:
         stlen = ctypes.c_int(8192)
         string_buffer = ctypes.create_string_buffer(stlen.value)
         result = _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
-        if result == -12:  # buffer too small
+        if result == -ENOMEM:  # buffer too small
             string_buffer = ctypes.create_string_buffer(stlen.value)
             _tidy.SaveString(self.cdoc, string_buffer, ctypes.byref(stlen))
         return string_buffer.value
