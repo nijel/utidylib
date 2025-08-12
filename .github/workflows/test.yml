@@ -29,7 +29,7 @@ jobs:
     name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Cache pip
         uses: actions/cache@v4
         with:
