@@ -2,7 +2,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -14,21 +14,21 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.29.0
+    rev: v1.37.1
     hooks:
       - id: yamllint
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.0
+    rev: v0.13.3
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.13.0
+    rev: 1.20.0
     hooks:
       - id: blacken-docs
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.12.0
+    rev: v2.15.0
     hooks:
       - id: pretty-format-toml
         args: [--autofix]
