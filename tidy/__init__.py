@@ -44,14 +44,14 @@ from tidy.error import InvalidOptionError, OptionArgError, TidyLibError
 from tidy.lib import Document, ReportItem, parse, parseString
 
 __all__ = [
+    "Document",
+    "InvalidOptionError",
+    "OptionArgError",
+    "ReportItem",
+    "TidyLibError",
     "error",
     "lib",
     "parse",
     "parseString",
-    "Document",
-    "ReportItem",
-    "TidyLibError",
-    "InvalidOptionError",
-    "OptionArgError",
 ]
 __version__ = "1.0"

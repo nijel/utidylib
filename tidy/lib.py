@@ -87,7 +87,7 @@ class Loader:
         self.LibraryVersion.restype = ctypes.c_char_p
 
     def __getattr__(self, name: str) -> Any:  # noqa: ANN401
-        return getattr(self.lib, "tidy%s" % name)
+        return getattr(self.lib, f"tidy{name}")
 
 
 _tidy = Loader()
@@ -165,12 +165,7 @@ class ReportItem:
 
     def __str__(self) -> str:
         if self.line:
-            return "line {} col {} - {}: {}".format(
-                self.line,
-                self.col,
-                self.get_severity(),
-                self.message,
-            )
+            return f"line {self.line} col {self.col} - {self.get_severity()}: {self.message}"
         return f"{self.get_severity()}: {self.message}"
 
     def __repr__(self) -> str:

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = ("TidyLibError", "InvalidOptionError", "OptionArgError")
+__all__ = ("InvalidOptionError", "OptionArgError", "TidyLibError")
 
 
 class TidyLibError(Exception):
@@ -13,7 +13,7 @@ class InvalidOptionError(TidyLibError):
     """Exception for invalid option."""
 
     def __str__(self) -> str:
-        return "%s was not a valid Tidy option." % (self.args[0])
+        return f"{self.args[0]} was not a valid Tidy option."
 
 
 class OptionArgError(TidyLibError):
