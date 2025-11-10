@@ -1,38 +1,116 @@
-[tool.ruff]
-target-version = "py38"
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=78.0.2"
+]
+
+[project]
+authors = [
+  {email = "michal@cihar.com", name = "Michal Čihař"}
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python",
+  "Topic :: Internet"
+]
+description = "Wrapper for HTML Tidy"
+dynamic = [
+  "version"
+]
+license = "MIT"
+license-files = ["LICENSE"]
+name = "uTidylib"
+requires-python = ">=3.10"
+
+[project.readme]
+content-type = "text/x-rst"
+file = "README.rst"
+
+[project.urls]
+Documentation = "https://utidylib.readthedocs.io/"
+Download = "https://github.com/nijel/utidylib"
+Funding = "https://liberapay.com/nijel"
+Homepage = "https://github.com/nijel/utidylib"
+"Issue Tracker" = "https://github.com/nijel/utidylib/issues"
+"Source Code" = "https://github.com/nijel/utidylib"
+
+[tool.isort]
+force_grid_wrap = 0
+include_trailing_comma = true
+known_first_party = [
+  "tidy"
+]
+line_length = 88
+multi_line_output = 3
+use_parentheses = true
+
+[tool.pycodestyle]
+exclude = ".git,.venv*,build"
+max-line-length = "88"
+select = "E,W1,W2,W3,W504,W505,W6"
 
 [tool.ruff.lint]
 extend-safe-fixes = [
   "ANN",
   "D",
-  "TCH",
   "FLY",
   "RUF005",
   "SIM",
+  "TCH",
   "UP"
 ]
 ignore = [
-  "PT",  # CONFIG: Not using pytest
-  "D203",  # CONFIG: incompatible with D211
-  "D212",  # CONFIG: incompatible with D213
   "COM812",  # CONFIG: incompatible with formatter
-  "ISC001",  # CONFIG: incompatible with formatter
-  "ANN101",  # TODO: Missing type annotation for `self` in method
-  "S101",  # TODO: Use of `assert` detected
   "D100",
   "D101",
   "D102",
   "D103",
   "D105",
   "D107",
+  "D203",  # CONFIG: incompatible with D211
+  "D212",  # CONFIG: incompatible with D213
+  "E501",  # CONFIG: formatter
+  "EM101",
+  "ISC001",  # CONFIG: incompatible with formatter
+  "PT",  # CONFIG: Not using pytest
   "PTH100",  # TODO: Use pathlib
   "PTH118",  # TODO: Use pathlib
   "PTH120",  # TODO: Use pathlib
-  "EM101",
+  "S101",  # TODO: Use of `assert` detected
   "TRY003"
 ]
 select = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
-"docs/conf.py" = ["INP001", "A001"]
+"docs/conf.py" = ["A001", "INP001"]
 "tidy/lib.py" = ["N802", "N816"]
+
+[tool.setuptools]
+include-package-data = true
+packages = [
+  "tidy"
+]
+
+[tool.setuptools.dynamic.version]
+attr = "tidy.__version__"
+
+[tool.setuptools.package-data]
+tidy = [
+  "test_data/*.html"
+]
+
+[tool.tomlsort]
+ignore_case = true
+sort_inline_arrays = true
+sort_inline_tables = true
+sort_table_keys = true
+spaces_before_inline_comment = 2

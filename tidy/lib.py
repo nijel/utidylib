@@ -6,14 +6,13 @@ import os
 import os.path
 import weakref
 from abc import ABC, abstractmethod
+from collections.abc import Callable, Mapping
 from errno import ENOMEM
 from typing import (
     TYPE_CHECKING,
     Any,
     BinaryIO,
-    Callable,
     ClassVar,
-    Mapping,
     TypeVar,
 )
 
@@ -238,9 +237,9 @@ class Document:
                 str(value).encode("utf-8"),
             )
             if self.errors:
-                for error in ERROR_MAP:
-                    if self.errors[-1].message.startswith(error):
-                        raise ERROR_MAP[error](self.errors[-1].message)
+                for error_prefix, error_exception in ERROR_MAP.items():
+                    if self.errors[-1].message.startswith(error_prefix):
+                        raise error_exception(self.errors[-1].message)
 
     def __del__(self) -> None:
         del sinkfactory[self.errsink.handle]
