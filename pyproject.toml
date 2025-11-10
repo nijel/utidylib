@@ -26,10 +26,11 @@ description = "Wrapper for HTML Tidy"
 dynamic = [
   "version"
 ]
-license = "MIT"
-license-files = ["LICENSE"]
 name = "uTidylib"
 requires-python = ">=3.10"
+
+[project.license]
+text = "MIT"
 
 [project.readme]
 content-type = "text/x-rst"
@@ -97,7 +98,8 @@ select = ["ALL"]
 [tool.setuptools]
 include-package-data = true
 packages = [
-  "tidy"
+  "tidy",
+  "tidy.test_data"
 ]
 
 [tool.setuptools.dynamic.version]

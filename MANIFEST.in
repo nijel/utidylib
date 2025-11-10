@@ -1,6 +1,4 @@
 include LICENSE
-include *.py
-include scripts/*
 include README.*
 include CHANGES.*
 include MANIFEST.in
