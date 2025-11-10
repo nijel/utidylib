@@ -370,6 +370,10 @@ parseString = docfactory.parseString
 
 
 def getTidyVersion() -> str:
-    version = _tidy.lib.tidyLibraryVersion()
-    assert isinstance(version, bytes)
-    return version.decode()
+    try:
+        version = _tidy.lib.tidyLibraryVersion()
+        assert isinstance(version, bytes)
+        return version.decode()
+    except AttributeError:
+        # tidyLibraryVersion not available, return unknown version
+        return "0.0.0"
