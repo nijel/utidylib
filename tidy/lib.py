@@ -83,7 +83,12 @@ class Loader:
 
         # Adjust some types
         self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
-        self.LibraryVersion.restype = ctypes.c_char_p
+        # LibraryVersion may not be available in all builds, set it if available
+        try:
+            self.lib.tidyLibraryVersion.restype = ctypes.c_char_p
+        except AttributeError:
+            # tidyLibraryVersion not available in this build
+            pass
 
     def __getattr__(self, name: str) -> Any:  # noqa: ANN401
         return getattr(self.lib, f"tidy{name}")
