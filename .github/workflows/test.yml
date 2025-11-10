@@ -9,23 +9,14 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
+          - ubuntu-latest
           - macos-latest
         python-version:
-          - '3.9'
           - '3.10'
           - '3.11'
           - '3.12'
           - '3.13'
-        tidy-version:
-          - 5.6.0
-        include:
-          - os: ubuntu-22.04
-            python-version: '3.11'
-            tidy-version: 5.8.0
-          - os: ubuntu-20.04
-            python-version: '3.11'
-            tidy-version: os
+          - '3.14'
     name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
 
     steps:
@@ -40,7 +31,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install tidy
-        run: ./scripts/install-tidy.sh ${{ matrix.tidy-version }}
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get install -y libtidy5deb1
+      - name: Install tidy
+        if: matrix.os == 'macos-latest'
+        run: brew install tidy-html5
       - name: Install pip dependencies
         run: |
           python -m pip install --upgrade pip wheel
