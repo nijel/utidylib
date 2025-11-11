@@ -17,41 +17,36 @@ jobs:
           - '3.12'
           - '3.13'
           - '3.14'
-    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}, tidy ${{ matrix.tidy-version }}
+    name: ${{ matrix.os }}, Python ${{ matrix.python-version }}
 
     steps:
       - uses: actions/checkout@v5
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements*.txt') }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
+        id: setup_python
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install tidy
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get install -y libtidy5deb1
+      - uses: astral-sh/setup-uv@85856786d1ce8acfbcc2f13a5f3fbd6b938f9f41 # v7.1.2
+        with:
+          save-cache: ${{ github.ref == 'refs/heads/main' }}
+          cache-suffix: ${{ steps.setup_python.outputs.python-version }}
+          version: 0.9.8
       - name: Install tidy
         if: matrix.os == 'macos-latest'
         run: brew install tidy-html5
       - name: Install pip dependencies
-        run: |
-          python -m pip install --upgrade pip wheel
-          pip install -r requirements.txt -r requirements-test.txt
-      - name: Install editable
-        run: pip install -e .
+        run: uv sync --all-extras
       - name: Check used library
-        run: python -c 'import tidy.lib; print(tidy.lib._tidy.lib._name)'
+        run: uv run python -c 'import tidy.lib; print(tidy.lib._tidy.lib._name)'
       - name: Check used library version
-        run: python -c 'import tidy.lib; print(tidy.lib.getTidyVersion())'
+        run: uv run python -c 'import tidy.lib; print(tidy.lib.getTidyVersion())'
       - name: Test
-        run: |
-          py.test --cov=tidy tidy
+        run: uv run pytest --cov=tidy tidy
       - name: Coverage
-        run: |
-          coverage xml
+        run: uv run coverage xml
       - uses: codecov/codecov-action@v5
         with:
           token: ${{secrets.CODECOV_TOKEN}}
