@@ -1,5 +1,6 @@
 *.swp
 *.pyc
+/uv.lock
 /build/
 /dist/
 /.venv*
