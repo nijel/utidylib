@@ -73,7 +73,12 @@ class Loader:
         # Try loading library
         for libname in self.libnames:
             try:
-                self.lib = ctypes.CDLL(libname)
+                # On macOS, try loading with RTLD_GLOBAL to expose all symbols
+                import sys
+                if sys.platform == 'darwin':
+                    self.lib = ctypes.CDLL(libname, mode=ctypes.RTLD_GLOBAL)
+                else:
+                    self.lib = ctypes.CDLL(libname)
                 break
             except OSError:
                 continue
