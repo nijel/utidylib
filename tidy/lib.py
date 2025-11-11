@@ -88,12 +88,7 @@ class Loader:
 
         # Adjust some types
         self.Create.restype = ctypes.POINTER(ctypes.c_void_p)
-        # LibraryVersion may not be available in all builds, set it if available
-        try:
-            self.lib.tidyLibraryVersion.restype = ctypes.c_char_p
-        except AttributeError:
-            # tidyLibraryVersion not available in this build
-            pass
+        self.lib.tidyLibraryVersion.restype = ctypes.c_char_p
 
     def __getattr__(self, name: str) -> Any:  # noqa: ANN401
         return getattr(self.lib, f"tidy{name}")
@@ -375,10 +370,6 @@ parseString = docfactory.parseString
 
 
 def getTidyVersion() -> str:
-    try:
-        version = _tidy.lib.tidyLibraryVersion()
-        assert isinstance(version, bytes)
-        return version.decode()
-    except AttributeError:
-        # tidyLibraryVersion not available, return unknown version
-        return "0.0.0"
+    version = _tidy.lib.tidyLibraryVersion()
+    assert isinstance(version, bytes)
+    return version.decode()
