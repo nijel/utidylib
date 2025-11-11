@@ -97,7 +97,8 @@ select = ["ALL"]
 [tool.setuptools]
 include-package-data = true
 packages = [
-  "tidy"
+  "tidy",
+  "tidy.test_data"
 ]
 
 [tool.setuptools.dynamic.version]
