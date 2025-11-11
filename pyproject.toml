@@ -4,6 +4,15 @@ requires = [
   "setuptools>=78.0.2"
 ]
 
+[dependency-groups]
+dev = [
+  "pytest-cov==7.0.0",
+  "pytest-github-actions-annotate-failures==0.3.0",
+  "pytest-profiling==1.8.1",
+  "pytest-xdist==3.8.0",
+  "pytest==9.0.0"
+]
+
 [project]
 authors = [
   {email = "michal@cihar.com", name = "Michal Čihař"}
@@ -42,6 +51,12 @@ Funding = "https://liberapay.com/nijel"
 Homepage = "https://github.com/nijel/utidylib"
 "Issue Tracker" = "https://github.com/nijel/utidylib/issues"
 "Source Code" = "https://github.com/nijel/utidylib"
+
+[tool.check-manifest]
+ignore = [
+  "*.yaml",
+  "*.yml"
+]
 
 [tool.isort]
 force_grid_wrap = 0
@@ -97,7 +112,8 @@ select = ["ALL"]
 [tool.setuptools]
 include-package-data = true
 packages = [
-  "tidy"
+  "tidy",
+  "tidy.test_data"
 ]
 
 [tool.setuptools.dynamic.version]
