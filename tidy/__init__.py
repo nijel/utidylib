@@ -11,7 +11,6 @@ to underscores(_).
 For example:
 
 >>> import tidy
->>> import os
 >>> output = str(tidy.parseString(
 ...     '<Html>Hello Tidy!',
 ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
