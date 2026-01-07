@@ -17,7 +17,7 @@ For example:
 ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
 ...     doctype='transitional'
 ... ))
->>> print(os.linesep.join(output.splitlines())
+>>> print(os.linesep.join(output.splitlines()))
 <?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
