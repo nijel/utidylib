@@ -43,7 +43,11 @@ jobs:
         run: brew install tidy-html5
       - name: Install tidy
         if: matrix.os == 'windows-latest'
-        run: choco install html-tidy -y
+        run: |
+          choco install html-tidy -y
+          find C:/ProgramData/chocolatey/lib/html-tidy/
+        shell: bash
+          
       - name: Install pip dependencies
         run: uv sync --all-extras
       - name: Check used library
