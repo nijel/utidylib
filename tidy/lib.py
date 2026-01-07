@@ -27,6 +27,14 @@ LIBNAMES = (
     "libtidy.so",
     # MacOS
     "libtidy.dylib",
+    # MacOS Homebrew (ARM)
+    "/opt/homebrew/lib/libtidy.dylib",
+    "/opt/homebrew/lib/libtidy.5.dylib",
+    "/opt/homebrew/lib/libtidy.58.dylib",
+    # MacOS Homebrew (Intel)
+    "/usr/local/lib/libtidy.dylib",
+    "/usr/local/lib/libtidy.5.dylib",
+    "/usr/local/lib/libtidy.58.dylib",
     # Windows
     "tidy",
     # Cygwin
