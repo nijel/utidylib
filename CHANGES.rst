@@ -4,6 +4,10 @@ Changes
 1.0
 ---
 
+* Modernized packaging.
+* Updated supported Python versions.
+* Homebrew compatiblity.
+
 0.10
 ----
 
