@@ -32,6 +32,7 @@ LIBNAMES = (
     "/usr/local/lib/libtidy.5.dylib",
     "/usr/local/lib/libtidy.58.dylib",
     # Windows - Chocolatey installation paths
+    "C:/ProgramData/chocolatey/lib/html-tidy/tools/tidy-5.9.14-win64/bin/tidy.dll",
     "C:/ProgramData/chocolatey/lib/html-tidy/tools/bin/tidy.dll",
     "C:/Program Files/tidy-html5/bin/tidy.dll",
     "C:/tools/tidy-html5/bin/tidy.dll",
