@@ -1,4 +1,4 @@
-r"""
+"""
 The Tidy wrapper.
 
 I am the main interface to TidyLib. This package supports processing HTML with
