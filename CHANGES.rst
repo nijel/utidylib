@@ -1,8 +1,8 @@
 Changes
 =======
 
-1.0
----
+1.0.0
+-----
 
 * Modernized packaging.
 * Updated supported Python versions.
