@@ -12,11 +12,12 @@ For example:
 
 >>> import tidy
 >>> from __future__ import print_function
->>> print(tidy.parseString(
+>>> output = str(tidy.parseString(
 ...     '<Html>Hello Tidy!',
 ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
 ...     doctype='transitional'
 ... ))
+>>> print(output.replace('\\r\\n', '\\n').replace('\\r', '\\n'))
 <?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
