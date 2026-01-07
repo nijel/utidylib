@@ -16,7 +16,7 @@ For example:
 ...     '<Html>Hello Tidy!',
 ...     output_xhtml=1, add_xml_decl=1, indent=1, tidy_mark=0,
 ...     doctype='transitional'
-... ))
+... ))  # doctest: +NORMALIZE_WHITESPACE
 <?xml version="1.0"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,7 +28,6 @@ For example:
     Hello Tidy!
   </body>
 </html>
-<BLANKLINE>
 
 For options like newline and output_encoding, which must be set to one of a
 fixed number of choices, you can provide either the numeric or string version
