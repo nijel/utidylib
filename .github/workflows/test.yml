@@ -45,24 +45,6 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           choco install html-tidy -y
-          # Common installation paths for Chocolatey packages
-          $possiblePaths = @(
-            "C:\Program Files\tidy-html5\bin",
-            "C:\ProgramData\chocolatey\lib\html-tidy\tools",
-            "C:\tools\tidy-html5\bin"
-          )
-          foreach ($path in $possiblePaths) {
-            if (Test-Path $path) {
-              Write-Host "Found tidy at: $path"
-              $files = Get-ChildItem -Path $path -Filter "*.dll" -ErrorAction SilentlyContinue
-              if ($files) {
-                Write-Host "DLL files found:"
-                $files | ForEach-Object { Write-Host "  $_" }
-                echo "$path" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-                break
-              }
-            }
-          }
         shell: pwsh
       - name: Install pip dependencies
         run: uv sync --all-extras
