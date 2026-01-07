@@ -14,6 +14,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
+          - windows-latest
         python-version:
           - '3.10'
           - '3.11'
@@ -40,6 +41,9 @@ jobs:
       - name: Install tidy
         if: matrix.os == 'macos-latest'
         run: brew install tidy-html5
+      - name: Install tidy
+        if: matrix.os == 'windows-latest'
+        run: choco install html-tidy -y
       - name: Install pip dependencies
         run: uv sync --all-extras
       - name: Check used library

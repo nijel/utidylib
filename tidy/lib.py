@@ -31,11 +31,17 @@ LIBNAMES = (
     "/usr/local/lib/libtidy.dylib",
     "/usr/local/lib/libtidy.5.dylib",
     "/usr/local/lib/libtidy.58.dylib",
+    # Windows - Chocolatey installation paths
+    "C:/ProgramData/chocolatey/lib/html-tidy/tools/tidy-5.9.14-win64/bin/tidy.dll",
+    "C:/ProgramData/chocolatey/lib/html-tidy/tools/bin/tidy.dll",
+    "C:/Program Files/tidy-html5/bin/tidy.dll",
+    "C:/tools/tidy-html5/bin/tidy.dll",
     # Linux
     "libtidy.so",
     # MacOS (generic, after Homebrew paths)
     "libtidy.dylib",
-    # Windows
+    # Windows (generic, after specific paths)
+    "tidy.dll",
     "tidy",
     # Cygwin
     "cygtidy-0-99-0",
@@ -50,8 +56,10 @@ LIBNAMES = (
     # Debian changed soname
     "libtidy.so.5deb1",
     # Windows?
+    "libtidy.dll",
     "libtidy",
     # Windows?
+    "tidylib.dll",
     "tidylib",
 )
 

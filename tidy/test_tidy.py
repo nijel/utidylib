@@ -141,8 +141,13 @@ class TidyTestCase(unittest.TestCase):
             "/usr/local/lib/libtidy.dylib",
             "/usr/local/lib/libtidy.5.dylib",
             "/usr/local/lib/libtidy.58.dylib",
+            "C:/ProgramData/chocolatey/lib/html-tidy/tools/tidy-5.9.14-win64/bin/tidy.dll",
+            "C:/ProgramData/chocolatey/lib/html-tidy/tools/bin/tidy.dll",
+            "C:/Program Files/tidy-html5/bin/tidy.dll",
+            "C:/tools/tidy-html5/bin/tidy.dll",
             "libtidy.so",
             "libtidy.dylib",
+            "tidy.dll",
             "tidy",
             "cygtidy-0-99-0",
             "libtidy-0.99.so.0",
@@ -150,7 +155,9 @@ class TidyTestCase(unittest.TestCase):
             "libtidy.so.5",
             "libtidy.so.58",
             "libtidy.so.5deb1",
+            "libtidy.dll",
             "libtidy",
+            "tidylib.dll",
             "tidylib",
         )
         self.assertEqual(loader.libnames, expected_libnames)
