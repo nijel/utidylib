@@ -23,9 +23,17 @@ if TYPE_CHECKING:
     OPTION_DICT_TYPE = dict[str, OPTION_TYPE]
 
 LIBNAMES = (
+    # MacOS Homebrew (ARM) - try first for CI compatibility
+    "/opt/homebrew/lib/libtidy.dylib",
+    "/opt/homebrew/lib/libtidy.5.dylib",
+    "/opt/homebrew/lib/libtidy.58.dylib",
+    # MacOS Homebrew (Intel)
+    "/usr/local/lib/libtidy.dylib",
+    "/usr/local/lib/libtidy.5.dylib",
+    "/usr/local/lib/libtidy.58.dylib",
     # Linux
     "libtidy.so",
-    # MacOS
+    # MacOS (generic, after Homebrew paths)
     "libtidy.dylib",
     # Windows
     "tidy",

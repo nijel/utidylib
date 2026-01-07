@@ -135,6 +135,12 @@ class TidyTestCase(unittest.TestCase):
         loader = tidy.lib.Loader()
         expected_libnames = (
             "/foo/bar/tidy",
+            "/opt/homebrew/lib/libtidy.dylib",
+            "/opt/homebrew/lib/libtidy.5.dylib",
+            "/opt/homebrew/lib/libtidy.58.dylib",
+            "/usr/local/lib/libtidy.dylib",
+            "/usr/local/lib/libtidy.5.dylib",
+            "/usr/local/lib/libtidy.58.dylib",
             "libtidy.so",
             "libtidy.dylib",
             "tidy",
