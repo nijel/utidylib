@@ -141,7 +141,7 @@ class TidyTestCase(unittest.TestCase):
             "/usr/local/lib/libtidy.dylib",
             "/usr/local/lib/libtidy.5.dylib",
             "/usr/local/lib/libtidy.58.dylib",
-            "C:/ProgramData/chocolatey/lib/html-tidy/tools/tidy.dll",
+            "C:/ProgramData/chocolatey/lib/html-tidy/bin/tidy.dll",
             "C:/Program Files/tidy-html5/bin/tidy.dll",
             "C:/tools/tidy-html5/bin/tidy.dll",
             "libtidy.so",
