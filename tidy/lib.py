@@ -36,6 +36,7 @@ LIBNAMES = (
     # MacOS (generic, after Homebrew paths)
     "libtidy.dylib",
     # Windows
+    "tidy.dll",
     "tidy",
     # Cygwin
     "cygtidy-0-99-0",
@@ -50,8 +51,10 @@ LIBNAMES = (
     # Debian changed soname
     "libtidy.so.5deb1",
     # Windows?
+    "libtidy.dll",
     "libtidy",
     # Windows?
+    "tidylib.dll",
     "tidylib",
 )
 

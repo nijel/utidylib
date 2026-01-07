@@ -143,6 +143,7 @@ class TidyTestCase(unittest.TestCase):
             "/usr/local/lib/libtidy.58.dylib",
             "libtidy.so",
             "libtidy.dylib",
+            "tidy.dll",
             "tidy",
             "cygtidy-0-99-0",
             "libtidy-0.99.so.0",
@@ -150,7 +151,9 @@ class TidyTestCase(unittest.TestCase):
             "libtidy.so.5",
             "libtidy.so.58",
             "libtidy.so.5deb1",
+            "libtidy.dll",
             "libtidy",
+            "tidylib.dll",
             "tidylib",
         )
         self.assertEqual(loader.libnames, expected_libnames)
