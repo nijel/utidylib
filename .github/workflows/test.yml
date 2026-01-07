@@ -47,7 +47,7 @@ jobs:
           choco install html-tidy -y
           find C:/ProgramData/chocolatey/lib/html-tidy/
         shell: bash
-          
+
       - name: Install pip dependencies
         run: uv sync --all-extras
       - name: Check used library
