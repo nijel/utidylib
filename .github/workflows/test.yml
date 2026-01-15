@@ -37,7 +37,7 @@ jobs:
         with:
           save-cache: ${{ github.ref == 'refs/heads/main' }}
           cache-suffix: ${{ steps.setup_python.outputs.python-version }}
-          version: 0.9.25
+          version: 0.9.26
       - name: Install tidy
         if: matrix.os == 'macos-latest'
         run: brew install tidy-html5
