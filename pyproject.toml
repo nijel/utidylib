@@ -85,6 +85,7 @@ extend-safe-fixes = [
 ]
 ignore = [
   "COM812",  # CONFIG: incompatible with formatter
+  "CPY001",  # TODO: missing copyright headers
   "D100",
   "D101",
   "D102",
