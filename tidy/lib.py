@@ -61,6 +61,8 @@ LIBNAMES = (
     # Windows?
     "tidylib.dll",
     "tidylib",
+    # FreeBSD
+    "libtidy5.so",
 )
 
 
