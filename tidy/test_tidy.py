@@ -159,6 +159,7 @@ class TidyTestCase(unittest.TestCase):
             "libtidy",
             "tidylib.dll",
             "tidylib",
+            "libtidy5.so",
         )
         self.assertEqual(loader.libnames, expected_libnames)
 
