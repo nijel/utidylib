@@ -1,6 +1,12 @@
 Changes
 =======
 
+1.1.0
+-----
+
+* Added FreeBSD support for finding the Tidy library.
+* Added support for Python 3.15.
+
 1.0.0
 -----
 

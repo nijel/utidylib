@@ -15,7 +15,7 @@ dev = [
 
 [project]
 authors = [
-  { email = "michal@cihar.com", name = "Michal Čihař" }
+  { email = "michal@weblate.org", name = "Michal Čihař" }
 ]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
